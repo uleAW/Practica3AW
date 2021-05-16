@@ -11,7 +11,7 @@ app.use('/img', express.static('img'));
 //app.use('/principal', express.static('principal'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'principal.html'))
+    res.sendFile(path.join(__dirname, 'index.html'))
 })
 
 app.listen(port, () => {
