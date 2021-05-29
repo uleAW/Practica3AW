@@ -36,10 +36,10 @@
                     <a href="#" id="nuevo">Nuevo</a>
                 </li>
                 <li>
-                    <a href="#" id="colecciones">Colecciones</a>
+                    <a href="colecciones.php" id="colecciones">Colecciones</a>
                 </li>
                 <li>
-                    <a href="#" id="colecciones">Pasatiempos</a>
+                    <a href="pasatiempos.php" id="colecciones">Pasatiempos</a>
                 </li>
             </ul>
 
@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-user"></i></a>
+                    <a href="inicioSesion.php"><i class="fas fa-user"></i></a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-shopping-cart"></i></a>
