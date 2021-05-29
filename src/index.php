@@ -10,12 +10,12 @@
     <!-- ICONO PESTAÑA -->
     <link rel="shortcut icon" href="../media/img/icon.ico">
     <!-- HOJA DE ESTILOS -->
-    <link rel="stylesheet" type="text/css" href="./src/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
     <article class="article">
-        <iframe src="./src/portada.html" frameborder="0" width="fit-content"></iframe>
+        <iframe src="portada.php" frameborder="0" width="fit-content"></iframe>
 
     </article>
     <article>
