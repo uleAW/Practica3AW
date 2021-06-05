@@ -14,7 +14,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema kiosko
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `kiosko` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+
+CREATE SCHEMA IF NOT EXISTS `kiosko` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 USE `kiosko` ;
 
 -- -----------------------------------------------------
@@ -22,12 +23,12 @@ USE `kiosko` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `kiosko`.`colecciones` (
   `numColeccion` INT NOT NULL AUTO_INCREMENT,
-  `nombre` INT NOT NULL,
-  `estado` VARCHAR(45) NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `estado` INT NOT NULL,
   PRIMARY KEY (`numColeccion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`socios` (
   PRIMARY KEY (`numSocio`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`cromos` (
   PRIMARY KEY (`codCromo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`coleccionSocio` (
   PRIMARY KEY (`idColSocio`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -81,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`albumes` (
   `precio` VARCHAR(30) NOT NULL,
   `idColeccion` INT NOT NULL,
   PRIMARY KEY (`idAlbum`),
-  INDEX `fk_albumes_colecciones_idx` (`idColeccion` ASC) VISIBLE,
   CONSTRAINT `fk_albumes_colecciones`
     FOREIGN KEY (`idColeccion`)
     REFERENCES `kiosko`.`colecciones` (`numColeccion`)
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`albumes` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_unicode_ci;
 
 
 -- -----------------------------------------------------
@@ -103,10 +103,6 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`coleccionUsuario` (
   `numColeccion` INT NOT NULL,
   `numSocio` INT NOT NULL,
   PRIMARY KEY (`idcoleccionUsuario`),
-  INDEX `codCromo_idx` (`codCromo` ASC) VISIBLE,
-  INDEX `idAlbum_idx` (`idAlbum` ASC) VISIBLE,
-  INDEX `numCol_idx` (`numColeccion` ASC) VISIBLE,
-  INDEX `numSocio_idx` (`numSocio` ASC) VISIBLE,
   CONSTRAINT `codCromo`
     FOREIGN KEY (`codCromo`)
     REFERENCES `kiosko`.`cromos` (`codCromo`)
