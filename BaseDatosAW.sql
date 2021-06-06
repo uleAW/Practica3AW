@@ -36,9 +36,9 @@ COLLATE = utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `kiosko`.`socios` (
   `numSocio` INT NOT NULL AUTO_INCREMENT,
-  `usuario` VARCHAR(30) NOT NULL,
+  `usuario` VARCHAR(30) NOT NULL UNIQUE,
   `contrasenia` VARCHAR(30) NOT NULL,
-  `puntos` VARCHAR(30) NOT NULL,
+  `puntos` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`numSocio`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
