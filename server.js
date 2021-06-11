@@ -4,19 +4,17 @@ const fs = require('fs')
 const port = 5050
 const host = '127.0.0.1'
 const mysql = require('mysql');
-const bodyParser = require('body-parser');
-require('body-parser-xml')(bodyParser);
 
-app.use(express.json());
+// NO CAMBIAR IMPORTANTE
 app.use(express.urlencoded({extended: true}));
-app.use(bodyParser.json());
-app.use(bodyParser.raw({limit:  '10mb'}))
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
-    port: 3306,
+    password: "Lr20jcxx%",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -76,21 +74,15 @@ app.post('/registrar', function (req, res) {
     });
 });
 
-//Imagenes (/src/index es el directorio)
-app.post('/src/index', function (req,res){
-    console.log("ENVIADO");
-    console.log(req.body);
-})
-
 app.post('/aniadirColeccion', function (req, res) {
     var values = [];
     var data = req.body
-
-    // values.push([data['usuario'], data['pass']]);
-
+    var ruta = __dirname + "/media/albumes/"+data["nombre"] +".png"
+    var values2 = [];
+    values.push([data["nombre"]]);
     var buffer = new Buffer(data["imagen"], 'base64');
-    console.log(buffer)
-    fs.writeFile(__dirname + "/media/albumes/1.png", buffer, function (err) {
+
+    fs.writeFile(ruta, buffer, function (err) {
         try {
             if (err) throw err;
 
@@ -98,10 +90,18 @@ app.post('/aniadirColeccion', function (req, res) {
             res.status(404).send();
         }
     })
-    con.query("INSERT INTO colecciones (nombre, estado) VALUES ?", [values], function (err, result, fields) {
+    con.query("INSERT INTO colecciones (nombre) VALUES ?", [values], function (err, result, fields) {
         try {
             if (err) throw err;
-            res.status(200).send();
+            values2.push([ruta, data["precio"], result.insertId]);
+            con.query("INSERT INTO albumes (imagen, precio, idColeccion) VALUES ?", [values2], function (err, result, fields) {
+                try {
+                    if (err) throw err;
+                } catch (err) {
+                    console.log(err);
+                    res.status(404).send();
+                }
+            });
         } catch (err) {
             console.log(err);
             res.status(404).send();

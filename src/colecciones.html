@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="colecciones.js"></script>
+    <script src="colecciones.js"></script>
 </head>
 
 <body>
-<form method="post" action="index" enctype="multipart/form-data">
-<input type="file" name="archivo"><br>
-<button type="submit">Enviar</button>
-</form>
+<!-- Utilizar estas etiquetas para evitar errores en la funcionalidad -->
+<input type="text" id="nombreAniadirColeccion">
+<br>
+<br>
+<input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
+<br>
+<br>
+<input type="number" id="precioAniadirAlbum">
+<br>
+<br>
+<button onclick="aniadirColeccion()">Añadir</button>
 </body>
 </html>
 

@@ -7,7 +7,6 @@ function aniadirColeccion() {
     reader.onload = function(event) {
 
         var data = event.target.result.replace("data:" + imagen.type+";base64,", '');
-        console.log(data)
         fetch("/aniadirColeccion", {
             method: "POST",
             headers: {
