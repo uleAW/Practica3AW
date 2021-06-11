@@ -13,8 +13,8 @@ app.use(express.urlencoded({limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Lr20jcxx%",
-    port: 3006,
+    password: "admin1",
+    port: 3306,
     database: "kiosko"
 })
 
@@ -45,10 +45,28 @@ app.post('/inicioSesion', function (req, res) {
     con.query("SELECT * FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
         try {
             if (err) throw err;
-            if (result.length)
+            if (result.length){
+                ///
+                con.query("SELECT rol FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
+                    try {
+                        if (result == "usuario"){
+                            //Usuario
+                            res.status(200).send();
+                        }else{
+                            //Admin
+                            res.status(201).send();
+                        }
+                    } catch (err) {
+                        console.log(err);
+                        res.status(404).send();
+                    }
+                });
+                ///
                 res.status(200).send();
-            else
+            }
+            else{
                 res.status(300).send();
+            }
         } catch (err) {
             console.log(err);
             res.status(404).send();

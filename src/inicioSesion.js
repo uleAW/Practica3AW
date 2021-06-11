@@ -9,10 +9,15 @@ function iniciarSesion() {
         },
         body: JSON.stringify({"usuario": usuario, "pass": pass})
     }).then(response => {
-        if (response.status == 200) {
+        //Respuesta segun el rol del usuario
+        alert(response.status);
+        if (response.status == 200){
             // Mostrar pagina del usuario
-            console.log("Usuario conectado")
+            window.open("http://127.0.0.1:5050/src/usuario.html");
         } else {
+            if(response.status == 201) {
+                window.open("http://127.0.0.1:5050/src/admin.html");
+            }
             // Mostrar error de conexion
             console.log("Error al conectar")
         }
