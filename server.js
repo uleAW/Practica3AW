@@ -126,7 +126,36 @@ app.post('/aniadirColeccion', function (req, res) {
         }
     });
 });
+var coleccionID;
+app.post('/cargarImagen', function (req, res){
+    coleccionID=req.body.numColeccion;//data["numColeccion"];
+    console.log(coleccionID);
+    res.end();
+});
+app.get('/imagenNombre', function (req, res) {
+    //var data = req.body
+    //console.log(nombre);
+    con.query("SELECT nombre FROM cromos WHERE numColeccion = ?",coleccionID, function (err, result, fields) {
+            var out="";
+            for(let item of result){
+                out= out+item.nombre+",";
+            };
+                res.send(out);
+    });
+    
+    
+});
+app.get('/imagenDireccion', function (req, res) {
+    var data = req.body
 
+    con.query("SELECT imagen FROM cromos WHERE numColeccion = ?",coleccionID, function (err, result, fields) {
+            var out="";
+            for(let item of result){
+                out= out+item.imagen+",";
+            };
+            res.send(out);
+    });
+});
 app.listen(port, () => {
     console.log(`Listening at http://${host}:${port}`)
 })
