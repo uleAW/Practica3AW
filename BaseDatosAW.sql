@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`cromos` (
   `imagen` VARCHAR(60) NULL,
   `precio` VARCHAR(30) NOT NULL,
   `copias` INT NOT NULL,
-  `numColeccion` INT GENERATED ALWAYS AS () VIRTUAL,
+  `numColeccion` INT NOT NULL,
   PRIMARY KEY (`codCromo`),
   INDEX `numColeccion_idx` (`numColeccion` ASC) VISIBLE,
   CONSTRAINT `numColeccion`
@@ -115,3 +115,4 @@ COLLATE = utf8mb4_0900_ai_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
