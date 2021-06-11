@@ -92,10 +92,10 @@ COLLATE = utf8mb4_unicode_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `kiosko`.`cromos` (
   `codCromo` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(30) NOT NULL,
-  `imagen` VARCHAR(60) NULL,
-  `precio` VARCHAR(30) NOT NULL,
-  `copias` INT NOT NULL,
+  `nombre` VARCHAR(40) NOT NULL,
+  `imagen` VARCHAR(250) NULL,
+  `precio` INT NOT NULL,
+  `copias` INT NOT NULL DEFAULT 10,
   `numColeccion` INT NOT NULL,
   PRIMARY KEY (`codCromo`),
   CONSTRAINT `numColeccion`

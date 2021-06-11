@@ -13,8 +13,8 @@ app.use(express.urlencoded({limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
-    port: 3306,
+    password: "Lr20jcxx%",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -45,14 +45,14 @@ app.post('/inicioSesion', function (req, res) {
     con.query("SELECT * FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
         try {
             if (err) throw err;
-            if (result.length){
+            if (result.length) {
                 ///
                 con.query("SELECT rol FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
                     try {
-                        if (result == "usuario"){
+                        if (result == "usuario") {
                             //Usuario
                             res.status(200).send();
-                        }else{
+                        } else {
                             //Admin
                             res.status(201).send();
                         }
@@ -63,8 +63,7 @@ app.post('/inicioSesion', function (req, res) {
                 });
                 ///
                 res.status(200).send();
-            }
-            else{
+            } else {
                 res.status(300).send();
             }
         } catch (err) {
@@ -95,7 +94,7 @@ app.post('/registrar', function (req, res) {
 app.post('/aniadirColeccion', function (req, res) {
     var values = [];
     var data = req.body
-    var ruta = __dirname + "/media/albumes/"+data["nombre"] +".png"
+    var ruta = __dirname + "/media/albumes/" + data["nombre"] + ".png"
     var values2 = [];
     values.push([data["nombre"]]);
     var buffer = new Buffer(data["imagen"], 'base64');
@@ -115,6 +114,7 @@ app.post('/aniadirColeccion', function (req, res) {
             con.query("INSERT INTO albumes (imagen, precio, idColeccion) VALUES ?", [values2], function (err, result, fields) {
                 try {
                     if (err) throw err;
+                    res.status(200).send();
                 } catch (err) {
                     console.log(err);
                     res.status(404).send();
@@ -126,46 +126,79 @@ app.post('/aniadirColeccion', function (req, res) {
         }
     });
 });
+
 var coleccionID;
-app.post('/cargarImagen', function (req, res){
-    coleccionID=req.body.numColeccion;//data["numColeccion"];
+app.post('/cargarImagen', function (req, res) {
+    coleccionID = req.body.numColeccion;//data["numColeccion"];
     console.log(coleccionID);
     res.end();
 });
+
 app.get('/imagenNombre', function (req, res) {
     //var data = req.body
     //console.log(nombre);
-    con.query("SELECT nombre FROM cromos WHERE numColeccion = ?",coleccionID, function (err, result, fields) {
-            var out="";
-            for(let item of result){
-                out= out+item.nombre+",";
-            };
-                res.send(out);
+    con.query("SELECT nombre FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.nombre + ",";
+        }
+        ;
+        res.send(out);
     });
-    
-    
+
+
 });
+
 app.get('/imagenDireccion', function (req, res) {
     var data = req.body
 
-    con.query("SELECT imagen FROM cromos WHERE numColeccion = ?",coleccionID, function (err, result, fields) {
-            var out="";
-            for(let item of result){
-                out= out+item.imagen+",";
-            };
-            res.send(out);
+    con.query("SELECT imagen FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.imagen + ",";
+        }
+        ;
+        res.send(out);
     });
 });
 app.listen(port, () => {
     console.log(`Listening at http://${host}:${port}`)
 })
 
+app.post('/aniadirCromo', function (req, res) {
+    var values = [];
+    var data = req.body
+    var ruta = __dirname + "/media/albumes/" + data["coleccion"] + "_" + data["nombre"] + ".png"
+
+    values.push([data["nombre"], ruta, data["precio"], data["coleccion"]]);
+
+    var buffer = new Buffer(data["imagen"], 'base64');
+
+    fs.writeFile(ruta, buffer, function (err) {
+        try {
+            if (err) throw err;
+        } catch (err) {
+            res.status(404).send();
+        }
+    })
+
+    con.query("INSERT INTO cromos (nombre, imagen, precio, numColeccion) VALUES ?", [values], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            res.status(200).send();
+        } catch (err) {
+            console.log(err);
+            res.status(404).send();
+        }
+    });
+});
+
 // EJEMPLO DE QUERY CUANDO HAYA QUE HACER UNA QUERY SE HACE ASÍ
 con.query("SELECT * FROM colecciones", function (err, result, fields) {
     try {
         if (err) throw err;
         console.log(result);
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 });
