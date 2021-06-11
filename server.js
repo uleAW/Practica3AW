@@ -15,8 +15,8 @@ app.use(bodyParser.raw({limit:  '10mb'}))
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "pass%",
-    port: 3006,
+    password: "admin1",
+    port: 3306,
     database: "kiosko"
 })
 
@@ -75,6 +75,12 @@ app.post('/registrar', function (req, res) {
         }
     });
 });
+
+//Imagenes (/src/index es el directorio)
+app.post('/src/index', function (req,res){
+    console.log("ENVIADO");
+    console.log(req.body);
+})
 
 app.post('/aniadirColeccion', function (req, res) {
     var values = [];
