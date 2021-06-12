@@ -10,13 +10,14 @@ function iniciarSesion() {
         body: JSON.stringify({"usuario": usuario, "pass": pass})
     }).then(response => {
         //Respuesta segun el rol del usuario
-        alert(response.status);
         if (response.status == 200){
+            localStorage.setItem("Cookie_Sesion", "true");
             // Mostrar pagina del usuario
-            window.open("http://127.0.0.1:5050/src/usuario.html");
+            window.open("http://127.0.0.1:5050/src/usuario.html","_self");
         } else {
             if(response.status == 201) {
-                window.open("http://127.0.0.1:5050/src/admin.html");
+                localStorage.setItem("Cookie_Sesion", "true");
+                window.open("http://127.0.0.1:5050/src/admin.html","_self");
             }
             // Mostrar error de conexion
             console.log("Error al conectar")
@@ -44,23 +45,4 @@ function registrar() {
             console.log("Se produjo un error al crear el socio");
         }
     })
-}
-
-//Inactividad
-function e(q) {
-    document.body.appendChild( document.createTextNode(q) );
-    document.body.appendChild( document.createElement("BR") );
-}
-function inactividad() {
-    alert("TIEMPO DE SESION EXCEDIDO");
-    history.forward();
-    window.open("http://127.0.0.1:5050/src/inicioSesion.html","_self");
-}
-var t=null;
-function contadorInactividad() {
-    t=setTimeout("inactividad()",1800000); //30 min (1800000)
-}
-window.onblur=window.onmousemove=function() {
-    if(t) clearTimeout(t);
-    contadorInactividad();
 }
