@@ -99,3 +99,25 @@ function comprarAlbum() {
         }
     })
 }
+
+//Inactividad
+function e(q) {
+    document.body.appendChild( document.createTextNode(q) );
+    document.body.appendChild( document.createElement("BR") );
+}
+function inactividad() {
+    alert("TIEMPO DE SESION EXCEDIDO");
+    window.top.close();
+    //abrir_ventana("http://127.0.0.1:5050/src/inicioSesion.html");
+}
+var t=null;
+function contadorInactividad() {
+    t=setTimeout("inactividad()",1800); //30 min (1800000)
+}
+window.onblur=window.onmousemove=function() {
+    if(t) clearTimeout(t);
+    contadorInactividad();
+}
+function abrir_ventana(pagina) {
+    window.open(pagina);
+}

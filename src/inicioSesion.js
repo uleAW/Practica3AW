@@ -45,3 +45,22 @@ function registrar() {
         }
     })
 }
+
+//Inactividad
+function e(q) {
+    document.body.appendChild( document.createTextNode(q) );
+    document.body.appendChild( document.createElement("BR") );
+}
+function inactividad() {
+    alert("TIEMPO DE SESION EXCEDIDO");
+    history.forward();
+    window.open("http://127.0.0.1:5050/src/inicioSesion.html","_self");
+}
+var t=null;
+function contadorInactividad() {
+    t=setTimeout("inactividad()",1800000); //30 min (1800000)
+}
+window.onblur=window.onmousemove=function() {
+    if(t) clearTimeout(t);
+    contadorInactividad();
+}
