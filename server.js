@@ -213,7 +213,7 @@ app.post('/comprarCromo', function (req, res) {
                         // AQUI PONER QUERY PARA ASIGNAR EL CROMO AL USUARIO
 
                         // -------------------------------------------------
-                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields){
+                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
                             if (err) throw err;
                         });
                         res.status(200).send();
@@ -275,14 +275,20 @@ app.post('/cargarPuntos', function (req, res) {
 app.post('/cargarInfoCromo', function (req, res) {
     var data = req.body;
     con.query("SELECT * FROM cromos WHERE codCromo = ?", data["idCromo"], function (err, result, fields) {
-    var out = "";
-    out = out + result[0].nombre + ",";
-    // MAL
-    out = out + result[0].imagen + ",";
-    out = out + result[0].precio.toString() + ",";
-    out = out + result[0].copias.toString() + ",";
-    out = out + result[0].numColeccion + ",";
-    res.send(out);
+        try {
+            if (err) throw err;
+            var out = "";
+            var bitmap = fs.readFileSync(result[0].imagen);
+            var data = Buffer(bitmap).toString('base64');
+            out = out + result[0].nombre + ",";
+            out = out + data + ",";
+            out = out + result[0].precio.toString() + ",";
+            out = out + result[0].copias.toString() + ",";
+            out = out + result[0].numColeccion + ",";
+            res.send(out);
+        } catch (err) {
+            console.log(err);
+        }
     });
 });
 

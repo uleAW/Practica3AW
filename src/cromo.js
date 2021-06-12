@@ -15,11 +15,13 @@ function consulta(){
     }).then(response => response.text().then(function(text){
     	var datos = text.split(",");
     	console.log(datos)
-        document.getElementById("nombre").innerHTML = datos[0];       
-        // document.getElementById("imagen").src = datos[1];
+        document.getElementById("nombre").innerHTML = datos[0];
+        document.getElementById("imagen").setAttribute(
+            'src', 'data:image/png;base64,' + datos[1]
+        );
         document.getElementById("precio").innerHTML = datos[2];
-        document.getElementById("copias").innerHTML = datos[3];   
-        document.getElementById("numColeccion").innerHTML = datos[4];     
+        document.getElementById("copias").innerHTML = datos[3];
+        document.getElementById("numColeccion").innerHTML = datos[4];
     }));
 }
 
