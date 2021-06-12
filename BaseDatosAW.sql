@@ -36,7 +36,7 @@ COLLATE = utf8mb4_unicode_ci;
 CREATE TABLE IF NOT EXISTS `kiosko`.`albumes` (
   `idAlbum` INT NOT NULL AUTO_INCREMENT,
   `imagen` VARCHAR(250) NULL,
-  `precio` VARCHAR(30) NOT NULL,
+  `precio` INT NOT NULL,
   `idColeccion` INT NOT NULL,
   PRIMARY KEY (`idAlbum`),
   CONSTRAINT `fk_albumes_colecciones`
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `kiosko`.`socios` (
   `numSocio` INT NOT NULL AUTO_INCREMENT,
   `usuario` VARCHAR(30) NOT NULL UNIQUE,
   `contrasenia` VARCHAR(30) NOT NULL,
-  `puntos` VARCHAR(30) NOT NULL DEFAULT 0,
+  `puntos` INT NOT NULL DEFAULT 0,
   `rol` VARCHAR(30) NOT NULL DEFAULT "usuario",
   PRIMARY KEY (`numSocio`))
 ENGINE = InnoDB

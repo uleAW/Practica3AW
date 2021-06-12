@@ -161,6 +161,7 @@ app.get('/imagenDireccion', function (req, res) {
         res.send(out);
     });
 });
+
 app.listen(port, () => {
     console.log(`Listening at http://${host}:${port}`)
 })
@@ -193,11 +194,77 @@ app.post('/aniadirCromo', function (req, res) {
     });
 });
 
+app.post('/comprarCromo', function (req, res) {
+    var data = req.body;
+    con.query("SELECT copias, precio FROM cromos WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var precio = result[0].precio
+            var copias = result[0].copias
+            if (copias > 0) {
+                // COMPROBAR TAMBIEN QUE TIENE MONEDAS SUFICIENTES
+                con.query("SELECT puntos FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
+                    if (err) throw err;
+                    var puntos = result[0].puntos
+                    if (puntos >= precio) {
+                        con.query("UPDATE cromos SET copias = copias - 1 WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
+                            if (err) throw err;
+                        });
+                        // AQUI PONER QUERY PARA ASIGNAR EL CROMO AL USUARIO
+
+                        // -------------------------------------------------
+                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields){
+                            if (err) throw err;
+                        });
+                        res.status(200).send();
+                    } else {
+                        res.status(404).send();
+                    }
+                });
+            } else {
+                // DEVOLVER MENSAJE DE QUE NO HAY CROMOS DISPONIBLES
+                res.status(404).send();
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(404).send();
+        }
+    });
+});
+
+app.post('/comprarAlbum', function (req, res) {
+    var data = req.body;
+    con.query("SELECT precio FROM albumes WHERE idColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?)", [data["album"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var precio = result[0].precio
+            con.query("SELECT puntos FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
+                if (err) throw err;
+                if (result[0].puntos >= precio) {
+                    // AQUI PONER QUERY PARA ASIGNAR EL ALBUM AL USUARIO
+
+                    // -------------------------------------------------
+                    con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
+                        if (err) throw err;
+                    });
+                    res.status(200).send();
+                } else {
+                    res.status(404).send();
+                }
+            });
+        } catch (err) {
+            console.log(err);
+            res.status(404).send();
+        }
+    });
+});
+
+
 // EJEMPLO DE QUERY CUANDO HAYA QUE HACER UNA QUERY SE HACE ASÍ
 con.query("SELECT * FROM colecciones", function (err, result, fields) {
     try {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
     } catch (err) {
         console.log(err);
     }
