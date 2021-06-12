@@ -129,14 +129,14 @@ app.post('/aniadirColeccion', function (req, res) {
 
 var coleccionID;
 app.post('/cargarImagen', function (req, res) {
-    coleccionID = req.body.numColeccion;//data["numColeccion"];
+    coleccionID = req.body.numColeccion;//
     console.log(coleccionID);
     res.end();
 });
 
 app.get('/imagenNombre', function (req, res) {
-    //var data = req.body
-    //console.log(nombre);
+    var data = req.body
+    console.log(data["numColeccion"]);
     con.query("SELECT nombre FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
         var out = "";
         for (let item of result) {
@@ -158,6 +158,32 @@ app.get('/imagenDireccion', function (req, res) {
             out = out + item.imagen + ",";
         }
         ;
+        res.send(out);
+    });
+});
+
+app.post('/coleccionNombre', function (req, res) {
+    //var data = req.body
+
+    con.query("SELECT nombre FROM colecciones", function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.nombre + ",";
+        }
+        
+        res.send(out);
+    });
+});
+
+app.post('/coleccionID', function (req, res) {
+    //var data = req.body
+
+    con.query("SELECT numColeccion FROM colecciones", function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.numColeccion + ",";
+        }
+        
         res.send(out);
     });
 });
