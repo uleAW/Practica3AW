@@ -1,7 +1,8 @@
-var Nombre;
+
 //la variable count es el id de la colección
 function imagenNombre(count) {
-
+	var aux;
+    //alert(count);
     fetch("/cargarImagen", {
         method: "POST",
         headers: {
@@ -20,18 +21,17 @@ function imagenNombre(count) {
     }).then(response => response.text().then(function(text){
         
             // Mostrar pagina del 
-            localStorage.setItem("Nombre", text);
+            localStorage.setItem("Nombre"+count, text);
             //Nombre = text;
 
         
     }));
-    //nsole.log(Nombre);
 
 };
-var Direccion;
+
 function imagenDireccion(count) {
 
-    fetch("/cargarImagen", {
+	fetch("/cargarImagen", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -49,22 +49,156 @@ function imagenDireccion(count) {
     }).then(response => response.text().then(function(text){
         
             // Mostrar pagina del usuario
-            //console.log(text);
-            localStorage.setItem("Direccion", text);
+            console.log("Direccion"+count);
+            localStorage.setItem("Direccion"+count, text);
             //text;
         
     }));
 };
+function coleccionNombre() {
 
-function table(){//sobre dudas del codigo o ampliaciones consultarme, soy Mario
-    imagenNombre(1);//el 1 marca el id de de la coleccion.
-    imagenDireccion(1);
-    //console.log(Nombre);
-    Nombre=localStorage.getItem("Nombre");//uso localStorage por que no me deja usar variables globales ni locales,
-    Direccion=localStorage.getItem("Direccion");
+    fetch("/coleccionNombre", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        //body: JSON.stringify({"numColeccion": count})
+    }).then(response => response.text().then(function(text){
+        
+            // Mostrar pagina del 
+            //console.log(text);
+            //if(localStorage.getItem("coleccionNombre")==null){
+            	localStorage.setItem("coleccionNombre", text);
+            /*}else{
+            	localStorage.removeItem("coleccionNombre");
+            	localStorage.setItem("coleccionNombre", text);
+            }*/
+            
+            //sessionStorage.setItem("coleccionNombre", text);
+            //Nombre = text;
+
+        
+    }));
+};
+function coleccionID() {
+
+    fetch("/coleccionID", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        //body: JSON.stringify({"numColeccion": count})
+    }).then(response => response.text().then(function(text){
+        
+            // Mostrar pagina del 
+            //console.log(text);
+            //if(localStorage.getItem("coleccionID")==null){
+            	localStorage.setItem("coleccionID", text);
+            /*}else{
+            	localStorage.removeItem("coleccionID");
+            	localStorage.setItem("coleccionID", text);
+            }*/
+            //sessionStorage.setItem("coleccionID", text);
+            //localStorage.setItem("coleccionID", text);
+            //Nombre = text;
+
+        
+    }));
+};
+function datos(){
+	localStorage.clear();
+	coleccionID();
+	coleccionNombre();
+}
+function colecciones1(){
+
+	//coleccionID();
+	//coleccionNombre();
+	
+	var nombreColeccion=localStorage.getItem("coleccionNombre");
+	//var nombreColeccion=sessionStorage.getItem("coleccionNombre");
+	var nombresColecciones = nombreColeccion.split(",");
+	var IDColeccion=localStorage.getItem("coleccionID");
+	//var IDColeccion=sessionStorage.getItem("coleccionID");
+	var IDColecciones = IDColeccion.split(",");
+	//console.log(IDColeccion);
+	tabla="";
+	for(var i=0; i<nombresColecciones.length-1; i++){
+		tabla=tabla+"<p>"+"<button onclick=table("+IDColecciones[i]+")>mostrar cartas "+nombresColecciones[i]+"</button></p>";
+		//imagenNombre(IDColecciones[i]);
+		//imagenDireccion(IDColecciones[i]);
+		//tabla=tabla+"<table id="+nombresColecciones[i]+IDColecciones[i]+"></table>";
+	}
+	//alert(tabla);
+	document.getElementById("coleccion").innerHTML=tabla;
+	//localStorage.removeItem("coleccionNombre");
+	//localStorage.removeItem("coleccionID");
+
+};
+var boolean=true;
+function table(ID){
+	//imagenNombre(ID);//el 1 marca el id de de la coleccion.
+    //imagenDireccion(ID);
+	
+	//localStorage.clear();//sobre dudas del codigo o ampliaciones consultarme, soy Mario
+    //imagenNombre(ID);//el 1 marca el id de de la coleccion.
+    //imagenDireccion(ID);
+    fetch("/cargarImagen", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"numColeccion": ID})
+    }).then(response => {
+        
+    })
+    fetch("/imagenDireccion", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        //body: JSON.stringify({"numColeccion": "1"})
+    }).then(response => response.text().then(function(text){
+        
+            Direccion=text.split(",");
+            tabla="";
+    		tabla=tabla+"<table>";
+    		salir=false;
+    		for(var i=0; i<Direccion.length; i++){
+    			if(salir) 
+       				break;
+       			tabla=tabla+"<tr>";
+            	for(var k=0;k<2;k++){//el 2 de este for marca el numero de fotos que se van a mostrar en la misma fila
+                	if((i*2+k)<Direccion.length){
+                        tabla=tabla+"<td><img src="+Direccion[i*2+k]+"></td>";
+                	}else{
+                    	tabla=tabla+"<td></td>";
+                    	salir=true;
+                	}
+            	}
+            	tabla=tabla+"</tr>";
+            }
+            tabla="<button onclick=colecciones1()>Volver</button>"+tabla;
+    		document.getElementById("coleccion").innerHTML=tabla;
+            // Mostrar pagina del usuario
+            //console.log("Direccion"+count);
+            //localStorage.setItem("Direccion"+count, text);
+            //text;
+        
+    }));
+    //alert(ID);
+    //console.log(localStorage.getItem("Nombre"));
+    /*Nombre=localStorage.getItem("Nombre"+ID);//uso localStorage por que no me deja usar variables globales ni locales,
+    //Nombre=sessionStorage.getItem("Nombre");
+    //Direccion=sessionStorage.getItem("Direccion");
+    Direccion=localStorage.getItem("Direccion"+ID);
     Nombres= Nombre.split(",");
     Direcciones= Direccion.split(",");
+    for(var i=1; i<=3; i++){
+		console.log(localStorage.getItem("Direccion"+i)+"\n");
+	}
     tabla="";
+    tabla=tabla+"<table>";
     salir=false;
     for(var i=0; i<Nombres.length; i++){//el metodo es dinamico por lo que si son 8 o 11 fotos se mostraran bien 
         if(salir) 
@@ -86,5 +220,16 @@ function table(){//sobre dudas del codigo o ampliaciones consultarme, soy Mario
         }
 
     }
-    document.getElementById("coleccion").innerHTML=tabla;//aqui se marca la tabla que se va a editar
+    tabla=tabla+"</table>";
+    //console.log(tabla);
+    tabla=tabla+"<button onclick=colecciones1()>Volver</button>\n";
+    document.getElementById("coleccion").innerHTML=tabla;
+    
+    //aqui se marca la tabla que se va a editar001
+  //  localStorage.clear();
+	/*if(boolean){
+		boolean=false;
+		table(ID);
+		boolean=true;
+	}*/
 };
