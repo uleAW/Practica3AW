@@ -13,8 +13,8 @@ app.use(express.urlencoded({limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Lr20jcxx%",
-    port: 3006,
+    password: "admin1",
+    port: 3306,
     database: "kiosko"
 })
 
@@ -195,6 +195,7 @@ app.post('/aniadirCromo', function (req, res) {
 });
 
 app.post('/comprarCromo', function (req, res) {
+    var values = [];
     var data = req.body;
     con.query("SELECT copias, precio FROM cromos WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
         try {
@@ -203,17 +204,44 @@ app.post('/comprarCromo', function (req, res) {
             var copias = result[0].copias
             if (copias > 0) {
                 // COMPROBAR TAMBIEN QUE TIENE MONEDAS SUFICIENTES
-                con.query("SELECT puntos FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
+                con.query("SELECT puntos, numSocio FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
                     if (err) throw err;
+                    var numSocio = result[0].numSocio;
                     var puntos = result[0].puntos
                     if (puntos >= precio) {
+                        values.push(["completada parcialmente", data["idcoleccion"], numSocio, data["idcromo"]+";"]);
                         con.query("UPDATE cromos SET copias = copias - 1 WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
                             if (err) throw err;
                         });
                         // AQUI PONER QUERY PARA ASIGNAR EL CROMO AL USUARIO
-
+                         con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ?", [data["idcoleccion"]], function (err, result, fields) {
+                            //Si esta vacia, es el primer cromo de la coleccion
+                            if(result.length == 0){
+                                con.query("INSERT INTO coleccionusuario (estado, numColeccion, numSocio, codCromos) VALUES ?", [values], function (err, result, fields) {
+                                try {
+                                    if (err) throw err;
+                                    res.status(200).send();
+                                } catch (err) {
+                                    console.log(err);
+                                    res.status(404).send();
+                                }
+                            });
+                            }else{//COMPLETAR       
+                                console.log("ELSE")                                    
+                                con.query("UPDATE coleccionusuario SET codCromos = concat(codCromos,?) WHERE numSocio = ? AND numColeccion = ?", [data["idcromo"]+";", numSocio, parseInt(data["idcoleccion"])], function (err, result, fields) {
+                                try {
+                                    if (err) throw err;
+                                    res.status(200).send();
+                                } catch (err) {
+                                    console.log(err);
+                                    res.status(404).send();
+                                }
+                                });
+                            }
+                            if (err) throw err;
+                        });
                         // -------------------------------------------------
-                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
+                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields){
                             if (err) throw err;
                         });
                         res.status(200).send();

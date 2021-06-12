@@ -4,8 +4,10 @@ function funciones(){
 }
 
 function consulta(){
-	//var id = localStorage.getItem("IDcromo");
-	var id = "1";
+    //SIMULADO
+    localStorage.setItem("IDcromo", 14);
+	var id = localStorage.getItem("IDcromo");
+    //-----
     fetch("/cargarInfoCromo", {
         method: "POST",
         headers: {
@@ -30,12 +32,15 @@ function comprarCromo() {
     var nombre = document.getElementById("nombre").innerHTML;
     // TAMBIEN TENDREMOS QUE COGER EL USUARIO QUE ESTA CONECTADO
     var usuario = localStorage.getItem("user")
+    // COGEMOS EL IDCROMO 
+    var idCromo = localStorage.getItem("IDcromo");
+    var idColeccion = document.getElementById("numColeccion").innerHTML;
     fetch("/comprarCromo", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"cromo": nombre, "usuario": usuario})
+        body: JSON.stringify({"cromo": nombre, "usuario": usuario, "idcromo": idCromo, "idcoleccion": idColeccion})
     }).then(response => {
         if (response.status == 200) {
             // Mostrar mensaje de que el cromo se ha comprado correctamente
