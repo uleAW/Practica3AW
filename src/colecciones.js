@@ -79,16 +79,16 @@ function comprarCromo() {
 }
 
 function comprarAlbum() {
-    // AQUI COGER EL NOMBRE DEL CROMO DE ALGUNA MANERA VER EN EL FUTURO
-    var nombre = "aa";
-    // TAMBIEN TENDREMOS QUE COGER EL USUARIO QUE ESTA CONECTADO
-    var usuario = "aaa"
+    //CAMBIAR
+    var nombre = "HOLA";
+    var idColeccion = "6";
+    var usuario = localStorage.getItem("user")
     fetch("/comprarAlbum", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"album": nombre, "usuario": usuario})
+        body: JSON.stringify({"album": nombre, "usuario": usuario, "idcoleccion": idColeccion})
     }).then(response => {
         if (response.status == 200) {
             // Mostrar mensaje de que el cromo se ha comprado correctamente

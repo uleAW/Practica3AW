@@ -226,8 +226,7 @@ app.post('/comprarCromo', function (req, res) {
                                     res.status(404).send();
                                 }
                             });
-                            }else{//COMPLETAR       
-                                console.log("ELSE")                                    
+                            }else{                                     
                                 con.query("UPDATE coleccionusuario SET codCromos = concat(codCromos,?) WHERE numSocio = ? AND numColeccion = ?", [data["idcromo"]+";", numSocio, parseInt(data["idcoleccion"])], function (err, result, fields) {
                                 try {
                                     if (err) throw err;
@@ -261,16 +260,45 @@ app.post('/comprarCromo', function (req, res) {
 });
 
 app.post('/comprarAlbum', function (req, res) {
+    var values = [];
     var data = req.body;
-    con.query("SELECT precio FROM albumes WHERE idColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?)", [data["album"]], function (err, result, fields) {
+    con.query("SELECT precio, idAlbum FROM albumes WHERE idColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?)", [data["album"]], function (err, result, fields) {
         try {
             if (err) throw err;
             var precio = result[0].precio
-            con.query("SELECT puntos FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
+            var idAlbum = result[0].idAlbum
+            console.log(idAlbum);
+            con.query("SELECT numSocio, puntos FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
                 if (err) throw err;
                 if (result[0].puntos >= precio) {
+                    var numSocio = result[0].numSocio
+                     values.push([idAlbum, "no iniciada", data["idcoleccion"], numSocio]);
                     // AQUI PONER QUERY PARA ASIGNAR EL ALBUM AL USUARIO
-
+                    con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ?", [data["idcoleccion"]], function (err, result, fields) {
+                            //Si esta vacia, solo he comprado el album
+                            if(result.length == 0){
+                                con.query("INSERT INTO coleccionusuario (idAlbum, estado, numColeccion, numSocio) VALUES ?", [values], function (err, result, fields) {
+                                try {
+                                    if (err) throw err;
+                                    res.status(200).send();
+                                } catch (err) {
+                                    console.log(err);
+                                    res.status(404).send();
+                                }
+                            });
+                            }else{                                     
+                                con.query("UPDATE coleccionusuario SET idAlbum = ? WHERE numSocio = ? AND numColeccion = ?", [idAlbum, numSocio, parseInt(data["idcoleccion"])], function (err, result, fields) {
+                                try {
+                                    if (err) throw err;
+                                    res.status(200).send();
+                                } catch (err) {
+                                    console.log(err);
+                                    res.status(404).send();
+                                }
+                                });
+                            }
+                            if (err) throw err;
+                        });
                     // -------------------------------------------------
                     con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
                         if (err) throw err;
