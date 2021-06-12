@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/**
+ * IMAGEN
+ */
+
+.imagen {
+    position: relative;
+    vertical-align: top;
+    height: 200px;
+}
+
+.imagen img {
+    position: absolute;
+    width: 200px;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+}
+
+
+/**
+ *   CAJA DE PARAMETROS
+ */
+
+.parametros {
+    height: 400px;
+    width: 300px;
+    /*border-style: solid;
+    border-color: #A34747;*/
+    padding: 18px 18px;
+}
+
+input {
+    background-color: #fff;
+    height: 31px;
+    width: 100%;
+    padding: 3px 7px;
+    line-height: normal;
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: grey;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: small;
+    font-weight: bold;
+}
+
+
+/**
+ *   BOTONES
+ */
+
+.botones {
+    margin-top: 50px;
+}
+
+button {
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 25px;
+    font-family: 'Ubuntu', sans-serif;
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.azul {
+    border-color: #3d5b9c;
+    color: white;
+    box-shadow: 0 0 40px 40px #3d5b9c inset, 0 0 0 0 #3d5b9c;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+
+.azul:hover {
+    box-shadow: 0 0 10px 0 #3d5b9c inset, 0 0 10px 4px #3d5b9c;
+    color: black;
+}
+
+.gris {
+    border-color: #808080;
+    color: white;
+    box-shadow: 0 0 40px 40px #808080 inset, 0 0 0 0 #808080;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+
+.gris:hover {
+    box-shadow: 0 0 10px 0 #808080 inset, 0 0 10px 4px #808080;
+    color: black;
+}

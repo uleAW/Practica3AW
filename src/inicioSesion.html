@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script src="inicioSesion.js" type="text/javascript"></script>
-</head>
-<body>
-Usuario <input type="text" id="usuario">
-<br>
-<br>
-Contraseña <input type="password" id="contrasenia">
-<br>
-<br>
-<button onclick="registrar()">Registrar</button>
-<button onclick="iniciarSesion()">Iniciar Sesion</button>
-</body>
-</html>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiKiosko</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./inicioSesion.css">
+
+    <script src="inicioSesion.js" type="text/javascript"></script>
+</head>
+
+<body overflow-y:hidden>
+    <!--Usuario <input type="text" id="usuario">
+    Contraseña <input type="password" id="contrasenia">
+    <button onclick="registrar()" class="rojo">Registrar</button>
+    <button onclick="iniciarSesion()" class="rojo">Iniciar Sesion</button>-->
+
+    <div class="parametros">
+        <div class="imagen">
+            <img src="../media/img/digimon-300x300.png" alt="">
+        </div>
+        <div class="parametro">
+            <label for="">Nombre de usuario</label>
+            <input type="text" id="usuario">
+        </div>
+
+        <div class="parametro">
+            <label for="">Contrase&ntilde;a</label>
+            <input type="text" id="contrasenia">
+        </div>
+        <div class="botones">
+            <button onclick="iniciarSesion()" class="azul">Iniciar Sesion</button>
+            <button onclick="registrar()" class="gris">Crea tu cuenta</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
