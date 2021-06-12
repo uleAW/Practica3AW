@@ -12,11 +12,13 @@ function iniciarSesion() {
         //Respuesta segun el rol del usuario
         if (response.status == 200){
             localStorage.setItem("Cookie_Sesion", "true");
+            localStorage.setItem("user", usuario);
             // Mostrar pagina del usuario
             window.open("http://127.0.0.1:5050/src/usuario.html","_self");
         } else {
             if(response.status == 201) {
                 localStorage.setItem("Cookie_Sesion", "true");
+                localStorage.setItem("user", usuario);
                 window.open("http://127.0.0.1:5050/src/admin.html","_self");
             }
             // Mostrar error de conexion

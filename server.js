@@ -259,6 +259,26 @@ app.post('/comprarAlbum', function (req, res) {
     });
 });
 
+app.post('/cargarPuntos', function (req, res) {
+    var data = req.body;
+    con.query("SELECT puntos FROM socios WHERE usuario = ?", data["usuario"], function (err, result, fields) {
+        res.send(result[0].puntos);
+    });
+});
+
+app.post('/cargarInfoCromo', function (req, res) {
+    var data = req.body;
+    con.query("SELECT * FROM cromos WHERE codCromo = ?", data["idCromo"], function (err, result, fields) {
+    var out = "";
+    out = out + result[0].nombre + ",";
+    out = out + result[0].imagen + ",";
+    out = out + result[0].precio + ",";
+    out = out + result[0].copias + ",";
+    out = out + result[0].numColeccion + ",";
+    res.send(out);
+    });
+});
+
 
 // EJEMPLO DE QUERY CUANDO HAYA QUE HACER UNA QUERY SE HACE ASÍ
 con.query("SELECT * FROM colecciones", function (err, result, fields) {
