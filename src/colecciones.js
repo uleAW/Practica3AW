@@ -80,8 +80,8 @@ function comprarCromo() {
 
 function comprarAlbum() {
     //CAMBIAR
-    var nombre = "HOLA";
-    var idColeccion = "6";
+    var nombre = "aa";
+    var idColeccion = "4";
     var usuario = localStorage.getItem("user")
     fetch("/comprarAlbum", {
         method: "POST",

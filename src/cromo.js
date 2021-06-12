@@ -5,7 +5,7 @@ function funciones(){
 
 function consulta(){
     //SIMULADO
-    localStorage.setItem("IDcromo", 14);
+    localStorage.setItem("IDcromo", 16);
 	var id = localStorage.getItem("IDcromo");
     //-----
     fetch("/cargarInfoCromo", {

@@ -13,8 +13,8 @@ app.use(express.urlencoded({limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
-    port: 3306,
+    password: "Lr20jcxx%",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -209,38 +209,42 @@ app.post('/comprarCromo', function (req, res) {
                     var numSocio = result[0].numSocio;
                     var puntos = result[0].puntos
                     if (puntos >= precio) {
-                        values.push(["completada parcialmente", data["idcoleccion"], numSocio, data["idcromo"]+";"]);
+                        values.push(["completada parcialmente", data["idcoleccion"], numSocio, data["idcromo"] + ";"]);
                         con.query("UPDATE cromos SET copias = copias - 1 WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
                             if (err) throw err;
                         });
                         // AQUI PONER QUERY PARA ASIGNAR EL CROMO AL USUARIO
-                         con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ?", [data["idcoleccion"]], function (err, result, fields) {
+                        con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ?", [data["idcoleccion"]], function (err, result, fields) {
                             //Si esta vacia, es el primer cromo de la coleccion
-                            if(result.length == 0){
+                            if (result.length == 0) {
                                 con.query("INSERT INTO coleccionusuario (estado, numColeccion, numSocio, codCromos) VALUES ?", [values], function (err, result, fields) {
-                                try {
-                                    if (err) throw err;
-                                    res.status(200).send();
-                                } catch (err) {
-                                    console.log(err);
-                                    res.status(404).send();
-                                }
-                            });
-                            }else{                                     
-                                con.query("UPDATE coleccionusuario SET codCromos = concat(codCromos,?) WHERE numSocio = ? AND numColeccion = ?", [data["idcromo"]+";", numSocio, parseInt(data["idcoleccion"])], function (err, result, fields) {
-                                try {
-                                    if (err) throw err;
-                                    res.status(200).send();
-                                } catch (err) {
-                                    console.log(err);
-                                    res.status(404).send();
-                                }
+                                    try {
+                                        if (err) throw err;
+                                        res.status(200).send();
+                                    } catch (err) {
+                                        console.log(err);
+                                        res.status(404).send();
+                                    }
+                                });
+                            } else {
+                                var cromos = result[0].codCromos;
+                                var datos = cromos.split(';');
+                                console.log(cromos)
+                                console.log(datos)
+                                con.query("UPDATE coleccionusuario SET codCromos = concat(codCromos,?) WHERE numSocio = ? AND numColeccion = ?", [data["idcromo"] + ";", numSocio, parseInt(data["idcoleccion"])], function (err, result, fields) {
+                                    try {
+                                        if (err) throw err;
+                                        res.status(200).send();
+                                    } catch (err) {
+                                        console.log(err);
+                                        res.status(404).send();
+                                    }
                                 });
                             }
                             if (err) throw err;
                         });
                         // -------------------------------------------------
-                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields){
+                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
                             if (err) throw err;
                         });
                         res.status(200).send();
@@ -267,44 +271,53 @@ app.post('/comprarAlbum', function (req, res) {
             if (err) throw err;
             var precio = result[0].precio
             var idAlbum = result[0].idAlbum
-            console.log(idAlbum);
             con.query("SELECT numSocio, puntos FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
                 if (err) throw err;
                 if (result[0].puntos >= precio) {
                     var numSocio = result[0].numSocio
-                     values.push([idAlbum, "no iniciada", data["idcoleccion"], numSocio]);
+                    values.push([idAlbum, "no iniciada", data["idcoleccion"], numSocio]);
                     // AQUI PONER QUERY PARA ASIGNAR EL ALBUM AL USUARIO
                     con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ?", [data["idcoleccion"]], function (err, result, fields) {
-                            //Si esta vacia, solo he comprado el album
-                            if(result.length == 0){
-                                con.query("INSERT INTO coleccionusuario (idAlbum, estado, numColeccion, numSocio) VALUES ?", [values], function (err, result, fields) {
+                        //Si esta vacia, solo he comprado el album
+                        if (result.length == 0) {
+                            con.query("INSERT INTO coleccionusuario (idAlbum, estado, numColeccion, numSocio) VALUES ?", [values], function (err, result, fields) {
                                 try {
                                     if (err) throw err;
-                                    res.status(200).send();
+                                    con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
+                                        if (err) throw err;
+                                        res.status(200).send();
+                                    });
                                 } catch (err) {
                                     console.log(err);
                                     res.status(404).send();
                                 }
                             });
-                            }else{                                     
+                        } else {
+                            if (result[0].idAlbum == null) {
                                 con.query("UPDATE coleccionusuario SET idAlbum = ? WHERE numSocio = ? AND numColeccion = ?", [idAlbum, numSocio, parseInt(data["idcoleccion"])], function (err, result, fields) {
-                                try {
-                                    if (err) throw err;
-                                    res.status(200).send();
-                                } catch (err) {
-                                    console.log(err);
-                                    res.status(404).send();
-                                }
+                                    try {
+                                        if (err) throw err;
+                                        con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
+                                            if (err) throw err;
+                                            res.status(200).send();
+                                        });
+                                    } catch (err) {
+                                        // Ya tiene el album comprado
+                                        console.log(err);
+                                        res.status(404).send();
+                                    }
                                 });
+                            } else {
+                                console.log("COMPRADO");
+                                // ya tiene el album comprado
+                                res.status(404).send();
                             }
-                            if (err) throw err;
-                        });
-                    // -------------------------------------------------
-                    con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
+                        }
                         if (err) throw err;
                     });
                     res.status(200).send();
                 } else {
+                    console.log("No tiene puntos")
                     res.status(404).send();
                 }
             });
