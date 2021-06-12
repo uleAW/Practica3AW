@@ -56,12 +56,19 @@ input {
     border-style: solid;
     border-color: grey;
     margin-top: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 label {
     font-size: small;
     font-weight: bold;
+}
+
+.password-icon {
+    float: right;
+    position: relative;
+    margin: -30px 10px 0 0;
+    cursor: pointer;
 }
 
 

@@ -25,13 +25,31 @@
             <img src="../media/img/digimon-300x300.png" alt="">
         </div>
         <div class="parametro">
-            <label for="">Nombre de usuario</label>
-            <input type="text" id="usuario">
+            <label for="">
+                Nombre de usuario
+                <input type="text" id="usuario">
+            </label>
+
         </div>
 
         <div class="parametro">
-            <label for="">Contrase&ntilde;a</label>
-            <input type="text" id="contrasenia">
+            <label for="">
+                Contrase&ntilde;a
+                <input id="contrasenia" type="password">
+                <span class="fa fa-fw fa-eye password-icon show-password" onclick="mostrarContrasenia()"></span>
+                <script>
+                    function mostrarContrasenia(){
+                        var contrasenia = document.getElementById("contrasenia");
+                        if(contrasenia.type === "text" ){
+                            contrasenia.type = "password";
+                        } else {
+                            contrasenia.type = "text";
+                        }
+                    }
+                    
+                </script>
+            </label>
+
         </div>
         <div class="botones">
             <button onclick="iniciarSesion()" class="azul">Iniciar Sesion</button>
