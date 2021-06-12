@@ -26,7 +26,7 @@ function inactividad() {
 }
 var t=null;
 function contadorInactividad() {
-    t=setTimeout("inactividad()",1000); //30 min (1800000)
+    t=setTimeout("inactividad()",1800000); //30 min (1800000)
 }
 window.onblur=window.onmousemove=function() {
     if(t) clearTimeout(t);

@@ -13,8 +13,8 @@ app.use(express.urlencoded({limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
-    port: 3306,
+    password: "Lr20jcxx%",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -262,7 +262,13 @@ app.post('/comprarAlbum', function (req, res) {
 app.post('/cargarPuntos', function (req, res) {
     var data = req.body;
     con.query("SELECT puntos FROM socios WHERE usuario = ?", data["usuario"], function (err, result, fields) {
-        res.send(result[0].puntos);
+        try {
+            if (err) throw err;
+            var puntos = result[0].puntos
+            res.status(200).send(puntos.toString());
+        } catch (err) {
+            console.log(err);
+        }
     });
 });
 
@@ -271,9 +277,10 @@ app.post('/cargarInfoCromo', function (req, res) {
     con.query("SELECT * FROM cromos WHERE codCromo = ?", data["idCromo"], function (err, result, fields) {
     var out = "";
     out = out + result[0].nombre + ",";
+    // MAL
     out = out + result[0].imagen + ",";
-    out = out + result[0].precio + ",";
-    out = out + result[0].copias + ",";
+    out = out + result[0].precio.toString() + ",";
+    out = out + result[0].copias.toString() + ",";
     out = out + result[0].numColeccion + ",";
     res.send(out);
     });
