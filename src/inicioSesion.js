@@ -9,7 +9,7 @@ function iniciarSesion() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({"usuario": usuario, "pass": pass})
-    }).then(response => {
+    }).then(response => response.text().then(function(text){
         //Respuesta segun el rol del usuario
         if (response.status == 200){
             localStorage.setItem("Cookie_Sesion", "true");
@@ -17,15 +17,18 @@ function iniciarSesion() {
             // Mostrar pagina del usuario
             window.open("./usuario.html","_self");
         } else {
+            console.log(text);
             if(response.status == 201) {
                 localStorage.setItem("Cookie_Sesion", "true");
                 localStorage.setItem("user", usuario);
                 window.open("./admin.html","_self");
+            } else if(response.status == 202) {
+                document.getElementById("textErrorInicioSesion").innerHTML = text;
+                document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "visible";
+                setTimeout(function(){ document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden"; }, 3000);
             }
-            // Mostrar error de conexion
-            console.log("Error al conectar")
         }
-    })
+    }));
 }
 
 // Cuando se haga click en el boton de registrar
