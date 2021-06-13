@@ -80,15 +80,14 @@ function comprarCromo() {
 
 function comprarAlbum() {
     //CAMBIAR
-    var nombre = "aa";
-    var idColeccion = "4";
+    var nombreColeccion = "aa";
     var usuario = localStorage.getItem("user")
     fetch("/comprarAlbum", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"album": nombre, "usuario": usuario, "idcoleccion": idColeccion})
+        body: JSON.stringify({"album": nombreColeccion, "usuario": usuario})
     }).then(response => {
         if (response.status == 200) {
             // Mostrar mensaje de que el cromo se ha comprado correctamente

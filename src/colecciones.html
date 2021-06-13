@@ -7,13 +7,14 @@
 <body onload="checkSesion()">
 <!-- Utilizar estas etiquetas para evitar errores en la funcionalidad -->
 <h1>Añadir Coleccion</h1>
-<input type="text" id="nombreAniadirColeccion">
+Nombre Coleccion <input type="text" id="nombreAniadirColeccion">
 <br>
 <br>
-<input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
+<!-- Principalmente esta es la que mas problemas da-->
+Imagen Album: <input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
 <br>
 <br>
-<input type="number" id="precioAniadirAlbum">
+Precio Album: <input type="number" id="precioAniadirAlbum">
 <br>
 <br>
 <button onclick="aniadirColeccion()">Añadir</button>
@@ -22,16 +23,16 @@
 <br>
 <br>
 <h1>Añadir Cromo</h1>
-<input type="text" id="nombreAniadirCromo">
+Nombre Cromo: <input type="text" id="nombreAniadirCromo">
 <br>
 <br>
-<input type="file" id="imgAniadirCromo" accept="image/png, image/jpeg">
+Imagen Cromo: <input type="file" id="imgAniadirCromo" accept="image/png, image/jpeg">
 <br>
 <br>
-<input type="number" id="precioAniadirCromo">
+Precio Cromo: <input type="number" id="precioAniadirCromo">
 <br>
 <br>
-<input type="number" id="coleccionAniadirCromo">
+Nombre Coleccion <input type="text" id="coleccionAniadirCromo">
 <br>
 <button onclick="aniadirCromo()">Añadir</button>
 <br>
