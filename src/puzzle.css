@@ -1,42 +1,96 @@
-body{
-    background:#222; 
-    margin:0;
-    padding:0;
-    font-family:Helvetica;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-span{
-    color:
-    #FFF;
+body {
+    font-family: 'Ubuntu', sans-serif;
 }
 
-div#content{
-    margin-top:10px;
+.puzzle {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
-div#conf{
-    padding-bottom:10px;
+.info {
+    text-align: center;
+    background-color: #3d5b9c;
+    color: white;
+    height: 100%;
+    width: 100%;
+    padding: 10% 10%;
 }
 
-table{
-    border:2px solid green;
-    box-shadow:1px 1px 8px #00e800,-1px -1px 8px #00e800, 1px -1px 8px #00e800, -1px 1px 8px #00e800;
-    -webkit-box-shadow:1px 1px 8px #00e800,-1px -1px 8px #00e800, 1px -1px 8px #00e800, -1px 1px 8px #00e800;
-    border-collapse:collapse;
+.rompecabezas {
+    position: relative;
+    margin: auto;
+    padding: 10% 10%;
 }
 
-td.pieza{
-    
-    transition:.3s ease-in-out;
-    -moz-transition:.3s ease-in-out;
-    -webkit-transition:.3s ease-in-out;
-    -o-transition:.3s ease-in-out;
-    cursor:pointer;
+#div_content {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
-div#titulo{
-    color:#FFF;
-    font-size:30px;
-    font-weight:bold;
-    text-shadow:1px 1px 8px #00e800, -1px -1px 8px #00e800, 1px -1px 8px #00e800, -1px 1px 8px #00e800;
+h2 {
+    text-align: center;
+    font-size: 2.5cm;
+    margin-bottom: 120px;
+}
+
+h3 {
+    text-align: center;
+    font-size: 1cm;
+    margin-top: 25px;
+    margin-bottom: 120px;
+}
+
+h4 {
+    font-weight: 450;
+    font-size: large;
+}
+
+.descripcion {
+    font-size: large;
+}
+
+button {
+    font-size: 0.5cm;
+    height: 40px;
+    width: 200px;
+    background-color: #3d7aba;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+
+button:hover {
+    box-shadow: 0 0 10px 0 #6184cf inset, 0 0 10px 4px #6184cf;
+    color: #bdc7df;
+}
+
+table {
+    border: 2px solid #2980B9;
+    box-shadow: 1px 1px 8px #6184cf, -1px -1px 8px #6184cf, 1px -1px 8px #6184cf, -1px 1px 8px #6184cf;
+    -webkit-box-shadow: 1px 1px 8px #6184cf, -1px -1px 8px #6184cf, 1px -1px 8px #6184cf, -1px 1px 8px #6184cf;
+    border-collapse: collapse;
+}
+
+td.pieza {
+    transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    cursor: pointer;
 }

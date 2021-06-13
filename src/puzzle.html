@@ -1,26 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<link rel="stylesheet" href="./puzzle.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./puzzle.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
 
 <body>
-    <div id='content' align='center'>
-        <div id="titulo">Bin ROMPECABEZAS</div>
-        <div id='conf'>
-            <span>Nro de piezas:</span>
-            <select id='piezas'>
-        <option value='4'>4</option>
-				<option value='9'>9</option>
-				<option value='16'>16</option>
-				<option value='25'>25</option>
-				<option value='36'>36</option>
-				<option value='100'>100</option>
-			</select><input type='button' id='barajar' value='Barajar' />
-            <div><span>Pulsa en un cuadro y luego en otro para intercambiar sus posiciones!!</span></div>
-        </div>
-    </div>
 
-    <script src="puzzle.js"></script>
+    <body>
+        <div class="puzzle">
+            <div class="info">
+                <h2>¡Puzzles locos! </h2>
+                <div class="descripcion">
+                    Elige el n&uacute;mero de piezas del puzzle y bar&aacute;jalas. <br><br> Selecciona un cuadro del puzzle, despu&eacute;s selecciona el cuadro por el que lo quieres intercambiar y...
+                </div>
+                <h3>¡¡A JUGAR!!</h3>
+                <h4>N&uacute;mero de piezas
+                    <select class="numeroPiezas" id='piezas'>
+                    <option value='4'>4</option>
+                    <option value='9'>9</option>
+                    <option value='16'>16</option>
+                    <option value='25'>25</option>
+                    <option value='36'>36</option>
+                    <option value='100'>100</option>
+                </select>
+                </h4>
+                <br>
+                <button id='barajar' value='Barajar'>Barajar</button>
+            </div>
+            <div class="rompecabezas" id="rompecabezas">
+            </div>
+        </div>
+        <!--<select id='piezas'>
+                    <option value='4'>4</option>
+                    <option value='9'>9</option>
+                    <option value='16'>16</option>
+                    <option value='25'>25</option>
+                    <option value='36'>36</option>
+                    <option value='100'>100</option>
+                </select>
+        <input type='button' id='barajar' value='Barajar' />
+        <div>
+            <span>Pulsa en un cuadro y luego en otro para intercambiar sus posiciones!!</span>
+        </div>-->
+
+        <script src="puzzle.js"></script>
+    </body>
 </body>
 
 </html>
