@@ -198,7 +198,6 @@ function addPuntos(){
         alert("Su balance de puntos es de: +"+puntos)
     }));
     }else{
-        //INICIAR SESION y ADD PUNTOS
-        alert("Necesario INICIAR SESION!!!")
+        alert("INICIA SESION para ganar puntos")
     }
 }
