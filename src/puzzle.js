@@ -33,6 +33,7 @@ var rompecabezas = {
                 td.style.height = pos_img + 'px';
                 var dbp = document.createElement('div');
                 dbp.id = 'val_bp_' + c;
+                dbp.style.visibility = "hidden";
                 var p = Math.round(((pos_img * cel) - pos_img) * -1) + 'px ' + Math.round(((fil * pos_img) - pos_img) * -1) + 'px';
                 td.style.backgroundPosition = p;
                 rompecabezas._arr_pos_r.push(p);
