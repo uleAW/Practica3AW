@@ -47,20 +47,19 @@ app.post('/inicioSesion', function (req, res) {
             if (result.length) {
                 con.query("SELECT rol FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
                     try {
-                        if (result == "usuario") {
+                        if (result[0].rol == "usuario") {
                             //Usuario
                             res.status(200).send();
                         } else {
                             //Admin
+                            console.log("ADMIN")
                             res.status(201).send();
                         }
                     } catch (err) {
                         console.log(err);
                         res.status(404).send();
                     }
-                });
-                ///
-                res.status(200).send();
+                })
             } else {
                 res.status(202).send("Introduce los datos correctamente");
             }

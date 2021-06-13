@@ -17,7 +17,6 @@ function iniciarSesion() {
             // Mostrar pagina del usuario
             window.open("./usuario.html","_self");
         } else {
-            console.log(text);
             if(response.status == 201) {
                 localStorage.setItem("Cookie_Sesion", "true");
                 localStorage.setItem("user", usuario);
