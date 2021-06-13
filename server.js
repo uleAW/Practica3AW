@@ -149,7 +149,34 @@ app.get('/imagenNombre', function (req, res) {
 
 
 });
+app.post('/coleccionCromos', function (req, res) {
+    var data = req.body
+    //console.log(data["numColeccion"]);
+    con.query("SELECT codCromo FROM cromos", function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.codCromo + ",";
+        }
+        console.log(result);
+        res.send(out);
+    });
 
+
+});
+app.post('/coleccionCromosImagenes', function (req, res) {
+    var data = req.body
+    //console.log(data["numColeccion"]);
+    con.query("SELECT imagen FROM cromos", function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.imagen + ",";
+        }
+        //console.log(result);
+        res.send(out);
+    });
+
+
+});
 app.get('/imagenDireccion', function (req, res) {
     var data = req.body
 
@@ -171,11 +198,10 @@ app.post('/coleccionNombre', function (req, res) {
         for (let item of result) {
             out = out + item.nombre + ",";
         }
-
+        
         res.send(out);
     });
 });
-
 app.post('/coleccionID', function (req, res) {
     //var data = req.body
 
@@ -184,11 +210,22 @@ app.post('/coleccionID', function (req, res) {
         for (let item of result) {
             out = out + item.numColeccion + ",";
         }
-
+        
         res.send(out);
     });
 });
+app.post('/coleccionUsuarioID', function (req, res) {
+    var data = req.body
 
+    con.query("SELECT codCromos FROM coleccionusuario WHERE numSocio = ?", data["numUsuario"], function (err, result, fields) {
+        var out = ";";
+        for (let item of result) {
+            out = out + item.codCromos+";";
+        }
+        
+        res.send(out);
+    });
+});
 app.listen(port, () => {
     console.log(`Listening at http://${host}:${port}`)
 })
