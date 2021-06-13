@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="./portada.css">
 </head>
 
-<body>
+<body onload="datos()">
     <!-- TRAILER DE FONDO -->
 
     <video autoplay muted loop id="videoTrailer">
@@ -36,7 +36,7 @@
                     <a href="#" id="nuevo">Nuevo</a>
                 </li>
                 <li>
-                    <a href="colecciones.html" id="colecciones">Colecciones</a>
+                    <a href="consultarColeccion.html" id="colecciones">Colecciones</a>
                 </li>
                 <li>
                     <a href="pasatiempos.html" id="colecciones">Pasatiempos</a>
@@ -67,6 +67,38 @@
     </button>
 
     <script>
+        function coleccionNombre() {
+
+            fetch("/coleccionNombre", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+            }
+        //body: JSON.stringify({"numColeccion": count})
+            }).then(response => response.text().then(function(text){
+
+                localStorage.setItem("coleccionNombre", text);
+        
+            }));
+        };
+        function coleccionID() {
+
+            fetch("/coleccionID", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+        //body: JSON.stringify({"numColeccion": count})
+            }).then(response => response.text().then(function(text){
+
+                        localStorage.setItem("coleccionID", text);
+            }));
+        };
+        function datos(){
+            coleccionID();
+            coleccionNombre();
+
+        }
         var boton = document.getElementById("myBtn");
         var botonLogo = document.getElementById("logo")
         var video = document.getElementById("videoTrailer");
