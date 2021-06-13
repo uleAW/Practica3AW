@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "root",
-    port: 3306,
+    password: "Lr20jcxx%",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -169,7 +169,9 @@ app.post('/coleccionCromosImagenes', function (req, res) {
     con.query("SELECT imagen FROM cromos", function (err, result, fields) {
         var out = "";
         for (let item of result) {
-            out = out + item.imagen + ",";
+            var bitmap = fs.readFileSync(item.imagen);
+            var data = Buffer(bitmap).toString('base64');
+            out = out + data + ",";
         }
         //console.log(result);
         res.send(out);

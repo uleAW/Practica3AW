@@ -4,7 +4,7 @@ function funciones(){
 }
 
 function consulta(){
-    var nombreCromo = "ada"
+    var nombreCromo = "adad"
     var nombreColeccion = "aa";
     fetch("/cargarInfoCromo", {
         method: "POST",
