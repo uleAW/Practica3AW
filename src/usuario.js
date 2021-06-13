@@ -1,6 +1,7 @@
 function funciones(){
     checkSesion();
     mostrarPuntos();
+    datos();
 }
 
 function checkSesion(){
@@ -54,4 +55,97 @@ function cerrarSesion(){
     localStorage.removeItem("user");
     localStorage.removeItem("pass");
     window.open("/index.html","_self");  
+}
+
+function coleccionID() {
+
+    fetch("/coleccionUsuarioID", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"numUsuario": localStorage.getItem("user")})
+    }).then(response => response.text().then(function(text){
+        
+            //if(localStorage.getItem("coleccionID")==null){
+                console.log(text);
+                localStorage.setItem("cromosUsuario", text);
+        
+    }));
+};
+function cromoID(){
+    fetch("/coleccionCromos", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        
+    }).then(response => response.text().then(function(text){
+            localStorage.setItem("cromosID", text);
+    }));
+    
+}
+function cromoImagen(){
+    fetch("/coleccionCromosImagenes", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        
+    }).then(response => response.text().then(function(text){
+            localStorage.setItem("cromosImagenes", text);
+    }));
+    
+}
+function datos(){
+    //localStorage.clear();
+    coleccionID();
+    cromoID();
+    cromoImagen();
+    //coleccionNombre();
+}
+function volver(){
+    window.open("./usuario.html","_self");
+    }
+var boolean=true;
+function table(){
+            var cromos = new Array();
+            var imagenes = new Array();
+            var IDCromo = localStorage.getItem("cromosID");
+            var imgCromo = localStorage.getItem("cromosImagenes");
+            var IDCromos = IDCromo.split(",");
+            var imgCromos = imgCromo.split(",");
+            var cromoUsuario = localStorage.getItem("cromosUsuario");
+            var cromoUsuarios =cromoUsuario.split(";");
+
+            for(var i=0;i<IDCromos.length;i++){
+                for(var j=0;j<cromoUsuarios.length;j++){
+                    if(IDCromos[i]==cromoUsuarios[j]){
+                        cromos.push(IDCromos[i]);
+                        imagenes.push(imgCromos[i]);
+                    }
+                }
+            }
+
+            console.log(imagenes);
+            tabla="";
+            tabla=tabla+"<table>";
+            salir=false;
+            for(var i=0; i<imagenes.length; i++){
+                if(salir) 
+                    break;
+                tabla=tabla+"<tr>";
+                for(var k=0;k<2;k++){//el 2 de este for marca el numero de fotos que se van a mostrar en la misma fila
+                    if((i*2+k)<imagenes.length){
+                        tabla=tabla+"<td><img src="+imagenes[i*2+k]+"></td>";
+                    }else{
+                        tabla=tabla+"<td></td>";
+                        salir=true;
+                    }
+                }
+                tabla=tabla+"</tr>";
+            }
+            tabla="<button onclick=volver()>Volver</button>"+tabla;
+            document.getElementById("coleccion").innerHTML=tabla;
+            
 }
