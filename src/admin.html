@@ -3,6 +3,45 @@
 <script src="usuario.js"></script>
 <title>ADMIN</title>
 <body onload="funciones()">
+<!-- Utilizar estas etiquetas para evitar errores en la funcionalidad -->
+<h1>Añadir Coleccion</h1>
+Nombre Coleccion <input type="text" id="nombreAniadirColeccion">
+<br>
+<br>
+<!-- Principalmente esta es la que mas problemas da-->
+Imagen Album: <input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
+<br>
+<br>
+Precio Album: <input type="number" id="precioAniadirAlbum">
+<br>
+<br>
+<button onclick="aniadirColeccion()">Añadir</button>
+<!-- Aqui poner el estilo hidden por defecto-->
+<div class="errorAniadirColeccion">
+    <text id="textErrorAniadirColeccion">PRUEBAA</text>
+</div>
+<br>
+<br>
+<br>
+<br>
+<h1>Añadir Cromo</h1>
+Nombre Cromo: <input type="text" id="nombreAniadirCromo">
+<br>
+<br>
+Imagen Cromo: <input type="file" id="imgAniadirCromo" accept="image/png, image/jpeg">
+<br>
+<br>
+Precio Cromo: <input type="number" id="precioAniadirCromo">
+<br>
+<br>
+Nombre Coleccion <input type="text" id="coleccionAniadirCromo">
+<br>
+<button onclick="aniadirCromo()">Añadir</button>
+<br>
+<!-- Aqui poner el estilo hidden por defecto-->
+<div class="errorAniadirCromo">
+    <text id="textErrorAniadirCromo">PRUEBAA</text>
+</div>
 <h1>ADMIN</h1>
 <input type="button" value="CERRAR SESION" onclick="cerrarSesion()">
 </body>
