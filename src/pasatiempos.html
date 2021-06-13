@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasatiempos</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./pasatiempos.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="menu">
+        <div class="pasatiempo" onclick="openPage(1)">
+            <div class="banner">
+                <div class="nombre">
+                    PUZZLES
+                </div>
+
+            </div>
+            <div class="info">
+                ROMPETE LA CABEZA RESOLVIENDO NUESTROS PUZZLES!
+            </div>
+        </div>
+        <div class="pasatiempo" onclick="openPage(2)">
+            <div class="banner">
+                <div class="nombre">
+                    TRIVIAL
+                </div>
+
+            </div>
+            <div class="info">
+                SABES TODO ACERCA DE LOS DIGIMON? RESPONDE PREGUNTAS Y GANA PUNTOS!
+            </div>
+        </div>
+        <div class="pasatiempo" onclick="openPage(3)">
+            <div class="banner">
+                <div class="nombre">
+                    CAPTCHA
+                </div>
+
+            </div>
+            <div class="info">
+                ¿ERES HUMANO?
+            </div>
+        </div>
+        <script>
+            function openPage(num) {
+                if (num == 1) {
+                    window.open("./puzzle.html", "_self");
+                } else if (num == 2) {
+                    window.open("./trivial.html", "_self");
+                } else {
+                    window.open("./captcha.html", "_self");
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>
