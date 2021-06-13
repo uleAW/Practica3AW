@@ -77,13 +77,19 @@ h1 {
 }
 
 h3 {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 10px;
-    font-weight: 550;
+    font-size: medium;
+    font-weight: 600;
 }
 
 input {
     height: 30px;
+    width: 200px;
+    line-height: normal;
+    border-width: 1px;
+    border-radius: 5px;
+    padding: 3px 7px;
 }
 
 button {
