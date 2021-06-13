@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
-    port: 3306,
+    password: "pass",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -45,7 +45,6 @@ app.post('/inicioSesion', function (req, res) {
         try {
             if (err) throw err;
             if (result.length) {
-                ///
                 con.query("SELECT rol FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
                     try {
                         if (result == "usuario") {
@@ -63,10 +62,9 @@ app.post('/inicioSesion', function (req, res) {
                 ///
                 res.status(200).send();
             } else {
-                res.status(300).send();
+                res.status(202).send("Introduce los datos correctamente");
             }
         } catch (err) {
-            console.log(err);
             res.status(404).send();
         }
     });
@@ -82,10 +80,9 @@ app.post('/registrar', function (req, res) {
     con.query("INSERT INTO socios (usuario, contrasenia) VALUES ?", [values], function (err, result, fields) {
         try {
             if (err) throw err;
-            res.status(200).send();
+            res.status(200).send("Usuario registrado correctamente");
         } catch (err) {
-            console.log(err);
-            res.status(404).send();
+            res.status(201).send("Ya existe un usuario con ese nombre");
         }
     });
 });
