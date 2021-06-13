@@ -21,20 +21,27 @@ function comprobar(){
 	}
 
 	//Pregunta 4 (checkBox) ------
-	if(document.getElementById("res41").checked){
-		puntos = puntos+10;
-	}
-	if(document.getElementById("res42").checked){
-		puntos = puntos+10;
-	}
-	if(document.getElementById("res43").checked){
-		puntos = puntos+10;
-	}
-	if(document.getElementById("res44").checked){
-		puntos = puntos+10;
-	}
 	if(document.getElementById("res45").checked == false){
-		puntos = puntos+10;
+		var todas = 0;
+		if(document.getElementById("res41").checked){
+			todas++;
+			puntos = puntos+10;
+		}
+		if(document.getElementById("res42").checked){
+			todas++;
+			puntos = puntos+10;
+		}
+		if(document.getElementById("res43").checked){
+			todas++;
+			puntos = puntos+10;
+		}
+		if(document.getElementById("res44").checked){
+			todas++;
+			puntos = puntos+10;
+		}
+		if(todas == 4){
+			puntos = puntos+10;
+		}
 	}
 
 	//Pregunta 5
@@ -117,7 +124,7 @@ function comprobar(){
 		puntos = puntos+50;
 	}
 
-	if(puntos == 1000){
+	if(puntos == 200){
 		alert("TODAS CORRECTAS")
 		puntos = puntos+300;
 	}
@@ -137,4 +144,31 @@ function comprobar(){
         //INICIAR SESION y ADD PUNTOS
         alert("INICIA SESION para ganar puntos")
     }
+}
+
+//Inactividad
+function e(q) {
+    document.body.appendChild(document.createTextNode(q));
+    document.body.appendChild(document.createElement("BR"));
+}
+
+//Los pasatiempos no requieren sesiones, pero si esta iniciada, expira igual solo que no le pide que se vuelva a autenticar
+function inactividad() {
+    //Solo se excedera el tiempo cuando la sesion cuente como iniciada
+    if (localStorage.getItem("Cookie_Sesion") == "true") {
+        alert("SESION EXPIRADA");
+        localStorage.setItem("Cookie_Sesion", "false");
+        localStorage.removeItem("user");
+    }
+}
+
+var t = null;
+
+function contadorInactividad() {
+    t = setTimeout("inactividad()", 1800000); //30 min (1800000)
+}
+
+window.onblur = window.onmousemove = function () {
+    if (t) clearTimeout(t);
+    contadorInactividad();
 }
