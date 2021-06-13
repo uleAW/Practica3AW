@@ -1,59 +1,107 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
- <head>
-     <script src="usuario.js"></script>
-     <script> src="admin.js"</script>
-     <title>ADMIN</title>
- </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión de administrador</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./admin.css">
+
+    <script src="usuario.js"></script>
+    <script src="admin.js"></script>
+</head>
+
 <body onload="funciones()">
-<!-- Utilizar estas etiquetas para evitar errores en la funcionalidad -->
-<h1>Añadir Coleccion</h1>
-Nombre Coleccion <input type="text" id="nombreAniadirColeccion">
-<br>
-<br>
-<!-- Principalmente esta es la que mas problemas da-->
-Imagen Album: <input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
-<br>
-<br>
-Precio Album: <input type="number" id="precioAniadirAlbum">
-<br>
-<br>
-<button onclick="aniadirColeccion()">Añadir</button>
-<!-- Aqui poner el estilo hidden por defecto-->
-<div class="errorAniadirColeccion">
-    <text id="textErrorAniadirColeccion">PRUEBAA</text>
-</div>
-<br>
-<br>
-<br>
-<br>
-<h1>Añadir Cromo</h1>
-Nombre Cromo: <input type="text" id="nombreAniadirCromo">
-<br>
-<br>
-Imagen Cromo: <input type="file" id="imgAniadirCromo" accept="image/png, image/jpeg">
-<br>
-<br>
-Precio Cromo: <input type="number" id="precioAniadirCromo">
-<br>
-<br>
-Nombre Coleccion <input type="text" id="coleccionAniadirCromo">
-<br>
-<button onclick="aniadirCromo()">Añadir</button>
-<br>
-<!-- Aqui poner el estilo hidden por defecto-->
-<div class="errorAniadirCromo">
-    <text id="textErrorAniadirCromo">PRUEBAA</text>
-</div>
-<br>
-<br>
-Nombre coleccion activar: <input type="text" id="nombreActivarColeccion">
-<button onclick="activarColeccion()">Añadir</button>
-<!-- Aqui poner el estilo hidden por defecto-->
-<div class="errorActivarColeccion">
-    <text id="textErrorActivarColeccion">PRUEBAA</text>
-</div>
-<h1>ADMIN</h1>
-<input type="button" value="CERRAR SESION" onclick="cerrarSesion()">
+
+    <div class="cuenta">
+        <div class="perfil">
+            <h4>Usuario</h4>
+            <h1>Admin</h1>
+            <div class="vertical-menu">
+                <a href="#" onclick="menuSelection('anadirCollecion')">A&ntilde;adir colecci&oacute;n</a>
+                <a href="#" onclick="menuSelection('anadirCromo')">A&ntilde;adir cromo</a>
+                <a href="#" onclick="menuSelection('activarColeccion')">Activar colecci&oacute;n</a>
+                <a href="#" id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesi&oacute;n</a>
+                <!-- x -->
+                <!-- x -->
+                <!-- x -->
+                <!-- x 
+                <input type="button" value="CERRAR SESION" onclick="cerrarSesion()">-->
+                <!-- x -->
+                <!-- x -->
+                <!-- x -->
+                <!-- x -->
+                <!-- x -->
+            </div>
+        </div>
+        <div class="operaciones">
+            <div class="anadirColeccion" id="anadirCollecion" style="display: block;">
+                <h1>A&ntilde;adir colecci&oacute;n</h1>
+                <h3>Nombre colecci&oacute;n</h3><input type="text" id="nombreAniadirColeccion">
+                <!-- Principalmente esta es la que mas problemas da-->
+                <h3>Imagen alb&uacute;m</h3><input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
+                <h3>Precio alb&uacute;m</h3><input type="number" id="precioAniadirAlbum">
+                <br><button onclick="aniadirColeccion()">A&ntilde;adir</button>
+                <!-- Aqui poner el estilo hidden por defecto-->
+                <div class="errorAniadirColeccion" style="display: none;">
+                    <text id="textErrorAniadirColeccion">PRUEBAA</text>
+                </div>
+            </div>
+            <div class="anadirCromo" id="anadirCromo" style="display: none;">
+                <h1>A&ntilde;adir cromo</h1>
+                <h3>Nombre cromo</h3><input type="text" id="nombreAniadirCromo">
+                <h3>Imagen cromo</h3><input type="file" id="imgAniadirCromo" accept="image/png, image/jpeg">
+                <h3>Precio cromo</h3><input type="number" id="precioAniadirCromo">
+                <h3>Nombre colecci&oacute;n</h3><input type="text" id="coleccionAniadirCromo">
+                <br><button onclick="aniadirCromo()">A&ntilde;adir</button>
+                <!-- Aqui poner el estilo hidden por defecto-->
+                <div class="errorAniadirCromo" style="display: none;">
+                    <text id="textErrorAniadirCromo">PRUEBAA</text>
+                </div>
+            </div>
+            <div class="activarColeccion" id="activarColeccion" style="display: none;">
+                <h1>Activar colecci&oacute;n</h1>
+                <h3>Nombre colecci&oacute;n a activar</h3><input type="text" id="nombreActivarColeccion">
+                <br><button onclick="activarColeccion()">Activar</button>
+                <!-- Aqui poner el estilo hidden por defecto-->
+                <div class="errorActivarColeccion" style="display: none;">
+                    <text id="textErrorActivarColeccion">PRUEBAA</text>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function menuSelection(id) {
+            if (id == "anadirCollecion") {
+                if (document.getElementById(id).style.display == "none") {
+                    document.getElementById(id).style.display = "block";
+                    document.getElementById("anadirCromo").style.display = "none";
+                    document.getElementById("activarColeccion").style.display = "none";
+                }
+            } else if (id == "anadirCromo") {
+                if (document.getElementById(id).style.display == "none") {
+                    document.getElementById(id).style.display = "block";
+                    document.getElementById("anadirCollecion").style.display = "none";
+                    document.getElementById("activarColeccion").style.display = "none";
+                }
+            } else {
+                if (document.getElementById(id).style.display == "none") {
+                    document.getElementById(id).style.display = "block";
+                    document.getElementById("anadirCollecion").style.display = "none";
+                    document.getElementById("anadirCromo").style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
-</html> 
+
+</html>
