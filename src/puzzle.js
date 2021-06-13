@@ -3,7 +3,7 @@ var c = "inc";
 var pos_s = "";
 var id_s = "";
 var aleatorio = Math.round(Math.random() * (16 - 1) + 1);
-
+var casillas = 0;
 var rompecabezas = {
     _arr_pos_r: new Array(),
     _arr_pos_a: new Array(),
@@ -18,7 +18,7 @@ var rompecabezas = {
         tb.cellSpacing = 0;
         var dp = document.createElement('div');
         var ar = Math.sqrt(piezas);
-        var c = 0;
+        var c = 0; //Numero de casillas
         var tam_img = 640;
         var pos_img = tam_img / ar;
         for (var fil = 1; fil <= ar; fil++) {
@@ -47,6 +47,7 @@ var rompecabezas = {
             }
             tb.appendChild(tr);
         }
+        casillas = c;
         if (!rompecabezas._get("div_content")) {
             var cont = document.createElement('div');
             cont.id = 'div_content';
@@ -139,7 +140,8 @@ var rompecabezas = {
 
         setTimeout(function() {
             if (fin) {
-                alert("PASATIEMPO TESUELTO")
+                alert("PASATIEMPO RESUELTO")
+                addPuntos();
             }
         }, 600);
     },
@@ -158,5 +160,45 @@ window.onload = function() {
     }
     rompecabezas._get("barajar").onclick = function() {
         rompecabezas._barajar();
+    }
+}
+
+function addPuntos(){
+    var puntos = 0;
+    switch (casillas){
+        case 4:
+            puntos = 80;
+            break;
+        case 9:
+            puntos = 150;
+            break;
+        case 16:
+            puntos = 200;
+            break;
+        case 25:
+            puntos = 250;
+            break;
+        case 36:
+            puntos = 500;
+            break;
+        case 100:
+            puntos = 1500;
+            break;
+        default:
+            puntos = 200;
+    }
+    if(localStorage.getItem("user") != null){
+        fetch("/addPuntos", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"usuario": localStorage.getItem("user"), "puntos": puntos})
+    }).then(response => response.text().then(function (text) {
+        alert("Su balance de puntos es de: +"+puntos)
+    }));
+    }else{
+        //INICIAR SESION y ADD PUNTOS
+        alert("Necesario INICIAR SESION!!!")
     }
 }

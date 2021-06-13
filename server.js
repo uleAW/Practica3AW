@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "root",
+    password: "admin1",
     port: 3306,
     database: "kiosko"
 })
@@ -460,6 +460,18 @@ app.post('/cargarPuntos', function (req, res) {
             if (err) throw err;
             var puntos = result[0].puntos
             res.status(200).send(puntos.toString());
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
+app.post('/addPuntos', function (req, res) {
+    var data = req.body;
+    con.query("UPDATE socios SET puntos = puntos + ? WHERE usuario = ?", [data["puntos"], data["usuario"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            res.status(200).send();
         } catch (err) {
             console.log(err);
         }
