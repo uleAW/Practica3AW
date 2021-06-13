@@ -122,13 +122,27 @@ function colecciones1(){
 	//var IDColeccion=sessionStorage.getItem("coleccionID");
 	var IDColecciones = IDColeccion.split(",");
 	//console.log(IDColeccion);
-	tabla="";
+    //tabla="";
+	tabla="<div class=menu>";
 	for(var i=0; i<nombresColecciones.length-1; i++){
-		tabla=tabla+"<p>"+"<button onclick=table("+IDColecciones[i]+")>mostrar cartas "+nombresColecciones[i]+"</button></p>";
+        tabla=tabla+"<div class=coleccion onclick="+table(IDColecciones[i])+";>"+
+            "<div class=banner>"+
+                "<div class=nombre>"+
+                    nombresColecciones[i]+
+                "</div>"+
+
+            "</div>"+
+            "<div class=info>"+
+                "ROMPETE LA CABEZA RESOLVIENDO NUESTROS PUZZLES!"+
+            "</div>"+
+        "</div>";
+
+		//tabla=tabla+"<p>"+"<button onclick=table("+IDColecciones[i]+")>mostrar cartas "+"</button></p>";
 		//imagenNombre(IDColecciones[i]);
 		//imagenDireccion(IDColecciones[i]);
 		//tabla=tabla+"<table id="+nombresColecciones[i]+IDColecciones[i]+"></table>";
 	}
+    tabla=tabla+"</div>";
 	//alert(tabla);
 	document.getElementById("coleccion").innerHTML=tabla;
 	//localStorage.removeItem("coleccionNombre");
@@ -170,7 +184,7 @@ function table(ID){
        			tabla=tabla+"<tr>";
             	for(var k=0;k<2;k++){//el 2 de este for marca el numero de fotos que se van a mostrar en la misma fila
                 	if((i*2+k)<Direccion.length){
-                        tabla=tabla+"<td><img src="+Direccion[i*2+k]+"></td>";
+                        tabla=tabla+"<td><img src=data:image/png;base64,"+Direccion[i*2+k]+"></td>";
                 	}else{
                     	tabla=tabla+"<td></td>";
                     	salir=true;
