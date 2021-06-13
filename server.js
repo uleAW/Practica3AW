@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Lr20jcxx%",
-    port: 3006,
+    password: "root",
+    port: 3306,
     database: "kiosko"
 })
 
@@ -157,7 +157,7 @@ app.post('/coleccionCromos', function (req, res) {
         for (let item of result) {
             out = out + item.codCromo + ",";
         }
-        console.log(result);
+        //console.log(result);
         res.send(out);
     });
 
@@ -185,7 +185,9 @@ app.get('/imagenDireccion', function (req, res) {
     con.query("SELECT imagen FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
         var out = "";
         for (let item of result) {
-            out = out + item.imagen + ",";
+            var bitmap = fs.readFileSync(item.imagen);
+            var data = Buffer(bitmap).toString('base64');
+            out = out + data + ",";
         }
         ;
         res.send(out);
