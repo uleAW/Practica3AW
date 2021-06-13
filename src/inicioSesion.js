@@ -2,6 +2,7 @@
 function iniciarSesion() {
     var usuario = document.getElementById("usuario").value;
     var pass = document.getElementById("contrasenia").value;
+    localStorage.setItem("pass",pass);
     fetch("/inicioSesion", {
         method: "POST",
         headers: {
@@ -14,12 +15,12 @@ function iniciarSesion() {
             localStorage.setItem("Cookie_Sesion", "true");
             localStorage.setItem("user", usuario);
             // Mostrar pagina del usuario
-            window.open("http://127.0.0.1:5050/src/usuario.html","_self");
+            window.open("./usuario.html","_self");
         } else {
             if(response.status == 201) {
                 localStorage.setItem("Cookie_Sesion", "true");
                 localStorage.setItem("user", usuario);
-                window.open("http://127.0.0.1:5050/src/admin.html","_self");
+                window.open("./admin.html","_self");
             }
             // Mostrar error de conexion
             console.log("Error al conectar")
@@ -47,4 +48,30 @@ function registrar() {
             console.log("Se produjo un error al crear el socio");
         }
     })
+}
+
+function checkSesion(){
+    if(localStorage.getItem("user") != null){
+         fetch("/inicioSesion", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"usuario": localStorage.getItem("user"), "pass": localStorage.getItem("pass")})
+    }).then(response => {
+        //Respuesta segun el rol del usuario
+        if (response.status == 200){
+            localStorage.setItem("Cookie_Sesion", "true");
+            // Mostrar pagina del usuario
+            window.open("./usuario.html","_self");
+        } else {
+            if(response.status == 201) {
+                localStorage.setItem("Cookie_Sesion", "true");
+                window.open("./admin.html","_self");
+            }
+            // Mostrar error de conexion
+            console.log("Error al conectar")
+        }
+    })
+    }
 }

@@ -5,7 +5,7 @@ function funciones(){
 function checkSesion(){
     if(localStorage.getItem("Cookie_Sesion") == "false"){
         alert("NECESARIO INICIAR SESION");
-        window.open("http://127.0.0.1:5050/src/inicioSesion.html","_self");
+        window.open("./inicioSesion.html","_self");
     }
 }
 
@@ -19,7 +19,7 @@ function inactividad() {
     if(localStorage.getItem("Cookie_Sesion") == "true"){
         alert("SESION EXPIRADA");
         localStorage.setItem("Cookie_Sesion", "false");
-        window.open("http://127.0.0.1:5050/src/inicioSesion.html","_self");   
+        window.open("./inicioSesion.html","_self");   
     }
 }
 var t=null;
@@ -29,4 +29,10 @@ function contadorInactividad() {
 window.onblur=window.onmousemove=function() {
     if(t) clearTimeout(t);
     contadorInactividad();
+}
+
+function cerrarSesion(){
+    localStorage.removeItem("user");
+    localStorage.removeItem("pass");
+    window.open("/index.html","_self");  
 }
