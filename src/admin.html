@@ -1,7 +1,10 @@
  <!DOCTYPE html>
 <html>
-<script src="usuario.js"></script>
-<title>ADMIN</title>
+ <head>
+     <script src="usuario.js"></script>
+     <script> src="admin.js"</script>
+     <title>ADMIN</title>
+ </head>
 <body onload="funciones()">
 <!-- Utilizar estas etiquetas para evitar errores en la funcionalidad -->
 <h1>Añadir Coleccion</h1>
@@ -41,6 +44,14 @@ Nombre Coleccion <input type="text" id="coleccionAniadirCromo">
 <!-- Aqui poner el estilo hidden por defecto-->
 <div class="errorAniadirCromo">
     <text id="textErrorAniadirCromo">PRUEBAA</text>
+</div>
+<br>
+<br>
+Nombre coleccion activar: <input type="text" id="nombreActivarColeccion">
+<button onclick="activarColeccion()">Añadir</button>
+<!-- Aqui poner el estilo hidden por defecto-->
+<div class="errorActivarColeccion">
+    <text id="textErrorActivarColeccion">PRUEBAA</text>
 </div>
 <h1>ADMIN</h1>
 <input type="button" value="CERRAR SESION" onclick="cerrarSesion()">
