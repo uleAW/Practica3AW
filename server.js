@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "pass",
-    port: 3006,
+    password: "root",
+    port: 3306,
     database: "kiosko"
 })
 
@@ -214,10 +214,35 @@ app.post('/coleccionID', function (req, res) {
         res.send(out);
     });
 });
+app.post('/albumImg', function (req, res) {
+    //var data = req.body
+
+    con.query("SELECT imagen FROM albumes", function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.imagen + ",";
+        }
+        
+        res.send(out);
+    });
+});
+app.post('/albumColeccion', function (req, res) {
+    //var data = req.body
+
+    con.query("SELECT idColeccion FROM albumes", function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.numColeccion + ",";
+        }
+        
+        res.send(out);
+    });
+});
+//SELECT precio, idAlbum FROM albumes WHERE idColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?)
 app.post('/coleccionUsuarioID', function (req, res) {
     var data = req.body
 
-    con.query("SELECT codCromos FROM coleccionusuario WHERE numSocio = ?", data["numUsuario"], function (err, result, fields) {
+    con.query("SELECT codCromos FROM coleccionusuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", data["numUsuario"], function (err, result, fields) {
         var out = ";";
         for (let item of result) {
             out = out + item.codCromos+";";
