@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
-    port: 3306,
+    password: "pass",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -80,10 +80,9 @@ app.post('/registrar', function (req, res) {
     con.query("INSERT INTO socios (usuario, contrasenia) VALUES ?", [values], function (err, result, fields) {
         try {
             if (err) throw err;
-            res.status(200).send();
+            res.status(200).send("Usuario registrado correctamente");
         } catch (err) {
-            console.log(err);
-            res.status(404).send();
+            res.status(201).send("Ya existe un usuario con ese nombre");
         }
     });
 });

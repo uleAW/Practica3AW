@@ -42,15 +42,17 @@ function registrar() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({"usuario": usuario, "pass": pass})
-    }).then(response => {
+    }).then(response => response.text().then(function(text) {
         if (response.status == 200) {
-            // CAMBIAR DE PAGINA
-            console.log("Registrado");
-        } else {
-            // MOSTRAR MENSAJE DE ERROR
-            console.log("Se produjo un error al crear el socio");
+            document.getElementById("textErrorInicioSesion").innerHTML = text;
+            document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "visible";
+            setTimeout(function(){ document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden"; }, 3000);
+        } else if (response.status == 201) {
+            document.getElementById("textErrorInicioSesion").innerHTML = text;
+            document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "visible";
+            setTimeout(function(){ document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden"; }, 3000);
         }
-    })
+    }));
 }
 
 function checkSesion(){
