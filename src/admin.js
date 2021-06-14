@@ -3,9 +3,14 @@ function funciones() {
 }
 
 function checkSesion() {
-    if (localStorage.getItem("Cookie_Sesion") == "false") {
-        alert("NECESARIO INICIAR SESION");
-        window.open("./inicioSesion.html", "_self");
+    //Impide que un usuario normal entre a esta pagina
+    if(localStorage.getItem("admin") != null){
+        if (localStorage.getItem("Cookie_Sesion") == "false") {
+            alert("NECESARIO INICIAR SESION");
+            window.open("./inicioSesion.html", "_self");
+        }
+    }else{
+         window.open("/index.html", "_self");
     }
 }
 
@@ -118,3 +123,13 @@ function activarColeccion() {
 window.onbeforeunload = function(e) {
     localStorage.setItem("back", "true");
 };
+
+//Cerrar Sesion
+function cerrarSesion() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("pass");
+    localStorage.removeItem("back");
+    localStorage.removeItem("admin");
+    console.log(localStorage.getItem("back"))
+    window.open("/index.html", "_self");
+}

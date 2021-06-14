@@ -20,6 +20,7 @@ function iniciarSesion() {
             if (response.status == 201) {
                 localStorage.setItem("Cookie_Sesion", "true");
                 localStorage.setItem("user", usuario);
+                localStorage.setItem("admin", "1");
                 window.open("./admin.html", "_self");
             } else if (response.status == 202) {
                 document.getElementById("textErrorInicioSesion").innerHTML = text;
