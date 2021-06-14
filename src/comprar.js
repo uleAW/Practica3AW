@@ -138,14 +138,15 @@ function colecciones1(){
 var boolean=true;
 var count=0;
 function table(ID){
+    imagenID(ID);
 	//imagenNombre(ID);//el 1 marca el id de de la coleccion.
     //imagenDireccion(ID);
     count=count+1;
 	console.log(ID);
     var IDColeccion=localStorage.getItem("coleccionID");
     var IDColecciones = IDColeccion.split(",");
-    imagenID(ID);
+    
     localStorage.setItem("coleccion", IDColecciones[ID]);
-    window.open("./cromos.html", "_self");
+    window.open("./listaCromosComprar.html", "_self");
     
 };
