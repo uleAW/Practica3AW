@@ -1,6 +1,7 @@
-function datos(){
+function datos() {
     cargarAlbumes();
 }
+
 function buscarImagenes() {
     return fetch("/albumesUsuario1", {
         method: "POST",
@@ -24,6 +25,7 @@ function buscarPrecio() {
         return text;
     }));
 }
+
 function albumID() {
     return fetch("/albumID", {
         method: "POST",
@@ -35,6 +37,7 @@ function albumID() {
         return text;
     }));
 }
+
 async function cargarAlbumes() {
     var nombresAlbumes;
     var imgAlbumes;
@@ -48,7 +51,7 @@ async function cargarAlbumes() {
     albumIDs = albumIDs.split(",");
     //estadosColeccion = await estadoColeccion();
     //estadosColeccion = estadosColeccion.split(",");
-    var out=""
+    var out = ""
     for (var i = 0; i < imgAlbumes.length - 1; i++) {
         /*var newDiv = document.createElement('div');
         newDiv.id = 'album' + i;
@@ -66,10 +69,25 @@ async function cargarAlbumes() {
         newDiv.className = 'text';
         newDiv.innerHTML = nombresAlbumes[i];
         document.getElementById('album' + i).appendChild(newDiv);*/
-        out=out+"<p><img src= data:image/png;base64,"+imgAlbumes[i]+"> Precio: "+precioAlbumes[i]+"<button onclick="+comprarAlbumes(albumIDs[i])+">Comprar albumes </button></p>";
+        out = out + "<p><img src= data:image/png;base64," + imgAlbumes[i] + "> Precio: " + precioAlbumes[i] + "<button onclick=comprarAlbum("+
+        albumIDs[i] + ")>Comprar albumes </button><div id='errorAlbum" + albumIDs[i] + "'><text id='textErrorAlbum" + albumIDs[i] + "'></text></div></p>";
     }
     document.write(out);
 }
-function comprarAlbumes(ID){
 
+function comprarAlbum(ID) {
+    console.log(localStorage.getItem("user"))
+    fetch("/comprarAlbum", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"usuario": localStorage.getItem("user"), "album": ID})
+    }).then(response => response.text().then(function (text) {
+        document.getElementById("textErrorAlbum" + ID).innerHTML = text;
+        document.getElementById("errorAlbum" + ID).style.display = "block";
+        setTimeout(function () {
+            document.getElementById("errorAlbum" + ID).style.display = "none";
+        }, 3000);
+    }));
 }
