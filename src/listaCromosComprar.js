@@ -16,16 +16,17 @@ function imagenID(count) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function(text){
-        
-            // Mostrar pagina del 
-            localStorage.setItem("imagenID", text);
-            //Nombre = text;
+    }).then(response => response.text().then(function (text) {
+        console.log(text)
+        // Mostrar pagina del
+        localStorage.setItem("imagenID", text);
+        //Nombre = text;
 
-        
+
     }));
 
 };
+
 function table() {
     //imagenNombre(ID);//el 1 marca el id de de la coleccion.
     //imagenDireccion(ID);
@@ -50,7 +51,6 @@ function table() {
         },
         //body: JSON.stringify({"numColeccion": "1"})
     }).then(response => response.text().then(function (text) {
-
         var direccion = text.split(",");
         //var imgIDs = imgID.split(",");
         var tabla = "";
@@ -61,27 +61,29 @@ function table() {
             newDiv.id = 'cromo' + i;
             newDiv.className = 'cromos';
             document.getElementById('menu').appendChild(newDiv);
-        
+
 
             newDiv = document.createElement('img');
             newDiv.id = 'img' + i;
             newDiv.className = 'image';
             newDiv.src = "data:image/png;base64," + direccion[i];
             document.getElementById('cromo' + i).appendChild(newDiv);
-            document.getElementById('cromo'+i).onclick=(function(i){return function() { abrirPagCromo(i); }})(i);
-            
-
-    }
-
+            document.getElementById('cromo' + i).onclick = (function (i) {
+                return function () {
+                    abrirPagCromo(i);
+                }
+            })(i);
+        }
     }));
 };
+
 function abrirPagCromo(ID) {
-    
     var imgID = localStorage.getItem("imagenID");
     var imgIDs = imgID.split(",");
     localStorage.setItem("cromoID", imgIDs[ID]);
     window.open("./cromo.html", "_self");
 }
+
 function colecciones1() {
     window.open("./comprar.html", "_self");
 }

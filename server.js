@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "root",
-    port: 3306,
+    password: "pass",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -155,13 +155,13 @@ app.get('/imagenID', function (req, res) {
 app.post('/IDimagen', function (req, res) {
     var data = req.body
     //console.log(data["numColeccion"]);
-    con.query("SELECT codCromo FROM cromos WHERE numColeccion = ?", data["numColeccion"] , function (err, result, fields) {
+    con.query("SELECT codCromo FROM cromos WHERE numColeccion = ?", data["numColeccion"], function (err, result, fields) {
         var out = "";
         for (let item of result) {
-            out = out + item.codCromos + ",";
+            out = out + item.codCromo + ",";
         }
         //console.log(result);
-        
+
         res.send(out);
     });
 });
@@ -301,12 +301,11 @@ app.post('/aniadirCromo', function (req, res) {
 app.post('/comprarCromo', function (req, res) {
     var values = [];
     var data = req.body;
-    con.query("SELECT copias, precio, codCromo FROM cromos WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
+    con.query("SELECT copias, precio FROM cromos WHERE codCromo = ?", [data["cromo"]], function (err, result, fields) {
         try {
             if (err) throw err;
             var precio = result[0].precio
             var copias = result[0].copias
-            var idCromo = result[0].codCromo
             if (copias > 0) {
                 // COMPROBAR TAMBIEN QUE TIENE MONEDAS SUFICIENTES
                 con.query("SELECT puntos, numSocio FROM socios WHERE usuario = ?", [data["usuario"]], function (err, result, fields) {
@@ -314,66 +313,63 @@ app.post('/comprarCromo', function (req, res) {
                     var numSocio = result[0].numSocio;
                     var puntos = result[0].puntos
                     if (puntos >= precio) {
-                        con.query("SELECT numColeccion FROM colecciones WHERE nombre = ?", [data["nombreColeccion"]], function (err, result, fields) {
-                            if (err) throw err;
-                            var numColeccion = result[0].numColeccion
-                            values.push(["completada parcialmente", numColeccion, numSocio, idCromo + ";"]);
-                            // AQUI PONER QUERY PARA ASIGNAR EL CROMO AL USUARIO
-                            con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ?", [numColeccion], function (err, result, fields) {
-                                //Si esta vacia, es el primer cromo de la coleccion
-                                if (result.length == 0) {
-                                    con.query("INSERT INTO coleccionusuario (estado, numColeccion, numSocio, codCromos) VALUES ?", [values], function (err, result, fields) {
-                                        if (err) throw err;
-                                    });
-                                    con.query("UPDATE cromos SET copias = copias - 1 WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
-                                        if (err) throw err;
-                                    });
-                                    con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
-                                        if (err) throw err;
-                                        res.status(200).send("Cromo comprado correctamente");
-                                    });
-                                } else {
-                                    var cromos = result[0].codCromos;
-                                    var datos = []
-                                    var album = result[0].idAlbum;
-                                    if (cromos != '') {
-                                        datos = cromos.split(';');
-                                    }
-                                    if (datos.indexOf(idCromo.toString()) === -1) {
-                                        con.query("SELECT * FROM cromos WHERE  numColeccion = ?", numColeccion, function (err, result, fields) {
-                                            try {
-                                                if (err) throw err;
-                                                var estado = "completada";
-                                                for (var i = 0; i < result.length; i++) {
-                                                    if (result[i].codCromo != idCromo.toString()) {
-                                                        if (datos.indexOf(result[i].codCromo.toString()) == -1) {
-                                                            estado = "completada parcialmente"
-                                                        }
+                        if (err) throw err;
+                        values.push(["completada parcialmente", data["numColeccion"], numSocio, data["cromo"] + ";"]);
+                        // AQUI PONER QUERY PARA ASIGNAR EL CROMO AL USUARIO
+                        con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ? AND numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", [data["numColeccion"], data["usuario"]], function (err, result, fields) {
+                            //Si esta vacia, es el primer cromo de la coleccion
+                            if (result.length == 0) {
+                                con.query("INSERT INTO coleccionusuario (estado, numColeccion, numSocio, codCromos) VALUES ?", [values], function (err, result, fields) {
+                                    if (err) throw err;
+                                });
+                                con.query("UPDATE cromos SET copias = copias - 1 WHERE codCromo = ?", [data["cromo"]], function (err, result, fields) {
+                                    if (err) throw err;
+                                });
+                                con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
+                                    if (err) throw err;
+                                    res.status(200).send("Cromo comprado correctamente");
+                                });
+                            } else {
+                                var cromos = result[0].codCromos;
+                                var datos = []
+                                var album = result[0].idAlbum;
+                                if (cromos != '') {
+                                    datos = cromos.split(';');
+                                }
+                                if (datos.indexOf(data["cromo"].toString()) === -1) {
+                                    con.query("SELECT * FROM cromos WHERE  numColeccion = ?", data["numColeccion"], function (err, result, fields) {
+                                        try {
+                                            if (err) throw err;
+                                            var estado = "completada";
+                                            for (var i = 0; i < result.length; i++) {
+                                                if (result[i].codCromo != data["cromo"].toString()) {
+                                                    if (datos.indexOf(result[i].codCromo.toString()) == -1) {
+                                                        estado = "completada parcialmente"
                                                     }
                                                 }
-                                                if (album == null) {
-                                                    estado = "completada parcialmente"
-                                                }
-                                                con.query("UPDATE coleccionusuario SET codCromos = concat(codCromos, ?), estado = ? WHERE numSocio = ? AND numColeccion = ?", [idCromo + ";", estado, numSocio, parseInt(numColeccion)], function (err, result, fields) {
-                                                    if (err) throw err;
-                                                });
-                                                con.query("UPDATE cromos SET copias = copias - 1 WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
-                                                    if (err) throw err;
-                                                });
-                                                con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
-                                                    if (err) throw err;
-                                                    res.status(200).send("Cromo comprado correctamente");
-                                                });
-                                            } catch (err) {
-                                                console.log(err);
-                                                res.status(404).send();
                                             }
-                                        });
-                                    } else {
-                                        res.status(200).send("ERROR: ya tienes este cromo");
-                                    }
+                                            if (album == null) {
+                                                estado = "completada parcialmente"
+                                            }
+                                            con.query("UPDATE coleccionusuario SET codCromos = concat(codCromos, ?), estado = ? WHERE numSocio = ? AND numColeccion = ?", [data["cromo"] + ";", estado, numSocio, parseInt(data["numColeccion"])], function (err, result, fields) {
+                                                if (err) throw err;
+                                            });
+                                            con.query("UPDATE cromos SET copias = copias - 1 WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
+                                                if (err) throw err;
+                                            });
+                                            con.query("UPDATE socios SET puntos = puntos - ? WHERE usuario = ?", [precio, data["usuario"]], function (err, result, fields) {
+                                                if (err) throw err;
+                                                res.status(200).send("Cromo comprado correctamente");
+                                            });
+                                        } catch (err) {
+                                            console.log(err);
+                                            res.status(404).send();
+                                        }
+                                    });
+                                } else {
+                                    res.status(200).send("ERROR: ya tienes este cromo");
                                 }
-                            });
+                            }
                         });
                     } else {
                         res.status(200).send("ERROR: no tienes suficientes puntos para comprar ese cromo");
@@ -489,8 +485,7 @@ app.post('/addPuntos', function (req, res) {
 
 app.post('/cargarInfoCromo', function (req, res) {
     var data = req.body;
-    var nombre = data["nombreColeccion"]
-    con.query("SELECT * FROM cromos WHERE nombre = ? and numColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?)", [data["nombreCromo"], data["nombreColeccion"]], function (err, result, fields) {
+    con.query("SELECT * FROM cromos WHERE codCromo = ?", [data["cromoID"]], function (err, result, fields) {
         try {
             if (err) throw err;
             var out = "";
@@ -500,7 +495,6 @@ app.post('/cargarInfoCromo', function (req, res) {
             out = out + data + ",";
             out = out + result[0].precio.toString() + ",";
             out = out + result[0].copias.toString() + ",";
-            out = out + nombre + ",";
             res.send(out);
         } catch (err) {
             console.log(err);

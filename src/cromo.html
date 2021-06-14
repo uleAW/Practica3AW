@@ -1,14 +1,26 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-<script src="cromo.js"></script>
-<title>CROMO</title>
+<head>
+    <script src="cromo.js"></script>
+    <title>CROMO</title>
+</head>
+
 <body onload="funciones()">
-imagen <img id="imagen"><br>
-nombre <text id="nombre"></text><br>
-precio <text id="precio"></text><br>
-copias <text id="copias"></text><br>
-nombreColeccion <text id="nombreColeccion"></text><br>
+<img id="imagen"><br>
+nombre
+<text id="nombre"></text>
+<br>
+precio
+<text id="precio"></text>
+<br>
+copias
+<text id="copias"></text>
+<br>
+<br>
 <input type="button" value="Comprar" onclick="comprarCromo()">
-<h1>Usuario</h1>
+<!--Poner invisible por defecto -->
+<div id="errorComprarCromo">
+    <text id="textErrorComprarCromo"></text>
+</div>
 </body>
 </html> 

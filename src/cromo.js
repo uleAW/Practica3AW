@@ -4,14 +4,13 @@ function funciones(){
 }
 
 function consulta(){
-    var nombreCromo = "adad"
-    var nombreColeccion = "aa";
+    var cromoID = localStorage.getItem("cromoID")
     fetch("/cargarInfoCromo", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombreCromo": nombreCromo, "nombreColeccion": nombreColeccion})
+        body: JSON.stringify({"cromoID": cromoID})
     }).then(response => response.text().then(function(text){
     	var datos = text.split(",");
     	console.log(datos)
@@ -21,31 +20,32 @@ function consulta(){
         );
         document.getElementById("precio").innerHTML = datos[2];
         document.getElementById("copias").innerHTML = datos[3];
-        document.getElementById("nombreColeccion").innerHTML = datos[4];
     }));
 }
 
 function comprarCromo() {
     // AQUI COGER EL NOMBRE DEL CROMO DE ALGUNA MANERA VER EN EL FUTURO
-    var nombre = document.getElementById("nombre").innerHTML;
+    var cromoID = localStorage.getItem("cromoID")
     // TAMBIEN TENDREMOS QUE COGER EL USUARIO QUE ESTA CONECTADO
     var usuario = localStorage.getItem("user");
-    var nombreColeccion = document.getElementById("nombreColeccion").innerHTML;
+    var numColeccion = localStorage.getItem("coleccion");
     fetch("/comprarCromo", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"cromo": nombre, "usuario": usuario, "nombreColeccion": nombreColeccion})
-    }).then(response => {
+        body: JSON.stringify({"cromo": cromoID, "usuario": usuario, "numColeccion": numColeccion})
+    }).then(response => response.text().then(function (text) {
         if (response.status == 200) {
-            // Mostrar mensaje de que el cromo se ha comprado correctamente
-            console.log("Cromo comprado")
+            document.getElementById("textErrorComprarCromo").innerHTML = text;
+            document.getElementById("errorComprarCromo").style.display = "block";
+            setTimeout(function () {
+                document.getElementById("errorComprarCromo").style.display = "none";
+            }, 3000);
         } else {
-            // Mostrar error de conexion
             console.log("Error al comprar el cromo")
         }
-    })
+    }));
 }
 
 function checkSesion(){
