@@ -28,13 +28,9 @@ function imagenID(count) {
 };
 
 function table() {
-    //imagenNombre(ID);//el 1 marca el id de de la coleccion.
-    //imagenDireccion(ID);
+
     var ID = localStorage.getItem("coleccion");
     imagenID(ID);
-    //localStorage.clear();//sobre dudas del codigo o ampliaciones consultarme, soy Mario
-    //imagenNombre(ID);//el 1 marca el id de de la coleccion.
-    //imagenDireccion(ID);
     fetch("/cargarImagen", {
         method: "POST",
         headers: {
@@ -42,8 +38,8 @@ function table() {
         },
         body: JSON.stringify({"numColeccion": ID})
     }).then(response => {
-
     })
+
     fetch("/imagenDireccion", {
         method: "GET",
         headers: {
@@ -53,35 +49,78 @@ function table() {
     }).then(response => response.text().then(function (text) {
         var direccion = text.split(",");
         //var imgIDs = imgID.split(",");
-        var tabla = "";
-        tabla = tabla + "<table>";
-        var salir = false;
-        for (var i = 0; i < direccion.length - 1; i++) {
+        for (var i = 0; i < direccion.length - 1;) {
             var newDiv = document.createElement('div');
             newDiv.id = 'cromo' + i;
             newDiv.className = 'cromos';
             document.getElementById('menu').appendChild(newDiv);
-
 
             newDiv = document.createElement('img');
             newDiv.id = 'img' + i;
             newDiv.className = 'image';
             newDiv.src = "data:image/png;base64," + direccion[i];
             document.getElementById('cromo' + i).appendChild(newDiv);
+
+            newDiv = document.createElement('text');
+            newDiv.id = 'textNombre' + i;
+            newDiv.className = 'textNombre';
+            newDiv.innerHTML = direccion[i + 2];
+            document.getElementById('cromo' + i).appendChild(newDiv);
+
+            newDiv = document.createElement('text');
+            newDiv.id = 'textPrecio' + i;
+            newDiv.className = 'textPrecio';
+            newDiv.innerHTML = direccion[i + 1];
+            document.getElementById('cromo' + i).appendChild(newDiv);
+
+            newDiv = document.createElement('button');
+            newDiv.id = 'buttonComprar' + i;
+            newDiv.appendChild(document.createTextNode("Comprar"))
+            document.getElementById('cromo' + i).appendChild(newDiv);
             document.getElementById('cromo' + i).onclick = (function (i) {
                 return function () {
-                    abrirPagCromo(i);
+                    comprarCromo(i);
                 }
             })(i);
+
+            newDiv = document.createElement('div');
+            newDiv.id = 'errorComprarCromo' + i;
+            newDiv.className = 'errorComprarCromo';
+            document.getElementById('cromo' + i).appendChild(newDiv);
+
+            newDiv = document.createElement('text');
+            newDiv.id = 'textErrorComprarCromo' + i;
+            newDiv.className = 'textErrorComprarCromo';
+            newDiv.setAttribute("content", "Comprar");
+            document.getElementById('errorComprarCromo' + i).appendChild(newDiv);
+            i = i + 3;
         }
     }));
 };
 
-function abrirPagCromo(ID) {
-    var imgID = localStorage.getItem("imagenID");
-    var imgIDs = imgID.split(",");
-    localStorage.setItem("cromoID", imgIDs[ID]);
-    window.open("./cromo.html", "_self");
+function comprarCromo(id) {
+    // AQUI COGER EL NOMBRE DEL CROMO DE ALGUNA MANERA VER EN EL FUTURO
+    var cromoID = document.getElementById("textNombre" + id).innerHTML
+    // TAMBIEN TENDREMOS QUE COGER EL USUARIO QUE ESTA CONECTADO
+    var usuario = localStorage.getItem("user");
+    var numColeccion = localStorage.getItem("coleccion");
+    fetch("/comprarCromo", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"cromo": cromoID, "usuario": usuario, "numColeccion": numColeccion})
+    }).then(response => response.text().then(function (text) {
+        if (response.status == 200) {
+            document.getElementById("textErrorComprarCromo" + id).innerHTML = text;
+            document.getElementById("errorComprarCromo" + id).style.display = "block";
+            setTimeout(function () {
+                document.getElementById("errorComprarCromo" + id).style.display = "none";
+            }, 3000);
+        } else {
+            console.log("Error al comprar el cromo")
+        }
+    }));
 }
 
 function colecciones1() {

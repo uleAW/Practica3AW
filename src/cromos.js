@@ -47,7 +47,6 @@ function table() {
         //console.log("Direccion"+count);
         //localStorage.setItem("Direccion"+count, text);
         //text;
-
     }));
 };
 
