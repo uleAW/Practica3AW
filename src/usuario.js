@@ -216,7 +216,9 @@ async function cargarAlbumes() {
         document.getElementById('album' + i).appendChild(newDiv);
     }
 }
-
+function mostrarAlbumes(){
+    window.open("./comprarAlbumes.html", "_self");
+}
 //Boton atras
 window.onbeforeunload = function(e) {
     localStorage.setItem("back", "true");
