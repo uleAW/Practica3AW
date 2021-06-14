@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Captcha</title>
+    <link rel="stylesheet" href="captcha.css" />
+    <script src="captcha.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="captcha" class="captcha">
+            <script>
+                createCaptcha();
+            </script>
+        </div>
+        <div class="restart">
+            <a href="#" onclick="createCaptcha()">Cambiar Captcha</a>
+        </div>
+        <div class="input">
+            <input type="text" name="reCaptcha" id="reCaptcha" placeholder="Escribe el Captcha" />
+        </div>
+        <div><input type="button" value="Comprobar" onclick="validateCaptcha()" /></div>
+        <div id="errCaptcha" class="errmsg"></div>
+    </div>
+</body>
+
+</html>
