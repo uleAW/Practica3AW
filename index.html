@@ -2,27 +2,115 @@
 <html lang="en">
 
 <head>
+    <script>
+        localStorage.removeItem("back")
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigiKiosko</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
     <!-- ICONO PESTAÑA -->
     <link rel="shortcut icon" href="./media/img/icon.ico">
     <!-- HOJA DE ESTILOS -->
-    <link rel="stylesheet" type="text/css" href="./src/styles.css">
+    <link rel="stylesheet" type="text/css" href="./src/portada.css">
 </head>
 
-<body>
-    <article class="article">
-        <iframe src="./src/portada.html" frameborder="0" width="fit-content"></iframe>
+<body onload="datos()">
+    <!-- TRAILER DE FONDO -->
 
-    </article>
-    <article>
-        <div class="logo">
-            perro
-        </div>
-    </article>
+    <video autoplay muted loop id="videoTrailer">
+        <source src="./media/video/DIGIMON CARD GAME Battle Trailer.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+    <img src="./media/img/digimon-trading-card-game-2020.jpg" alt="" id="fotoTrailer">
+
+    <!-- BARRA DEL MENU -->
+    <div class="menu-bar">
+        <nav class="navegacion">
+            <ul class="nav-menu-left">
+                <li>
+                    <a href="#" id="nombreTienda">DigiKiosko</a>
+                </li>
+                <li>
+                    <a href="./src/colecciones.html" id="colecciones">Colecciones</a>
+                </li>
+                <li>
+                    <a href="./src/pasatiempos.html" id="colecciones">Pasatiempos</a>
+                </li>
+            </ul>
+
+            <ul class="nav-menu-right">
+                <li>
+                    <a href="./src/inicioSesion.html"><i class="fas fa-user"></i></a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <!-- BOTON ALTAVOZ -->
+    <button id="myBtn" class="boton">
+        <i class="fas fa-volume-mute" id="logo"></i>
+    </button>
+
+    <script>
+        function coleccionNombre() {
+
+            fetch("/coleccionNombre", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                //body: JSON.stringify({"numColeccion": count})
+            }).then(response => response.text().then(function(text) {
+
+                localStorage.setItem("coleccionNombre", text);
+
+            }));
+        };
+
+        function coleccionID() {
+
+            fetch("/coleccionID", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                //body: JSON.stringify({"numColeccion": count})
+            }).then(response => response.text().then(function(text) {
+
+                localStorage.setItem("coleccionID", text);
+            }));
+        };
+
+        function datos() {
+            coleccionID();
+            coleccionNombre();
+
+        }
+        var boton = document.getElementById("myBtn");
+        var botonLogo = document.getElementById("logo")
+        var video = document.getElementById("videoTrailer");
+
+        boton.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                botonLogo.className = "fas fa-volume-up";
+            } else {
+                video.muted = true;
+                botonLogo.className = "fas fa-volume-mute";
+            }
+        });
+
+        if (boton.style.display == "none") {
+            video.muted = true;
+            botonLogo.className = "fas fa-volume-mute";
+        }
+    </script>
 </body>
 
 </html>
