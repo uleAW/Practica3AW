@@ -186,13 +186,28 @@ function buscarNombres() {
     }));
 }
 
+function estadoColeccion() {
+    return fetch("/estadoColeccionesUsuario", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
+        return text;
+    }));
+}
+
 async function cargarAlbumes() {
     var nombresAlbumes;
     var imgAlbumes;
+    var estadosColeccion;
     imgAlbumes = await buscarImagenes();
     imgAlbumes = imgAlbumes.split(",");
     nombresAlbumes = await buscarNombres();
     nombresAlbumes = nombresAlbumes.split(",");
+    estadosColeccion = await estadoColeccion();
+    estadosColeccion = estadosColeccion.split(",");
     for (var i = 0; i < imgAlbumes.length - 1; i++) {
         var newDiv = document.createElement('div');
         newDiv.id = 'album' + i;
@@ -204,7 +219,6 @@ async function cargarAlbumes() {
             }
         })(i);
         document.getElementById('menu').appendChild(newDiv);
-        //document.getElementById('pasatiempo'+i).onclick=function() { table(IDColecciones[i]); };;
 
         newDiv = document.createElement('img');
         newDiv.id = 'img' + i;
@@ -216,6 +230,12 @@ async function cargarAlbumes() {
         newDiv.id = 'text' + i;
         newDiv.className = 'text';
         newDiv.innerHTML = nombresAlbumes[i];
+        document.getElementById('album' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('text');
+        newDiv.id = 'estado' + i;
+        newDiv.className = 'estado';
+        newDiv.innerHTML = "   " +estadosColeccion[i];
         document.getElementById('album' + i).appendChild(newDiv);
     }
 }

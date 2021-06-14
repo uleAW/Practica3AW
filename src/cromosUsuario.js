@@ -23,6 +23,7 @@ async function cargarCromos() {
         newDiv.className = 'text';
         newDiv.innerHTML = nombreCromo[i];
         document.getElementById('cromo' + i).appendChild(newDiv);
+
     }
 }
 

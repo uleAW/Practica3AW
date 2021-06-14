@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "password",
+    password: "pass",
     port: 3006,
     database: "kiosko"
 })
@@ -533,6 +533,24 @@ app.post("/nombreColeccionesUsuario", function (req, res) {
         }
     });
 });
+
+app.post("/estadoColeccionesUsuario", function (req, res) {
+    var data = req.body;
+    con.query("SELECT estado FROM coleccionUsuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", [data["nombre"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var out = "";
+            for (let item of result) {
+                out = out + item.estado + ",";
+            }
+            //console.log(result);
+            res.send(out);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
 
 app.post("/imagenCromosUsuario", function (req, res) {
     var data = req.body;
