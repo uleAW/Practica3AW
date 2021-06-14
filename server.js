@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
+    password: "root",
     port: 3306,
     database: "kiosko"
 })
@@ -121,13 +121,13 @@ app.post('/aniadirColeccion', function (req, res) {
 var coleccionID;
 app.post('/cargarImagen', function (req, res) {
     coleccionID = req.body.numColeccion;//
-    console.log(coleccionID);
+    //console.log(coleccionID);
     res.end();
 });
 
 app.get('/imagenNombre', function (req, res) {
     var data = req.body
-    console.log(data["numColeccion"]);
+    //console.log(data["numColeccion"]);
     con.query("SELECT nombre FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
         var out = "";
         for (let item of result) {
@@ -141,17 +141,29 @@ app.get('/imagenNombre', function (req, res) {
 });
 app.get('/imagenID', function (req, res) {
     var data = req.body
-    console.log(data["numColeccion"]);
-    con.query("SELECT codCromos FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
+    //console.log(data["numColeccion"]);
+    con.query("SELECT codCromo FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
+        var out = "";
+        /*for (let item of result) {
+            out = out + item.codCromos + ",";
+        }*/
+        console.log(result);
+        ;
+        res.send(out);
+    });
+});
+app.post('/IDimagen', function (req, res) {
+    var data = req.body
+    //console.log(data["numColeccion"]);
+    con.query("SELECT codCromo FROM cromos WHERE numColeccion = ?", data["numColeccion"] , function (err, result, fields) {
         var out = "";
         for (let item of result) {
             out = out + item.codCromos + ",";
         }
-        ;
+        //console.log(result);
+        
         res.send(out);
     });
-
-
 });
 app.post('/coleccionCromos', function (req, res) {
     var data = req.body
