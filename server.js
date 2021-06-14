@@ -96,7 +96,22 @@ app.post("/albumesUsuario1", function (req, res) {
         }
     });
 });
-
+app.post("/albumesPrecio1", function (req, res) {
+    var data = req.body;
+    con.query("SELECT precio FROM albumes WHERE idColeccion IN (SELECT numColeccion FROM colecciones WHERE estado <> 'inactiva')", function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var out = "";
+            for (let item of result) {
+                out = out + item.precio + ",";
+            }
+            //console.log(result);
+            res.send(out);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
 app.post('/registrar', function (req, res) {
     var values = [];
     var data = req.body
