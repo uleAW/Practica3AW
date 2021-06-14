@@ -50,7 +50,7 @@ function comprobar(){
 	}
 
 	//Pregunta 6
-	if(document.getElementById("res62").checked){
+	if(document.getElementById("res63").checked){
 		puntos = puntos+50;
 	}
 
@@ -95,7 +95,7 @@ function comprobar(){
 	}
 
 	//Pregunta 15
-	if(document.getElementById("res152").checked){
+	if(document.getElementById("res151").checked){
 		puntos = puntos+50;
 	}
 
@@ -105,7 +105,7 @@ function comprobar(){
 	}
 
 	//Pregunta 17
-	if(document.getElementById("res173").checked){
+	if(document.getElementById("res171").checked){
 		puntos = puntos+50;
 	}
 
@@ -119,8 +119,8 @@ function comprobar(){
 		puntos = puntos+50;
 	}
 
-	//Pregunta 20 (MAL)
-	if(document.getElementById("res203").checked){
+	//Pregunta 20
+	if(document.getElementById("res204").checked){
 		puntos = puntos+50;
 	}
 
