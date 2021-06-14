@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
+    password: "root",
     port: 3306,
     database: "kiosko"
 })
@@ -132,6 +132,20 @@ app.get('/imagenNombre', function (req, res) {
         var out = "";
         for (let item of result) {
             out = out + item.nombre + ",";
+        }
+        ;
+        res.send(out);
+    });
+
+
+});
+app.get('/imagenID', function (req, res) {
+    var data = req.body
+    console.log(data["numColeccion"]);
+    con.query("SELECT codCromos FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
+        var out = "";
+        for (let item of result) {
+            out = out + item.codCromos + ",";
         }
         ;
         res.send(out);
