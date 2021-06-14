@@ -1,17 +1,61 @@
- <!DOCTYPE html>
- <html xmlns="http://www.w3.org/1999/html">
- <head>
-     <script src="usuario.js"></script>
-     <title>USUARIO</title>
- </head>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión de usuario</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./usuario.css">
+
+    <script src="usuario.js"></script>
+</head>
+
 <body onload="funciones()" id="coleccion">
-<h1>Usuario</h1>
-Puntos: <text id="puntos"></text><br>
-<button onclick="table();">Comprar cromos</button>
-<button onclick="mostrarAlbumes()">Comprar albumes </button>
-<input type="button" value="CERRAR SESION" onclick="cerrarSesion()">
-<div id="menu">
-<script>cargarAlbumes()</script>
-</div>
+    <!--<div id="menu">
+        <script>
+            cargarAlbumes()
+        </script>
+    </div>-->
+    <div class="cuenta">
+        <div class="perfil">
+
+            <div class="vertical-menu">
+                <ul class="vertical-menu-top">
+                    <h4>Usuario</h4>
+                    <h1>User</h1>
+                    <li>
+                        <a href="#" id="etiquetaPuntos">Puntos: <text id="puntos"></text></a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="table();">Comprar cromos</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="mostrarAlbumes()">Comprar albums</a>
+                    </li>
+                </ul>
+                <ul class="vertical-menu-bottom">
+                    <li>
+                        <a href="#" id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesi&oacute;n</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="operaciones">
+            <div id="menu">
+                <script>
+                    cargarAlbumes();
+                </script>
+            </div>
+        </div>
+    </div>
 </body>
-</html> 
+
+</html>

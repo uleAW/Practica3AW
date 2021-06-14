@@ -20,37 +20,37 @@
 </head>
 
 <body onload="funciones()">
-
     <div class="cuenta">
         <div class="perfil">
-            <h4>Usuario</h4>
-            <h1>Admin</h1>
+
             <div class="vertical-menu">
-                <a href="#" onclick="menuSelection('anadirCollecion')">A&ntilde;adir colecci&oacute;n</a>
-                <a href="#" onclick="menuSelection('anadirCromo')">A&ntilde;adir cromo</a>
-                <a href="#" onclick="menuSelection('activarColeccion')">Activar colecci&oacute;n</a>
-                <a href="#" id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesi&oacute;n</a>
-                <!-- x -->
-                <!-- x -->
-                <!-- x -->
-                <!-- x 
-                <input type="button" value="CERRAR SESION" onclick="cerrarSesion()">-->
-                <!-- x -->
-                <!-- x -->
-                <!-- x -->
-                <!-- x -->
-                <!-- x -->
+                <ul class="vertical-menu-top">
+                    <h4>Usuario</h4>
+                    <h1>Admin</h1>
+                    <li>
+                        <a href="#" onclick="menuSelection('anadirCollecion')">A&ntilde;adir colecci&oacute;n</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="menuSelection('anadirCromo')">A&ntilde;adir cromo</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="menuSelection('activarColeccion')">Activar colecci&oacute;n</a>
+                    </li>
+                </ul>
+                <ul class="vertical-menu-bottom">
+                    <li>
+                        <a href="#" id="cerrarSesion" onclick="cerrarSesion()">Cerrar sesi&oacute;n</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="operaciones">
             <div class="anadirColeccion" id="anadirCollecion" style="display: block;">
                 <h1>A&ntilde;adir colecci&oacute;n</h1>
                 <h3>Nombre colecci&oacute;n</h3><input type="text" id="nombreAniadirColeccion">
-                <!-- Principalmente esta es la que mas problemas da-->
                 <h3>Imagen alb&uacute;m</h3><input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
                 <h3>Precio alb&uacute;m</h3><input type="number" id="precioAniadirAlbum" min="0" step="1">
                 <br><button onclick="aniadirColeccion()">A&ntilde;adir</button>
-                <!-- Aqui poner el estilo hidden por defecto-->
                 <div class="errorAniadirColeccion" style="display: none;">
                     <text id="textErrorAniadirColeccion">PRUEBAA</text>
                 </div>
@@ -62,7 +62,6 @@
                 <h3>Precio cromo</h3><input type="number" id="precioAniadirCromo" min="0" step="1">
                 <h3>Nombre colecci&oacute;n</h3><input type="text" id="coleccionAniadirCromo">
                 <br><button onclick="aniadirCromo()">A&ntilde;adir</button>
-                <!-- Aqui poner el estilo hidden por defecto-->
                 <div class="errorAniadirCromo" style="display: none;">
                     <text id="textErrorAniadirCromo">PRUEBAA</text>
                 </div>
@@ -71,7 +70,6 @@
                 <h1>Activar colecci&oacute;n</h1>
                 <h3>Nombre colecci&oacute;n a activar</h3><input type="text" id="nombreActivarColeccion">
                 <br><button onclick="activarColeccion()">Activar</button>
-                <!-- Aqui poner el estilo hidden por defecto-->
                 <div class="errorActivarColeccion" style="display: none;">
                     <text id="textErrorActivarColeccion">PRUEBAA</text>
                 </div>
