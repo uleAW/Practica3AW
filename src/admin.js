@@ -113,3 +113,16 @@ function activarColeccion() {
         }, 3000);
     }));
 }
+
+//Cerrar Sesion
+function cerrarSesion() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("pass");
+    localStorage.removeItem("back");
+    window.open("/index.html", "_self");
+}
+
+//Boton atras
+window.onbeforeunload = function(e) {
+    localStorage.setItem("back", "true");
+};

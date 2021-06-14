@@ -55,9 +55,12 @@ function abrirPagCromo() {
     window.open("./cromo.html", "_self");
 }
 
+//Cerrar Sesion
 function cerrarSesion() {
     localStorage.removeItem("user");
     localStorage.removeItem("pass");
+    localStorage.removeItem("back");
+    console.log(localStorage.getItem("back"))
     window.open("/index.html", "_self");
 }
 
@@ -72,7 +75,7 @@ function coleccionID() {
     }).then(response => response.text().then(function (text) {
 
         //if(localStorage.getItem("coleccionID")==null){
-        console.log(text);
+        //console.log(text); //OCULTO, SALE UN ;
         localStorage.setItem("cromosUsuario", text);
 
     }));
@@ -239,3 +242,8 @@ async function cargarAlbumes() {
         document.getElementById('album' + i).appendChild(newDiv);
     }
 }
+
+//Boton atras
+window.onbeforeunload = function(e) {
+    localStorage.setItem("back", "true");
+};

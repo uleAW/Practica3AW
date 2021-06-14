@@ -61,25 +61,32 @@ function registrar() {
 }
 
 function checkSesion() {
-    if (localStorage.getItem("user") != null) {
-        fetch("/inicioSesion", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({"usuario": localStorage.getItem("user"), "pass": localStorage.getItem("pass")})
-        }).then(response => {
-            //Respuesta segun el rol del usuario
-            if (response.status == 200) {
-                localStorage.setItem("Cookie_Sesion", "true");
-                // Mostrar pagina del usuario
-                window.open("./usuario.html", "_self");
-            } else {
-                if (response.status == 201) {
+    //Me salto la pantalla de autenticacion si quiere pasar del area usuario al perfil
+    if(localStorage.getItem("back") == "true"){
+        console.log(localStorage.getItem("back"));
+        localStorage.removeItem("back");
+        window.open("/index.html", "_self");
+    }else{
+        if (localStorage.getItem("user") != null) {
+            fetch("/inicioSesion", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({"usuario": localStorage.getItem("user"), "pass": localStorage.getItem("pass")})
+            }).then(response => {
+                //Respuesta segun el rol del usuario
+                if (response.status == 200) {
                     localStorage.setItem("Cookie_Sesion", "true");
-                    window.open("./admin.html", "_self");
+                    // Mostrar pagina del usuario
+                    window.open("./usuario.html", "_self");
+                } else {
+                    if (response.status == 201) {
+                        localStorage.setItem("Cookie_Sesion", "true");
+                        window.open("./admin.html", "_self");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }
