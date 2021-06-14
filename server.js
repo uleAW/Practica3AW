@@ -62,7 +62,40 @@ app.post('/inicioSesion', function (req, res) {
         }
     });
 });
-
+app.post("/albumID", function (req, res) {
+    var data = req.body;
+    con.query("SELECT idAlbum FROM albumes WHERE idColeccion IN (SELECT numColeccion FROM colecciones WHERE estado <> 'inactiva')", function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var out = "";
+            for (let item of result) {
+                out = out + item.idAlbum + ",";
+            }
+            //console.log(result);
+            res.send(out);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+app.post("/albumesUsuario1", function (req, res) {
+    var data = req.body;
+    con.query("SELECT imagen FROM albumes WHERE idColeccion IN (SELECT numColeccion FROM colecciones WHERE estado <> 'inactiva')", function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var out = "";
+            for (let item of result) {
+                var bitmap = fs.readFileSync(item.imagen);
+                var data = Buffer(bitmap).toString('base64');
+                out = out + data + ",";
+            }
+            //console.log(result);
+            res.send(out);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
 
 app.post('/registrar', function (req, res) {
     var values = [];
