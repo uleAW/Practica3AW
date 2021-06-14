@@ -13,8 +13,8 @@ function buscarImagenes() {
     }));
 }
 
-/*function buscarNombres() {
-    return fetch("/nombreColeccionesUsuario1", {
+function buscarPrecio() {
+    return fetch("/albumesPrecio1", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -23,7 +23,7 @@ function buscarImagenes() {
     }).then(response => response.text().then(function (text) {
         return text;
     }));
-}*/
+}
 function albumID() {
     return fetch("/albumID", {
         method: "POST",
@@ -42,34 +42,34 @@ async function cargarAlbumes() {
     var albumIDs;
     imgAlbumes = await buscarImagenes();
     imgAlbumes = imgAlbumes.split(",");
-    //nombresAlbumes = await buscarNombres();
-    //nombresAlbumes = nombresAlbumes.split(",");
+    precioAlbumes = await buscarPrecio();
+    precioAlbumes = precioAlbumes.split(",");
     albumIDs = await albumID();
     albumIDs = albumIDs.split(",");
     //estadosColeccion = await estadoColeccion();
     //estadosColeccion = estadosColeccion.split(",");
+    var out=""
     for (var i = 0; i < imgAlbumes.length - 1; i++) {
-        var newDiv = document.createElement('div');
+        /*var newDiv = document.createElement('div');
         newDiv.id = 'album' + i;
         newDiv.className = 'album';
-        newDiv.onclick = (function (i) {
-            return function () {
-                localStorage.setItem("albumComprar", albumIDs[i])://aqui se guarda el ID
-                window.open("./cromosUsuario.html", "_self");//aqui se guarda el 
-            }
-        })(i);
         document.getElementById('menu').appendChild(newDiv);
 
         newDiv = document.createElement('img');
         newDiv.id = 'img' + i;
         newDiv.className = 'image';
         newDiv.src = "data:image/png;base64," + imgAlbumes[i];
-        document.getElementById('album' + i).appendChild(newDiv);
+        document.getElementById('album' + i).appendChild(newDiv);*/
 
         /*newDiv = document.createElement('text');
         newDiv.id = 'text' + i;
         newDiv.className = 'text';
         newDiv.innerHTML = nombresAlbumes[i];
         document.getElementById('album' + i).appendChild(newDiv);*/
+        out=out+"<p><img src= data:image/png;base64,"+imgAlbumes[i]+"> Precio: "+precioAlbumes[i]+"<button onclick="+comprarAlbumes(albumIDs[i])+">Comprar albumes </button></p>";
     }
+    document.write(out);
+}
+function comprarAlbumes(ID){
+
 }
