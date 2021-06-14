@@ -48,7 +48,7 @@
                 <h3>Nombre colecci&oacute;n</h3><input type="text" id="nombreAniadirColeccion">
                 <!-- Principalmente esta es la que mas problemas da-->
                 <h3>Imagen alb&uacute;m</h3><input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
-                <h3>Precio alb&uacute;m</h3><input type="number" id="precioAniadirAlbum">
+                <h3>Precio alb&uacute;m</h3><input type="number" id="precioAniadirAlbum" min="0" step="1">
                 <br><button onclick="aniadirColeccion()">A&ntilde;adir</button>
                 <!-- Aqui poner el estilo hidden por defecto-->
                 <div class="errorAniadirColeccion" style="display: none;">
@@ -59,7 +59,7 @@
                 <h1>A&ntilde;adir cromo</h1>
                 <h3>Nombre cromo</h3><input type="text" id="nombreAniadirCromo">
                 <h3>Imagen cromo</h3><input type="file" id="imgAniadirCromo" accept="image/png, image/jpeg">
-                <h3>Precio cromo</h3><input type="number" id="precioAniadirCromo">
+                <h3>Precio cromo</h3><input type="number" id="precioAniadirCromo" min="0" step="1">
                 <h3>Nombre colecci&oacute;n</h3><input type="text" id="coleccionAniadirCromo">
                 <br><button onclick="aniadirCromo()">A&ntilde;adir</button>
                 <!-- Aqui poner el estilo hidden por defecto-->

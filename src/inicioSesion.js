@@ -2,29 +2,31 @@
 function iniciarSesion() {
     var usuario = document.getElementById("usuario").value;
     var pass = document.getElementById("contrasenia").value;
-    localStorage.setItem("pass",pass);
+    localStorage.setItem("pass", pass);
     fetch("/inicioSesion", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({"usuario": usuario, "pass": pass})
-    }).then(response => response.text().then(function(text){
+    }).then(response => response.text().then(function (text) {
         //Respuesta segun el rol del usuario
-        if (response.status == 200){
+        if (response.status == 200) {
             localStorage.setItem("Cookie_Sesion", "true");
             localStorage.setItem("user", usuario);
             // Mostrar pagina del usuario
-            window.open("./usuario.html","_self");
+            window.open("./usuario.html", "_self");
         } else {
-            if(response.status == 201) {
+            if (response.status == 201) {
                 localStorage.setItem("Cookie_Sesion", "true");
                 localStorage.setItem("user", usuario);
-                window.open("./admin.html","_self");
-            } else if(response.status == 202) {
+                window.open("./admin.html", "_self");
+            } else if (response.status == 202) {
                 document.getElementById("textErrorInicioSesion").innerHTML = text;
                 document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "visible";
-                setTimeout(function(){ document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden"; }, 3000);
+                setTimeout(function () {
+                    document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden";
+                }, 3000);
             }
         }
     }));
@@ -41,41 +43,43 @@ function registrar() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({"usuario": usuario, "pass": pass})
-    }).then(response => response.text().then(function(text) {
+    }).then(response => response.text().then(function (text) {
         if (response.status == 200) {
             document.getElementById("textErrorInicioSesion").innerHTML = text;
             document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "visible";
-            setTimeout(function(){ document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden"; }, 3000);
+            setTimeout(function () {
+                document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden";
+            }, 3000);
         } else if (response.status == 201) {
             document.getElementById("textErrorInicioSesion").innerHTML = text;
             document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "visible";
-            setTimeout(function(){ document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden"; }, 3000);
+            setTimeout(function () {
+                document.getElementsByClassName("errorInicioSesion")[0].style.visibility = "hidden";
+            }, 3000);
         }
     }));
 }
 
-function checkSesion(){
-    if(localStorage.getItem("user") != null){
-         fetch("/inicioSesion", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"usuario": localStorage.getItem("user"), "pass": localStorage.getItem("pass")})
-    }).then(response => {
-        //Respuesta segun el rol del usuario
-        if (response.status == 200){
-            localStorage.setItem("Cookie_Sesion", "true");
-            // Mostrar pagina del usuario
-            window.open("./usuario.html","_self");
-        } else {
-            if(response.status == 201) {
+function checkSesion() {
+    if (localStorage.getItem("user") != null) {
+        fetch("/inicioSesion", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"usuario": localStorage.getItem("user"), "pass": localStorage.getItem("pass")})
+        }).then(response => {
+            //Respuesta segun el rol del usuario
+            if (response.status == 200) {
                 localStorage.setItem("Cookie_Sesion", "true");
-                window.open("./admin.html","_self");
+                // Mostrar pagina del usuario
+                window.open("./usuario.html", "_self");
+            } else {
+                if (response.status == 201) {
+                    localStorage.setItem("Cookie_Sesion", "true");
+                    window.open("./admin.html", "_self");
+                }
             }
-            // Mostrar error de conexion
-            console.log("Error al conectar")
-        }
-    })
+        });
     }
 }

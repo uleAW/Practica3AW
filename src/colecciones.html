@@ -1,49 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="colecciones.js"></script>
-</head>
+	<script src="colecciones.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="./pasatiempos.css">
 
-<body onload="checkSesion()">
-<!-- Utilizar estas etiquetas para evitar errores en la funcionalidad -->
-<h1>Añadir Coleccion</h1>
-Nombre Coleccion <input type="text" id="nombreAniadirColeccion">
-<br>
-<br>
-<!-- Principalmente esta es la que mas problemas da-->
-Imagen Album: <input type="file" id="imgAniadirAlbum" accept="image/png, image/jpeg">
-<br>
-<br>
-Precio Album: <input type="number" id="precioAniadirAlbum">
-<br>
-<br>
-<button onclick="aniadirColeccion()">Añadir</button>
-<br>
-<br>
-<br>
-<br>
-<h1>Añadir Cromo</h1>
-Nombre Cromo: <input type="text" id="nombreAniadirCromo">
-<br>
-<br>
-Imagen Cromo: <input type="file" id="imgAniadirCromo" accept="image/png, image/jpeg">
-<br>
-<br>
-Precio Cromo: <input type="number" id="precioAniadirCromo">
-<br>
-<br>
-Nombre Coleccion <input type="text" id="coleccionAniadirCromo">
-<br>
-<button onclick="aniadirCromo()">Añadir</button>
-<br>
-<br>
-<br>
-<h1>PRUEBA COMPRAR CROMO</h1>
-<button onclick="comprarCromo()">Comprar</button>
-<h1>PRUEBA COMPRAR ALBUM</h1>
-<button onclick="comprarAlbum()">Comprar</button>
+</head>
+<body onload="datos();" id="coleccion">
+	<div class="menu" id="menu">
+            </div>
 </body>
 </html>
-
-
-

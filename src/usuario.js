@@ -47,7 +47,7 @@ function mostrarPuntos() {
         },
         body: JSON.stringify({"usuario": usuario})
     }).then(response => response.text().then(function (text) {
-        document.getElementById("puntos").value = text;
+        document.getElementById("puntos").innerHTML = text;
     }));
 }
 
