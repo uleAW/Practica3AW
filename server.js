@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "Lr20jcxx%",
+    password: "password",
     port: 3006,
     database: "kiosko"
 })
@@ -492,6 +492,92 @@ app.post("/activarColeccion", function (req, res) {
             } else {
                 res.status(200).send("Colección activada correctamente");
             }
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
+app.post("/albumesUsuario", function (req, res) {
+    var data = req.body;
+    con.query("SELECT imagen FROM albumes WHERE idAlbum IN (SELECT idAlbum FROM coleccionusuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?))", [data["nombre"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var out = "";
+            for (let item of result) {
+                var bitmap = fs.readFileSync(item.imagen);
+                var data = Buffer(bitmap).toString('base64');
+                out = out + data + ",";
+            }
+            //console.log(result);
+            res.send(out);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
+app.post("/nombreColeccionesUsuario", function (req, res) {
+    var data = req.body;
+    con.query("SELECT nombre FROM colecciones WHERE numColeccion IN (SELECT numColeccion FROM coleccionUsuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?))", [data["nombre"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var out = "";
+            for (let item of result) {
+                out = out + item.nombre + ",";
+            }
+            //console.log(result);
+            res.send(out);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
+app.post("/imagenCromosUsuario", function (req, res) {
+    var data = req.body;
+    con.query("SELECT codCromos FROM coleccionusuario WHERE numColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?) and numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", [data["nombreAlbum"], data["nombreUsuario"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var datos = result[0].codCromos.split(';');
+            con.query("SELECT imagen FROM cromos WHERE codCromo IN (?)", [datos], function (err, result, fields) {
+                try {
+                    if (err) throw err;
+                    var out = "";
+                    for (let item of result) {
+                        var bitmap = fs.readFileSync(item.imagen);
+                        var data = Buffer(bitmap).toString('base64');
+                        out = out + data + ",";
+                    }
+                    res.send(out);
+                } catch (err) {
+                    console.log(err);
+                }
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
+app.post("/nombreCromosUsuario", function (req, res) {
+    var data = req.body;
+    con.query("SELECT codCromos FROM coleccionusuario WHERE numColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?) and numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", [data["nombreAlbum"], data["nombreUsuario"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var datos = result[0].codCromos.split(';');
+            con.query("SELECT nombre FROM cromos WHERE codCromo IN (?)", [datos], function (err, result, fields) {
+                try {
+                    if (err) throw err;
+                    var out = "";
+                    for (let item of result) {
+                        out = out + item.nombre + ",";
+                    }
+                    res.send(out);
+                } catch (err) {
+                    console.log(err);
+                }
+            });
         } catch (err) {
             console.log(err);
         }

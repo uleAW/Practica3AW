@@ -101,10 +101,10 @@ function cromoImagen() {
     }).then(response => response.text().then(function (text) {
         return text;
     }));
-
 }
 
 var text;
+
 async function datos() {
     //localStorage.clear();
     coleccionID();
@@ -149,7 +149,7 @@ function table() {
         tabla = tabla + "<tr>";
         for (var k = 0; k < 2; k++) {//el 2 de este for marca el numero de fotos que se van a mostrar en la misma fila
             if ((i * 2 + k) < imagenes.length) {
-                tabla = tabla + "<td><img src=data:image/png;base64," + imagenes[i * 2 + k] +"></td>";
+                tabla = tabla + "<td><img src=data:image/png;base64," + imagenes[i * 2 + k] + "></td>";
             } else {
                 tabla = tabla + "<td></td>";
                 salir = true;
@@ -160,4 +160,62 @@ function table() {
     tabla = "<button onclick=volver()>Volver</button>" + tabla;
     document.getElementById("coleccion").innerHTML = tabla;
 
+}
+
+function buscarImagenes() {
+    return fetch("/albumesUsuario", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
+        return text;
+    }));
+}
+
+function buscarNombres() {
+    return fetch("/nombreColeccionesUsuario", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
+        return text;
+    }));
+}
+
+async function cargarAlbumes() {
+    var nombresAlbumes;
+    var imgAlbumes;
+    imgAlbumes = await buscarImagenes();
+    imgAlbumes = imgAlbumes.split(",");
+    nombresAlbumes = await buscarNombres();
+    nombresAlbumes = nombresAlbumes.split(",");
+    for (var i = 0; i < imgAlbumes.length - 1; i++) {
+        var newDiv = document.createElement('div');
+        newDiv.id = 'album' + i;
+        newDiv.className = 'album';
+        newDiv.onclick = (function (i) {
+            return function () {
+                localStorage.setItem("cargarCromosUsuario", nombresAlbumes[i])
+                window.open("./cromosUsuario.html", "_self");
+            }
+        })(i);
+        document.getElementById('menu').appendChild(newDiv);
+        //document.getElementById('pasatiempo'+i).onclick=function() { table(IDColecciones[i]); };;
+
+        newDiv = document.createElement('img');
+        newDiv.id = 'img' + i;
+        newDiv.className = 'image';
+        newDiv.src = "data:image/png;base64," + imgAlbumes[i];
+        document.getElementById('album' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('text');
+        newDiv.id = 'text' + i;
+        newDiv.className = 'text';
+        newDiv.innerHTML = nombresAlbumes[i];
+        document.getElementById('album' + i).appendChild(newDiv);
+    }
 }
