@@ -64,20 +64,30 @@ function cerrarSesion() {
     window.open("/index.html", "_self");
 }
 
-function coleccionID() {
+function coleccionNombre() {
 
-    fetch("/coleccionUsuarioID", {
+            fetch("/coleccionNombre", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+            }
+        //body: JSON.stringify({"numColeccion": count})
+            }).then(response => response.text().then(function(text){
+
+                localStorage.setItem("coleccionNombre", text);
+        
+            }));
+        };
+function coleccionID() {
+    fetch("/coleccionID", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"numUsuario": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+            }
+        //body: JSON.stringify({"numColeccion": count})
+    }).then(response => response.text().then(function(text){
 
-        //if(localStorage.getItem("coleccionID")==null){
-        //console.log(text); //OCULTO, SALE UN ;
-        localStorage.setItem("cromosUsuario", text);
-
+            localStorage.setItem("coleccionID", text);
     }));
 };
 
@@ -110,8 +120,8 @@ var text;
 
 async function datos() {
     //localStorage.clear();
-    coleccionID();
-    cromoID();
+    //coleccionID();
+    //cromoID();
     text = await cromoImagen();
     //coleccionNombre();
 }
@@ -123,47 +133,11 @@ function volver() {
 var boolean = true;
 
 function table() {
-    var cromos = new Array();
-    var imagenes = new Array();
-    var IDCromo = localStorage.getItem("cromosID");
-    var imgCromo = text;
-    var IDCromos = IDCromo.split(",");
-    var imgCromos = imgCromo.split(",");
-    var cromoUsuario = localStorage.getItem("cromosUsuario");
-    var cromoUsuarios = cromoUsuario.split(";");
-    console.log(cromoUsuarios)
-    console.log(IDCromos)
-    for (var i = 0; i < IDCromos.length; i++) {
-        for (var j = 0; j < cromoUsuarios.length; j++) {
-            if (IDCromos[i] == cromoUsuarios[j] && IDCromos[i] != "") {
-                console.log(i)
-                cromos.push(IDCromos[i]);
-                imagenes.push(imgCromos[i]);
-            }
-        }
-    }
+    coleccionID()
+    coleccionNombre()
+        window.open("./comprar.html", "_self");    
+}    
 
-    tabla = "";
-    tabla = tabla + "<table>";
-    salir = false;
-    for (var i = 0; i < imagenes.length; i++) {
-        if (salir)
-            break;
-        tabla = tabla + "<tr>";
-        for (var k = 0; k < 2; k++) {//el 2 de este for marca el numero de fotos que se van a mostrar en la misma fila
-            if ((i * 2 + k) < imagenes.length) {
-                tabla = tabla + "<td><img src=data:image/png;base64," + imagenes[i * 2 + k] + "></td>";
-            } else {
-                tabla = tabla + "<td></td>";
-                salir = true;
-            }
-        }
-        tabla = tabla + "</tr>";
-    }
-    tabla = "<button onclick=volver()>Volver</button>" + tabla;
-    document.getElementById("coleccion").innerHTML = tabla;
-
-}
 
 function buscarImagenes() {
     return fetch("/albumesUsuario", {
