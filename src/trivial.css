@@ -8,7 +8,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-.captcha {
+.puzzle {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -25,10 +25,18 @@ body {
     padding: 10% 10%;
 }
 
-.imagenCapctha {
+.rompecabezas {
     position: relative;
     margin: auto;
     padding: 10% 10%;
+}
+
+#div_content {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
 h2 {
@@ -70,4 +78,19 @@ button {
 button:hover {
     box-shadow: 0 0 10px 0 #6184cf inset, 0 0 10px 4px #6184cf;
     color: #bdc7df;
+}
+
+table {
+    border: 2px solid #2980B9;
+    box-shadow: 1px 1px 8px #6184cf, -1px -1px 8px #6184cf, 1px -1px 8px #6184cf, -1px 1px 8px #6184cf;
+    -webkit-box-shadow: 1px 1px 8px #6184cf, -1px -1px 8px #6184cf, 1px -1px 8px #6184cf, -1px 1px 8px #6184cf;
+    border-collapse: collapse;
+}
+
+td.pieza {
+    transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    cursor: pointer;
 }

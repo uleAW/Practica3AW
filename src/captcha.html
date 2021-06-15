@@ -2,28 +2,47 @@
 <html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captcha</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./puzzle.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="captcha.css" />
     <script src="captcha.js"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div id="captcha" class="captcha">
-            <script>
-                createCaptcha();
-            </script>
+    <div class="captcha">
+        <div class="info">
+            <h2>¡Captchas a lo loco!</h2>
+            <div class="descripcion">
+                ¿Eres lo sufuciente humano como para resolver nuestros captchas? <br><br> ¡Escribe la soluci&oacute;n y disipa todas nuestras dudas!
+            </div>
+            <h3>¡A DESCIFRAR!</h3>
+            <br>
+            <button onclick="createCaptcha()">Cambiar</button>
+            <button onclick="validateCaptcha()">Comprobar</button>
         </div>
-        <div class="restart">
-            <a href="#" onclick="createCaptcha()">Cambiar Captcha</a>
+        <div class="imagenCapctha" id="imagenCapctha">
+            <div id="captcha" class="captcha">
+                <script>
+                    createCaptcha();
+                </script>
+            </div>
+            <div class="input">
+                <input type="text" name="reCaptcha" id="reCaptcha" placeholder="Escribe el Captcha" />
+            </div>
+            <div id="errCaptcha" class="errmsg"></div>
         </div>
-        <div class="input">
-            <input type="text" name="reCaptcha" id="reCaptcha" placeholder="Escribe el Captcha" />
-        </div>
-        <div><input type="button" value="Comprobar" onclick="validateCaptcha()" /></div>
-        <div id="errCaptcha" class="errmsg"></div>
     </div>
 </body>
 
