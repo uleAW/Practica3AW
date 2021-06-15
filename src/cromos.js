@@ -1,10 +1,5 @@
 function table() {
-    //imagenNombre(ID);//el 1 marca el id de de la coleccion.
-    //imagenDireccion(ID);
     var ID = localStorage.getItem("coleccion");
-    //localStorage.clear();//sobre dudas del codigo o ampliaciones consultarme, soy Mario
-    //imagenNombre(ID);//el 1 marca el id de de la coleccion.
-    //imagenDireccion(ID);
     fetch("/cargarImagen", {
         method: "POST",
         headers: {

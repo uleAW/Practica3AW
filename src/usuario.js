@@ -105,7 +105,6 @@ function cromoImagen() {
         headers: {
             'Content-Type': 'application/json'
         },
-
     }).then(response => response.text().then(function (text) {
         return text;
     }));
@@ -115,10 +114,6 @@ var text;
 
 async function datos() {
     text = await cromoImagen();
-}
-
-function volver() {
-    window.open("./usuario.html", "_self");
 }
 
 function table() {

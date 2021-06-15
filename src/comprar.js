@@ -1,7 +1,5 @@
 //la variable count es el id de la colección
 function imagenID(count) {
-    var aux;
-    //alert(count);
     fetch("/cargarImagen", {
         method: "POST",
         headers: {
@@ -18,40 +16,7 @@ function imagenID(count) {
         },
         //body: JSON.stringify({"numColeccion": "1"})
     }).then(response => response.text().then(function (text) {
-
-        // Mostrar pagina del
         localStorage.setItem("imagenID", text);
-        //Nombre = text;
-
-
-    }));
-
-};
-
-function imagenDireccion(count) {
-
-    fetch("/cargarImagen", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"numColeccion": count})
-    }).then(response => {
-
-    })
-    fetch("/imagenDireccion", {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        //body: JSON.stringify({"numColeccion": "1"})
-    }).then(response => response.text().then(function (text) {
-
-        // Mostrar pagina del usuario
-        console.log("Direccion" + count);
-        localStorage.setItem("Direccion" + count, text);
-        //text;
-
     }));
 };
 
@@ -93,10 +58,6 @@ function datos() {
 
 function colecciones1() {
 
-    //coleccionID();
-    //coleccionNombre();
-
-    //var =localStorage.getItem("coleccionNombre");
     var nombreColeccion = localStorage.getItem("coleccionNombre");
     var nombresColecciones = nombreColeccion.split(",");
 
@@ -140,8 +101,6 @@ var count = 0;
 
 function table(ID) {
     imagenID(ID);
-    //imagenNombre(ID);//el 1 marca el id de de la coleccion.
-    //imagenDireccion(ID);
     count = count + 1;
     console.log(ID);
     var IDColeccion = localStorage.getItem("coleccionID");

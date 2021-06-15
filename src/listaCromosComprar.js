@@ -6,10 +6,7 @@ function imagenID(count) {
         },
         body: JSON.stringify({"numColeccion": count})
     }).then(response => response.text().then(function (text) {
-        console.log(text)
-        // Mostrar pagina del
         localStorage.setItem("imagenID", text);
-        //Nombre = text;
     }));
 
 };
