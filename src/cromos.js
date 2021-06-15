@@ -1,4 +1,4 @@
-function funciones(){
+function funciones() {
     checkSesion();
     table();
 }
@@ -28,32 +28,40 @@ function table() {
         },
         //body: JSON.stringify({"numColeccion": "1"})
     }).then(response => response.text().then(function (text) {
-
         var direccion = text.split(",");
-        var tabla = "";
-        tabla = tabla + "<table>";
-        var salir = false;
-        for (var i = 0; i < direccion.length; i++) {
-            if (salir)
-                break;
-            tabla = tabla + "<tr>";
-            for (var k = 0; k < 2; k++) {//el 2 de este for marca el numero de fotos que se van a mostrar en la misma fila
-                if ((i * 2 + k) < direccion.length && direccion[i * 2 + k] != "") {
-                    tabla = tabla + "<td><img src=data:image/png;base64," + direccion[i * 2 + k] + "></td>";
-                } else {
-                    tabla = tabla + "<td></td>";
-                    salir = true;
-                }
-            }
-            tabla = tabla + "</tr>";
+        //var imgIDs = imgID.split(",");
+        for (var i = 0; i < direccion.length - 1;) {
+            var newDiv = document.createElement('div');
+            newDiv.id = 'cromo' + i;
+            newDiv.className = 'cromos';
+            document.getElementById('menu').appendChild(newDiv);
+
+            newDiv = document.createElement('img');
+            newDiv.id = 'img' + i;
+            newDiv.className = 'image';
+            newDiv.src = "data:image/png;base64," + direccion[i];
+            document.getElementById('cromo' + i).appendChild(newDiv);
+
+            newDiv = document.createElement('div');
+            newDiv.id = 'divAux' + i;
+            newDiv.className = 'divAux';
+            document.getElementById('cromo' + i).appendChild(newDiv);
+
+            newDiv = document.createElement('text');
+
+            newDiv.id = 'textNombre' + i;
+            newDiv.className = 'textNombre';
+            newDiv.innerHTML = direccion[i + 2];
+            document.getElementById('divAux' + i).appendChild(newDiv);
+            document.getElementById("divAux" + i).insertBefore(document.createTextNode("Nombre: "), newDiv);
+
+            newDiv = document.createElement('text');
+            newDiv.id = 'textPrecio' + i;
+            newDiv.className = 'textPrecio';
+            newDiv.innerHTML = "Precio: " + direccion[i + 1];
+            document.getElementById('divAux' + i).appendChild(newDiv);
+            i = i + 3;
         }
-        tabla = "<button onclick=colecciones1()>Volver</button>" + tabla;
-        document.write(tabla);
-        //document.getElementById("coleccion").innerHTML=tabla;
-        // Mostrar pagina del usuario
-        //console.log("Direccion"+count);
-        //localStorage.setItem("Direccion"+count, text);
-        //text;
     }));
 };
 
@@ -78,6 +86,7 @@ function inactividad() {
 }
 
 var t = null;
+
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }

@@ -28,11 +28,12 @@ function inactividad() {
 }
 
 var t = null;
+
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
-window.onblur = window.onmousemove = function () {
+window.onblur = window.onmousemove = function() {
     if (t) clearTimeout(t);
     contadorInactividad();
 }
@@ -45,8 +46,8 @@ function mostrarPuntos() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"usuario": usuario})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "usuario": usuario })
+    }).then(response => response.text().then(function(text) {
         document.getElementById("puntos").innerHTML = text;
     }));
 }
@@ -67,7 +68,7 @@ function coleccionNombre() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function (text) {
+    }).then(response => response.text().then(function(text) {
 
         localStorage.setItem("coleccionNombre", text);
 
@@ -81,7 +82,7 @@ function coleccionID() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function (text) {
+    }).then(response => response.text().then(function(text) {
 
         localStorage.setItem("coleccionID", text);
     }));
@@ -94,7 +95,7 @@ function cromoID() {
             'Content-Type': 'application/json'
         },
 
-    }).then(response => response.text().then(function (text) {
+    }).then(response => response.text().then(function(text) {
         localStorage.setItem("cromosID", text);
     }));
 
@@ -106,7 +107,7 @@ function cromoImagen() {
         headers: {
             'Content-Type': 'application/json'
         },
-    }).then(response => response.text().then(function (text) {
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -129,8 +130,8 @@ function buscarImagenes() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -141,8 +142,8 @@ function buscarNombres() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -153,8 +154,8 @@ function estadoColeccion() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -165,8 +166,8 @@ function calcularNumCromos() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -188,8 +189,14 @@ async function cargarAlbumes() {
         var newDiv = document.createElement('div');
         newDiv.id = 'album' + i;
         newDiv.className = 'album';
-        newDiv.onclick = (function (i) {
-            return function () {
+        document.getElementById('menu').appendChild(newDiv);
+
+        newDiv = document.createElement('img');
+        newDiv.id = 'img' + i;
+        newDiv.className = 'image';
+        newDiv.src = "data:image/png;base64," + imgAlbumes[i];
+        newDiv.onclick = (function(i) {
+            return function() {
                 localStorage.setItem("cargarCromosUsuario", nombresAlbumes[i])
                 // window.open("./cromosUsuario.html", "_self");
                 document.getElementById("menu").style.display = "none"
@@ -197,12 +204,6 @@ async function cargarAlbumes() {
                 cargarCromos();
             }
         })(i);
-        document.getElementById('menu').appendChild(newDiv);
-
-        newDiv = document.createElement('img');
-        newDiv.id = 'img' + i;
-        newDiv.className = 'image';
-        newDiv.src = "data:image/png;base64," + imgAlbumes[i];
         document.getElementById('album' + i).appendChild(newDiv);
 
         newDiv = document.createElement('div');
@@ -255,17 +256,25 @@ async function cargarCromos() {
     imgCromo = imgCromo.split(',')
     nombreCromo = await cargarNombresCromo();
     nombreCromo = nombreCromo.split(',')
+
+    document.getElementById("menuCromos").innerHTML = '';
+
     for (var i = 0; i < imgCromo.length - 1; i++) {
         var newDiv = document.createElement('div');
         newDiv.id = 'cromo' + i;
         newDiv.className = 'cromos';
         document.getElementById('menuCromos').appendChild(newDiv);
-        //document.getElementById('pasatiempo'+i).onclick=function() { table(IDColecciones[i]); };;
 
         newDiv = document.createElement('img');
         newDiv.id = 'img' + i;
         newDiv.className = 'image';
         newDiv.src = "data:image/png;base64," + imgCromo[i];
+        document.getElementById('cromo' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('b');
+        newDiv.id = 'nombreCromo' + i;
+        newDiv.className = 'nombreCromo';
+        newDiv.innerHTML = "Nombre:";
         document.getElementById('cromo' + i).appendChild(newDiv);
 
         newDiv = document.createElement('text');
@@ -275,7 +284,10 @@ async function cargarCromos() {
         document.getElementById('cromo' + i).appendChild(newDiv);
 
     }
-    document.getElementById("menuCromos").style.display = "block";
+
+    document.getElementById("tituloColeccion").innerHTML = localStorage.getItem("cargarCromosUsuario");
+    document.getElementById("menuCromos").style.display = "grid";
+    document.getElementById("tituloColeccion").style.display = "block";
 }
 
 function cargarImagenesCromos() {
@@ -284,8 +296,8 @@ function cargarImagenesCromos() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombreAlbum": localStorage.getItem("cargarCromosUsuario"), "nombreUsuario": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombreAlbum": localStorage.getItem("cargarCromosUsuario"), "nombreUsuario": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -296,8 +308,8 @@ function cargarNombresCromo() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombreAlbum": localStorage.getItem("cargarCromosUsuario"), "nombreUsuario": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombreAlbum": localStorage.getItem("cargarCromosUsuario"), "nombreUsuario": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -305,8 +317,8 @@ function cargarNombresCromo() {
 function volver() {
     document.getElementById("menuCromos").style.display = "none";
     document.getElementById("tituloColeccion").style.display = "none";
-    document.getElementById("menu").style.display = "block"
-    document.getElementById("tituloColecciones").style.display = "block"
+    document.getElementById("menu").style.display = "grid";
+    document.getElementById("tituloColecciones").style.display = "block";
 }
 
 function mostrarAlbumes() {
@@ -314,6 +326,6 @@ function mostrarAlbumes() {
 }
 
 //Boton atras
-window.onbeforeunload = function (e) {
+window.onbeforeunload = function(e) {
     localStorage.setItem("back", "true");
 };
