@@ -8,7 +8,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-.puzzle {
+.trivial {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -25,18 +25,32 @@ body {
     padding: 10% 10%;
 }
 
-.rompecabezas {
+.preguntas {
     position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
     margin: auto;
-    padding: 10% 10%;
+    padding: 10% 5%;
 }
 
-#div_content {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    text-align: center;
+form {
+    height: 120%;
+    width: 100%;
+}
+
+.fondo {
+    background-color: #3d5b9c;
+    padding: 5% 10%;
+    color: white;
+}
+
+.respuestas {
+    height: 100%;
+    padding: 5% 10%;
+}
+
+label {
+    font-size: medium;
 }
 
 h2 {
@@ -78,19 +92,4 @@ button {
 button:hover {
     box-shadow: 0 0 10px 0 #6184cf inset, 0 0 10px 4px #6184cf;
     color: #bdc7df;
-}
-
-table {
-    border: 2px solid #2980B9;
-    box-shadow: 1px 1px 8px #6184cf, -1px -1px 8px #6184cf, 1px -1px 8px #6184cf, -1px 1px 8px #6184cf;
-    -webkit-box-shadow: 1px 1px 8px #6184cf, -1px -1px 8px #6184cf, 1px -1px 8px #6184cf, -1px 1px 8px #6184cf;
-    border-collapse: collapse;
-}
-
-td.pieza {
-    transition: .3s ease-in-out;
-    -moz-transition: .3s ease-in-out;
-    -webkit-transition: .3s ease-in-out;
-    -o-transition: .3s ease-in-out;
-    cursor: pointer;
 }

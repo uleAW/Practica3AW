@@ -1,15 +1,15 @@
-function funciones(){
+function funciones() {
     cargaRandom();
     desmarcar();
 }
 
-function desmarcar(){
-    
+function desmarcar() {
+
     //Borro todos las preguntas con 4 opciones
     for (var i = 1; i <= 20; i++) {
         for (var j = 1; j <= 4; j++) {
-            if( i != 8 && i != 15){
-                document.getElementById("res"+i+j).checked = false;
+            if (i != 8 && i != 15) {
+                document.getElementById("res" + i + j).checked = false;
             }
         }
     }
@@ -18,31 +18,31 @@ function desmarcar(){
 
     //Pregunta 8
     for (var i = 1; i <= 3; i++) {
-        document.getElementById("res8"+i).checked = false;
+        document.getElementById("res8" + i).checked = false;
     }
 
     //Pregunta 14
     for (var i = 1; i <= 2; i++) {
-        document.getElementById("res15"+i).checked = false;
+        document.getElementById("res15" + i).checked = false;
     }
 
 }
 
 //Carga aleatoria de 4 preguntas en el crucigrama
 function cargaRandom() {
-    
-    var lista = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+
+    var lista = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
     var val;
     //Genero los valores de las 4 preguntas que apareceran
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 4; i++) {
         val = Math.round(Math.random() * (lista.length - 1) + 1);
-        if(lista.includes(val)){
+        if (lista.includes(val)) {
             //Borro el elemento del array para no repetirlo
             var j = lista.indexOf(val);
             lista.splice(j, 1);
-            document.getElementById("pregunta"+val).style.display = "block";
-        //Si el ya se ha elegido, repito el proceso hasta que el numero no se haya elegido antes
-        }else{
+            document.getElementById("pregunta" + val).style.display = "block";
+            //Si el ya se ha elegido, repito el proceso hasta que el numero no se haya elegido antes
+        } else {
             i--;
         }
     }
@@ -182,8 +182,8 @@ function comprobar() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"usuario": localStorage.getItem("user"), "puntos": puntos})
-        }).then(response => response.text().then(function (text) {
+            body: JSON.stringify({ "usuario": localStorage.getItem("user"), "puntos": puntos })
+        }).then(response => response.text().then(function(text) {
             alert("Su balance de puntos es de: +" + puntos)
         }));
     } else {
@@ -214,7 +214,7 @@ function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
-window.onblur = window.onmousemove = function () {
+window.onblur = window.onmousemove = function() {
     if (t) clearTimeout(t);
     contadorInactividad();
 }

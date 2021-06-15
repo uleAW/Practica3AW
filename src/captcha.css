@@ -8,7 +8,7 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
-.captcha {
+.captchaContainer {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -29,6 +29,11 @@ body {
     position: relative;
     margin: auto;
     padding: 10% 10%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 h2 {
@@ -70,4 +75,27 @@ button {
 button:hover {
     box-shadow: 0 0 10px 0 #6184cf inset, 0 0 10px 4px #6184cf;
     color: #bdc7df;
+}
+
+.captcha {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 2em;
+    border-radius: 5px;
+    text-decoration: line-through;
+    color: #a0a0a0;
+    background-color: #3d5b9c;
+    user-select: none;
+    width: 200px;
+    text-align: center;
+}
+
+input {
+    width: 200px;
+    height: 40px;
+    border: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding: 3px 7px;
 }

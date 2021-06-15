@@ -1,249 +1,317 @@
 <!DOCTYPE html>
 <html>
-<script src="trivial.js"></script>
-<meta charset="UTF-8">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivial</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./trivial.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="trivial.js"></script>
+</head>
+
 <body onload="funciones()">
+    <div class="trivial">
+        <div class="info">
+            <h2>Sabes más de lo que piensas</h2>
+            <div class="descripcion">
+                ¿Lo sabes todo acerca del mundo digital? <br><br> ¡Responde nuestras mejores preguntas digitales y se el nuevo niño elegido!
+            </div>
+            <h3>¡¡1,2,3 responde otra vez!!</h3>
+            <br>
+            <button id="botonComprobar" onclick="comprobar()">Comprobar</button>
+        </div>
+        <div class="preguntas">
+            <form id="pregunta1" style="display:none;">
+                <h4 class="fondo">¿Cuál es la digievolución de Agumon?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res11" name="pregunta1" value="greymon">
+                    <label for="res11">Greymon</label><br>
+                    <input type="radio" id="res12" name="pregunta1" value="terriermon">
+                    <label for="res12">Terriermon</label><br>
+                    <input type="radio" id="res13" name="pregunta1" value="flamedramon">
+                    <label for="res13">Flamedramon</label><br>
+                    <input type="radio" id="res14" name="pregunta1" value="kuwagamon">
+                    <label for="res14">Kuwagamon</label>
+                </div>
 
-    <form id="pregunta1"  style="display:none;">
-        <h2>¿Cuál es la digievolución de Agumon?</h2>
-        <input type="radio" id="res11" name="pregunta1" value="greymon">
-        <label for="res11">Greymon</label><br>
-        <input type="radio" id="res12" name="pregunta1" value="terriermon">
-        <label for="res12">Terriermon</label><br>
-        <input type="radio" id="res13" name="pregunta1" value="flamedramon">
-        <label for="res13">Flamedramon</label><br>
-        <input type="radio" id="res14" name="pregunta1" value="kuwagamon">
-        <label for="res14">Kuwagamon</label>
-    </form>
+            </form>
 
-    <form id="pregunta2" style="display:none;">
-        <h2>¿Cuál es el emblema de Izzy?</h2>
-        <input type="radio" id="res21" name="pregunta2" value="valor">
-        <label for="res21">Valor</label><br>
-        <input type="radio" id="res22" name="pregunta2" value="esperanza">
-        <label for="res22">Esperanza</label><br>
-        <input type="radio" id="res23" name="pregunta2" value="amistad">
-        <label for="res23">Amistad</label><br>
-        <input type="radio" id="res24" name="pregunta2" value="conocimiento">
-        <label for="res24">Conocimiento</label>
-    </form>
+            <form id="pregunta2" style="display:none;">
+                <h4 class="fondo">¿Cuál es el emblema de Izzy?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res21" name="pregunta2" value="valor">
+                    <label for="res21">Valor</label><br>
+                    <input type="radio" id="res22" name="pregunta2" value="esperanza">
+                    <label for="res22">Esperanza</label><br>
+                    <input type="radio" id="res23" name="pregunta2" value="amistad">
+                    <label for="res23">Amistad</label><br>
+                    <input type="radio" id="res24" name="pregunta2" value="conocimiento">
+                    <label for="res24">Conocimiento</label>
+                </div>
+            </form>
 
-    <form id="pregunta3" style="display:none;">
-        <h2>¿Cuál fue la &uacute;ltima digievolución de nivel campeón en aparecer en Digimon Adventure?</h2>
-        <input type="radio" id="res31" name="pregunta3" value="angemon">
-        <label for="res31">Angemon</label><br>
-        <input type="radio" id="res32" name="pregunta3" value="garurumon">
-        <label for="res32">Garurumon</label><br>
-        <input type="radio" id="res33" name="pregunta3" value="magnaangemon">
-        <label for="res33">MagnaAngemon</label><br>
-        <input type="radio" id="res34" name="pregunta3" value="angewomon">
-        <label for="res34">Angewomon</label>
-    </form>
+            <form id="pregunta3" style="display:none;">
+                <h4 class="fondo">¿Cuál fue la &uacute;ltima digievolución de nivel campeón en aparecer en Digimon Adventure?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res31" name="pregunta3" value="angemon">
+                    <label for="res31">Angemon</label><br>
+                    <input type="radio" id="res32" name="pregunta3" value="garurumon">
+                    <label for="res32">Garurumon</label><br>
+                    <input type="radio" id="res33" name="pregunta3" value="magnaangemon">
+                    <label for="res33">MagnaAngemon</label><br>
+                    <input type="radio" id="res34" name="pregunta3" value="angewomon">
+                    <label for="res34">Angewomon</label>
+                </div>
+            </form>
 
-    <form id="pregunta4" style="display:none;">
-        <h2>¿Cuál de estos Digimons de Digimon Adventure son de nivel megacampeón?</h2>
-        <input type="checkbox" id="res41" name="pregunta4" value="garudamon">
-        <label for="res41">Garudamon</label><br>
-        <input type="checkbox" id="res42" name="pregunta4" value="piximon">
-        <label for="res42">Piximon</label><br>
-        <input type="checkbox" id="res43" name="pregunta4" value="megakabuterimon">
-        <label for="res43">MegaKabuterimon</label><br>
-        <input type="checkbox" id="res44" name="pregunta4" value="angewomon">
-        <label for="res44">Angewomon</label><br>
-        <input type="checkbox" id="res45" name="pregunta4" value="metalgarurumon">
-        <label for="res45">MetalGarurumon</label>
-    </form>
+            <form id="pregunta4" style="display:none;">
+                <h4 class="fondo">¿Cuál de estos Digimons de Digimon Adventure son de nivel megacampeón?</h4>
+                <div class="respuestas">
+                    <input type="checkbox" id="res41" name="pregunta4" value="garudamon">
+                    <label for="res41">Garudamon</label><br>
+                    <input type="checkbox" id="res42" name="pregunta4" value="piximon">
+                    <label for="res42">Piximon</label><br>
+                    <input type="checkbox" id="res43" name="pregunta4" value="megakabuterimon">
+                    <label for="res43">MegaKabuterimon</label><br>
+                    <input type="checkbox" id="res44" name="pregunta4" value="angewomon">
+                    <label for="res44">Angewomon</label><br>
+                    <input type="checkbox" id="res45" name="pregunta4" value="metalgarurumon">
+                    <label for="res45">MetalGarurumon</label>
+                </div>
+            </form>
 
-    <form id="pregunta5" style="display:none;">
-        <h2>¿Qué dos Digimons forman a Omnimon?</h2>
-        <input type="radio" id="res51" name="pregunta5" value="xveemonstingmon">
-        <label for="res51">ExVeemon y Stingmon</label><br>
-        <input type="radio" id="res52" name="pregunta5" value="wargreymonwergarurumon">
-        <label for="res52">WarGreymon y WereGarurumon</label><br>
-        <input type="radio" id="res53" name="pregunta5" value="waregreymonmetalgarurumon">
-        <label for="res53">WarGreymon y MetalGarurumon</label><br>
-        <input type="radio" id="res54" name="pregunta5" value="metalgreymonmetalgarurumon">
-        <label for="res54">MetalGreymon y MetalGarurumon</label>
-    </form>
+            <form id="pregunta5" style="display:none;">
+                <h4 class="fondo">¿Qué dos Digimons forman a Omnimon?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res51" name="pregunta5" value="xveemonstingmon">
+                    <label for="res51">ExVeemon y Stingmon</label><br>
+                    <input type="radio" id="res52" name="pregunta5" value="wargreymonwergarurumon">
+                    <label for="res52">WarGreymon y WereGarurumon</label><br>
+                    <input type="radio" id="res53" name="pregunta5" value="waregreymonmetalgarurumon">
+                    <label for="res53">WarGreymon y MetalGarurumon</label><br>
+                    <input type="radio" id="res54" name="pregunta5" value="metalgreymonmetalgarurumon">
+                    <label for="res54">MetalGreymon y MetalGarurumon</label>
+                </div>
+            </form>
 
-    <form id="pregunta6" style="display:none;">
-        <h2>¿Cuántas armodigievoluciones tiene Veemon en la serie de Digimon 02?</h2>
-        <input type="radio" id="res61" name="pregunta6" value="una">
-        <label for="res61">Una</label><br>
-        <input type="radio" id="res62" name="pregunta6" value="dos">
-        <label for="res62">Dos</label><br>
-        <input type="radio" id="res63" name="pregunta6" value="tres">
-        <label for="res63">Tres</label><br>
-        <input type="radio" id="res64" name="pregunta6" value="cuatro">
-        <label for="res64">Cuatro</label>
-    </form>
+            <form id="pregunta6" style="display:none;">
+                <h4 class="fondo">¿Cuántas armodigievoluciones tiene Veemon en la serie de Digimon 02?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res61" name="pregunta6" value="una">
+                    <label for="res61">Una</label><br>
+                    <input type="radio" id="res62" name="pregunta6" value="dos">
+                    <label for="res62">Dos</label><br>
+                    <input type="radio" id="res63" name="pregunta6" value="tres">
+                    <label for="res63">Tres</label><br>
+                    <input type="radio" id="res64" name="pregunta6" value="cuatro">
+                    <label for="res64">Cuatro</label>
+                </div>
+            </form>
 
-    <form id="pregunta7" style="display:none;">
-        <h2>¿Qué niño elegido hereda el emblema de la amistad de Matt en Digimon 02?</h2>
-        <input type="radio" id="res71" name="pregunta7" value="davis">
-        <label for="res71">Davis</label><br>
-        <input type="radio" id="res72" name="pregunta7" value="yolei">
-        <label for="res72">Yolei</label><br>
-        <input type="radio" id="res73" name="pregunta7" value="ken">
-        <label for="res73">Ken</label><br>
-        <input type="radio" id="res74" name="pregunta7" value="cody">
-        <label for="res74">Cody</label>
-    </form>
+            <form id="pregunta7" style="display:none;">
+                <h4 class="fondo">¿Qué niño elegido hereda el emblema de la amistad de Matt en Digimon 02?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res71" name="pregunta7" value="davis">
+                    <label for="res71">Davis</label><br>
+                    <input type="radio" id="res72" name="pregunta7" value="yolei">
+                    <label for="res72">Yolei</label><br>
+                    <input type="radio" id="res73" name="pregunta7" value="ken">
+                    <label for="res73">Ken</label><br>
+                    <input type="radio" id="res74" name="pregunta7" value="cody">
+                    <label for="res74">Cody</label>
+                </div>
+            </form>
 
-    <form id="pregunta8" style="display:none;">
-        <h2>¿Cuál es la ADN digievolución de ExVeemon y Stingmon en Digimon 02?</h2>
-        <input type="radio" id="res81" name="pregunta8" value="silphymon">
-        <label for="res81">Silphymon</label><br>
-        <input type="radio" id="res82" name="pregunta8" value="shakkoumon">
-        <label for="res82">Shakkoumon</label><br>
-        <input type="radio" id="res83" name="pregunta8" value="paildramon">
-        <label for="res83">Paildramon</label>
-    </form>
+            <form id="pregunta8" style="display:none;">
+                <h4 class="fondo">¿Cuál es la ADN digievolución de ExVeemon y Stingmon en Digimon 02?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res81" name="pregunta8" value="silphymon">
+                    <label for="res81">Silphymon</label><br>
+                    <input type="radio" id="res82" name="pregunta8" value="shakkoumon">
+                    <label for="res82">Shakkoumon</label><br>
+                    <input type="radio" id="res83" name="pregunta8" value="paildramon">
+                    <label for="res83">Paildramon</label>
+                </div>
+            </form>
 
-    <form id="pregunta9" style="display:none;">
-        <h2>¿Cuál de estas digievoluciones no es una de Hawkmon?</h2>
-        <input type="radio" id="res91" name="pregunta9" value="aquilamon">
-        <label for="res91">Aquilamon</label><br>
-        <input type="radio" id="res92" name="pregunta9" value="shurimon">
-        <label for="res92">Shurimon</label><br>
-        <input type="radio" id="res93" name="pregunta9" value="imperialdramon">
-        <label for="res93">Imperialdramon</label><br>
-        <input type="radio" id="res94" name="pregunta9" value="halsemon">
-        <label for="res94">Halsemon</label>
-    </form>
+            <form id="pregunta9" style="display:none;">
+                <h4 class="fondo">¿Cuál de estas digievoluciones no es una de Hawkmon?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res91" name="pregunta9" value="aquilamon">
+                    <label for="res91">Aquilamon</label><br>
+                    <input type="radio" id="res92" name="pregunta9" value="shurimon">
+                    <label for="res92">Shurimon</label><br>
+                    <input type="radio" id="res93" name="pregunta9" value="imperialdramon">
+                    <label for="res93">Imperialdramon</label><br>
+                    <input type="radio" id="res94" name="pregunta9" value="halsemon">
+                    <label for="res94">Halsemon</label>
+                </div>
+            </form>
 
-    <form id="pregunta10" style="display:none;">
-        <h2>¿Quién es el compañero digimon de Cody en la serie de Digimon 02?</h2>
-        <input type="radio" id="res101" name="pregunta10" value="patamon">
-        <label for="res101">Patamon</label><br>
-        <input type="radio" id="res102" name="pregunta10" value="armadillomon">
-        <label for="res102">Armadillomon</label><br>
-        <input type="radio" id="res103" name="pregunta10" value="veemon">
-        <label for="res103">Veemon</label><br>
-        <input type="radio" id="res104" name="pregunta10" value="wormmon">
-        <label for="res104">Wormmon</label>
-    </form>
+            <form id="pregunta10" style="display:none;">
+                <h4 class="fondo">¿Quién es el compañero digimon de Cody en la serie de Digimon 02?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res101" name="pregunta10" value="patamon">
+                    <label for="res101">Patamon</label><br>
+                    <input type="radio" id="res102" name="pregunta10" value="armadillomon">
+                    <label for="res102">Armadillomon</label><br>
+                    <input type="radio" id="res103" name="pregunta10" value="veemon">
+                    <label for="res103">Veemon</label><br>
+                    <input type="radio" id="res104" name="pregunta10" value="wormmon">
+                    <label for="res104">Wormmon</label>
+                </div>
+            </form>
 
-    <form id="pregunta11" style="display:none;">
-        <h2>¿De qué color es el D-Power de Henry en Digimon Tamers?</h2>
-        <input type="radio" id="res111" name="pregunta11" value="rojo">
-        <label for="res111">Rojo</label><br>
-        <input type="radio" id="res112" name="pregunta11" value="verde">
-        <label for="res112">Verde</label><br>
-        <input type="radio" id="res113" name="pregunta11" value="azul">
-        <label for="res113">Azul</label><br>
-        <input type="radio" id="res114" name="pregunta11" value="amarillo">
-        <label for="res114">Amarillo</label>
-    </form>
+            <form id="pregunta11" style="display:none;">
+                <h4 class="fondo">¿De qué color es el D-Power de Henry en Digimon Tamers?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res111" name="pregunta11" value="rojo">
+                    <label for="res111">Rojo</label><br>
+                    <input type="radio" id="res112" name="pregunta11" value="verde">
+                    <label for="res112">Verde</label><br>
+                    <input type="radio" id="res113" name="pregunta11" value="azul">
+                    <label for="res113">Azul</label><br>
+                    <input type="radio" id="res114" name="pregunta11" value="amarillo">
+                    <label for="res114">Amarillo</label>
+                </div>
+            </form>
 
-    <form id="pregunta12" style="display:none;">
-        <h2>¿Con qué sobrenombre se le conocía a Rika en Digimon Tamers?</h2>
-        <input type="radio" id="res121" name="pregunta12" value="emperatriz">
-        <label for="res121">Digimon emperatriz</label><br>
-        <input type="radio" id="res122" name="pregunta12" value="duquesa">
-        <label for="res122">Duquesa de los Digimon</label><br>
-        <input type="radio" id="res123" name="pregunta12" value="duena">
-        <label for="res123">Due&ntilde;a de los Digimon</label><br>
-        <input type="radio" id="res124" name="pregunta12" value="reina">
-        <label for="res124">Reina de los Digimon</label>
-    </form>
+            <form id="pregunta12" style="display:none;">
+                <h4 class="fondo">¿Con qué sobrenombre se le conocía a Rika en Digimon Tamers?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res121" name="pregunta12" value="emperatriz">
+                    <label for="res121">Digimon emperatriz</label><br>
+                    <input type="radio" id="res122" name="pregunta12" value="duquesa">
+                    <label for="res122">Duquesa de los Digimon</label><br>
+                    <input type="radio" id="res123" name="pregunta12" value="duena">
+                    <label for="res123">Due&ntilde;a de los Digimon</label><br>
+                    <input type="radio" id="res124" name="pregunta12" value="reina">
+                    <label for="res124">Reina de los Digimon</label>
+                </div>
+            </form>
 
-    <form id="pregunta13" style="display:none;">
-        <h2>¿Qué tipo de digievolución aparece solo en Digimon Tamers?</h2>
-        <input type="radio" id="res131" name="pregunta13" value="adn">
-        <label for="res131">ADN Digievoluci&oacute;n</label><br>
-        <input type="radio" id="res132" name="pregunta13" value="matrix">
-        <label for="res132">Matrix Evolution</label><br>
-        <input type="radio" id="res133" name="pregunta13" value="armor">
-        <label for="res133">Armor Digievoluci&oacute;n</label><br>
-        <input type="radio" id="res134" name="pregunta13" value="espiritudigital">
-        <label for="res134">Espiritu Digital Digievoluci&oacute;n</label>
-    </form>
+            <form id="pregunta13" style="display:none;">
+                <h4 class="fondo">¿Qué tipo de digievolución aparece solo en Digimon Tamers?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res131" name="pregunta13" value="adn">
+                    <label for="res131">ADN Digievoluci&oacute;n</label><br>
+                    <input type="radio" id="res132" name="pregunta13" value="matrix">
+                    <label for="res132">Matrix Evolution</label><br>
+                    <input type="radio" id="res133" name="pregunta13" value="armor">
+                    <label for="res133">Armor Digievoluci&oacute;n</label><br>
+                    <input type="radio" id="res134" name="pregunta13" value="espiritudigital">
+                    <label for="res134">Espiritu Digital Digievoluci&oacute;n</label>
+                </div>
+            </form>
 
-    <form id="pregunta14" style="display:none;">
-        <h2>¿Cuál de estas no es una digievolución de Guilmon en Digimon Tamers?</h2>
-        <input type="radio" id="res141" name="pregunta14" value="wargrowldmon">
-        <label for="res141">WarGrowldmon</label><br>
-        <input type="radio" id="res142" name="pregunta14" value="gargomon">
-        <label for="res142">Gargomon</label><br>
-        <input type="radio" id="res143" name="pregunta14" value="growldmon">
-        <label for="res143">Growldmon</label><br>
-        <input type="radio" id="res144" name="pregunta14" value="gallantmon">
-        <label for="res144">Gallantmon</label>
-    </form>
+            <form id="pregunta14" style="display:none;">
+                <h4 class="fondo">¿Cuál de estas no es una digievolución de Guilmon en Digimon Tamers?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res141" name="pregunta14" value="wargrowldmon">
+                    <label for="res141">WarGrowldmon</label><br>
+                    <input type="radio" id="res142" name="pregunta14" value="gargomon">
+                    <label for="res142">Gargomon</label><br>
+                    <input type="radio" id="res143" name="pregunta14" value="growldmon">
+                    <label for="res143">Growldmon</label><br>
+                    <input type="radio" id="res144" name="pregunta14" value="gallantmon">
+                    <label for="res144">Gallantmon</label>
+                </div>
+            </form>
 
-    <form id="pregunta15" style="display:none;">
-        <h2>¿Leomon muere en Digimon Tamers?</h2>
-        <input type="radio" id="res151" name="pregunta15" value="si">
-        <label for="res151">Si</label><br>
-        <input type="radio" id="res152" name="pregunta15" value="no">
-        <label for="res152">No</label>
-    </form>
+            <form id="pregunta15" style="display:none;">
+                <h4 class="fondo">¿Leomon muere en Digimon Tamers?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res151" name="pregunta15" value="si">
+                    <label for="res151">Si</label><br>
+                    <input type="radio" id="res152" name="pregunta15" value="no">
+                    <label for="res152">No</label>
+                </div>
+            </form>
 
-    <form id="pregunta16" style="display:none;">
-        <h2>¿Qué niño elegido consiguió primero su espíritu digital animal en Digimon Frontier?</h2>
-        <input type="radio" id="res161" name="pregunta16" value="tommy">
-        <label for="res161">Tommy</label><br>
-        <input type="radio" id="res162" name="pregunta16" value="zoe">
-        <label for="res162">Zoe</label><br>
-        <input type="radio" id="res163" name="pregunta16" value="takuya">
-        <label for="res163">Takuya</label><br>
-        <input type="radio" id="res164" name="pregunta16" value="jp">
-        <label for="res164">JP</label><br>
-        <input type="radio" id="res165" name="pregunta16" value="koji">
-        <label for="res165">Koji</label>
-    </form>
+            <form id="pregunta16" style="display:none;">
+                <h4 class="fondo">¿Qué niño elegido consiguió primero su espíritu digital animal en Digimon Frontier?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res161" name="pregunta16" value="tommy">
+                    <label for="res161">Tommy</label><br>
+                    <input type="radio" id="res162" name="pregunta16" value="zoe">
+                    <label for="res162">Zoe</label><br>
+                    <input type="radio" id="res163" name="pregunta16" value="takuya">
+                    <label for="res163">Takuya</label><br>
+                    <input type="radio" id="res164" name="pregunta16" value="jp">
+                    <label for="res164">JP</label><br>
+                    <input type="radio" id="res165" name="pregunta16" value="koji">
+                    <label for="res165">Koji</label>
+                </div>
+            </form>
 
-    <form id="pregunta17" style="display:none;">
-        <h2>¿Cuál no es un espíritu digital animal en Digimon Frontier?</h2>
-        <input type="radio" id="res171" name="pregunta17" value="kazemon">
-        <label for="res171">Kazemon</label><br>
-        <input type="radio" id="res172" name="pregunta17" value="burninggreymon">
-        <label for="res172">BurningGreymon</label><br>
-        <input type="radio" id="res173" name="pregunta17" value="kendogarurumon">
-        <label for="res173">KendoGarurumon</label><br>
-        <input type="radio" id="res174" name="pregunta17" value="korikakumon">
-        <label for="res174">Korikakumon</label>
-    </form>
+            <form id="pregunta17" style="display:none;">
+                <h4 class="fondo">¿Cuál no es un espíritu digital animal en Digimon Frontier?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res171" name="pregunta17" value="kazemon">
+                    <label for="res171">Kazemon</label><br>
+                    <input type="radio" id="res172" name="pregunta17" value="burninggreymon">
+                    <label for="res172">BurningGreymon</label><br>
+                    <input type="radio" id="res173" name="pregunta17" value="kendogarurumon">
+                    <label for="res173">KendoGarurumon</label><br>
+                    <input type="radio" id="res174" name="pregunta17" value="korikakumon">
+                    <label for="res174">Korikakumon</label>
+                </div>
+            </form>
 
-    <form id="pregunta18" style="display:none;">
-        <h2>¿De qué color es el D-tector de JP en Digimon Frontier?</h2>
-        <input type="radio" id="res181" name="pregunta18" value="azulamarillo">
-        <label for="res181">Azul y amarillo</label><br>
-        <input type="radio" id="res182" name="pregunta18" value="rojonegro">
-        <label for="res182">Rojo y negro</label><br>
-        <input type="radio" id="res183" name="pregunta18" value="azulblanco">
-        <label for="res183">Azul y blanco</label><br>
-        <input type="radio" id="res184" name="pregunta18" value="verdeamarillo">
-        <label for="res184">Verde y amarillo</label>
-    </form>
+            <form id="pregunta18" style="display:none;">
+                <h4 class="fondo">¿De qué color es el D-tector de JP en Digimon Frontier?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res181" name="pregunta18" value="azulamarillo">
+                    <label for="res181">Azul y amarillo</label><br>
+                    <input type="radio" id="res182" name="pregunta18" value="rojonegro">
+                    <label for="res182">Rojo y negro</label><br>
+                    <input type="radio" id="res183" name="pregunta18" value="azulblanco">
+                    <label for="res183">Azul y blanco</label><br>
+                    <input type="radio" id="res184" name="pregunta18" value="verdeamarillo">
+                    <label for="res184">Verde y amarillo</label>
+                </div>
+            </form>
 
-    <form id="pregunta19" style="display:none;">
-        <h2>¿De quíen es hermano Koichi en Digimon Frontier?</h2>
-        <input type="radio" id="res191" name="pregunta19" value="takuya">
-        <label for="res191">Takuya</label><br>
-        <input type="radio" id="res192" name="pregunta19" value="jp">
-        <label for="res192">JP</label><br>
-        <input type="radio" id="res193" name="pregunta19" value="koji">
-        <label for="res193">Koji</label><br>
-        <input type="radio" id="res194" name="pregunta19" value="tommy">
-        <label for="res194">Tommy</label>
-    </form>
+            <form id="pregunta19" style="display:none;">
+                <h4 class="fondo">¿De quíen es hermano Koichi en Digimon Frontier?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res191" name="pregunta19" value="takuya">
+                    <label for="res191">Takuya</label><br>
+                    <input type="radio" id="res192" name="pregunta19" value="jp">
+                    <label for="res192">JP</label><br>
+                    <input type="radio" id="res193" name="pregunta19" value="koji">
+                    <label for="res193">Koji</label><br>
+                    <input type="radio" id="res194" name="pregunta19" value="tommy">
+                    <label for="res194">Tommy</label>
+                </div>
+            </form>
 
-    <form id="pregunta20" style="display:none;">
-        <h2>¿Qué tipo de espiritu digital es Beetlemon?</h2>
-        <input type="radio" id="res201" name="pregunta20" value="bestia">
-        <label for="res201">Bestia</label><br>
-        <input type="radio" id="res202" name="pregunta20" value="fusion">
-        <label for="res202">Fusi&oacute;n</label><br>
-        <input type="radio" id="res203" name="pregunta20" value="antiguo">
-        <label for="res203">Antiguo</label><br>
-        <input type="radio" id="res204" name="pregunta20" value="humano">
-        <label for="res204">Humano</label>
-    </form>
-
-    <p><button id="botonComprobar" onclick="comprobar()">Comprobar</button></p>
-
+            <form id="pregunta20" style="display:none;">
+                <h4 class="fondo">¿Qué tipo de espiritu digital es Beetlemon?</h4>
+                <div class="respuestas">
+                    <input type="radio" id="res201" name="pregunta20" value="bestia">
+                    <label for="res201">Bestia</label><br>
+                    <input type="radio" id="res202" name="pregunta20" value="fusion">
+                    <label for="res202">Fusi&oacute;n</label><br>
+                    <input type="radio" id="res203" name="pregunta20" value="antiguo">
+                    <label for="res203">Antiguo</label><br>
+                    <input type="radio" id="res204" name="pregunta20" value="humano">
+                    <label for="res204">Humano</label>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
