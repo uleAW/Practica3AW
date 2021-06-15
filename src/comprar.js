@@ -1,3 +1,16 @@
+function funciones(){
+    checkSesion();
+    datos();
+}
+
+//Comprueba si la sesion esta activa
+function checkSesion() {
+    if (localStorage.getItem("Cookie_Sesion") == "false") {
+        alert("NECESARIO INICIAR SESION");
+        window.open("./inicioSesion.html", "_self");
+    }
+}
+
 //la variable count es el id de la colección
 function imagenID(count) {
     fetch("/cargarImagen", {
@@ -110,3 +123,29 @@ function table(ID) {
     window.open("./listaCromosComprar.html", "_self");
 
 };
+
+//Inactividad
+function e(q) {
+    document.body.appendChild(document.createTextNode(q));
+    document.body.appendChild(document.createElement("BR"));
+}
+
+function inactividad() {
+    //Solo se excedera el tiempo cuando la sesion cuente como iniciada
+    if (localStorage.getItem("Cookie_Sesion") == "true") {
+        alert("SESION EXPIRADA");
+        localStorage.setItem("Cookie_Sesion", "false");
+        window.open("./inicioSesion.html", "_self");
+        localStorage.removeItem("user");
+    }
+}
+
+var t = null;
+function contadorInactividad() {
+    t = setTimeout("inactividad()", 1800000); //30 min (1800000)
+}
+
+window.onblur = window.onmousemove = function () {
+    if (t) clearTimeout(t);
+    contadorInactividad();
+}
