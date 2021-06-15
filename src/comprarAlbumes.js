@@ -50,24 +50,34 @@ function albumID() {
     }));
 }
 
+function buscarNombres() {
+    return fetch("/coleccionNombre", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }).then(response => response.text().then(function (text) {
+        return text;
+    }));
+}
+
 async function cargarAlbumes() {
     var nombresAlbumes;
     var imgAlbumes;
-    var estadosColeccion;
     var albumIDs;
+    var precioAlbumes;
     imgAlbumes = await buscarImagenes();
     imgAlbumes = imgAlbumes.split(",");
     precioAlbumes = await buscarPrecio();
     precioAlbumes = precioAlbumes.split(",");
     albumIDs = await albumID();
     albumIDs = albumIDs.split(",");
-    //estadosColeccion = await estadoColeccion();
-    //estadosColeccion = estadosColeccion.split(",");
-    var out = ""
+    nombresAlbumes = await buscarNombres();
+    nombresAlbumes = nombresAlbumes.split(",");
     for (var i = 0; i < imgAlbumes.length - 1; i++) {
         var newDiv = document.createElement('div');
         newDiv.id = 'cromo' + i;
-        newDiv.className = 'cromos';
+        newDiv.className = 'album';
         document.getElementById('menu').appendChild(newDiv);
 
         newDiv = document.createElement('img');
@@ -81,18 +91,28 @@ async function cargarAlbumes() {
         newDiv.className = 'divAux';
         document.getElementById('cromo' + i).appendChild(newDiv);
 
-        newDiv = document.createElement('text');
-
-        /*newDiv.id = 'textNombre' + i;
-        newDiv.className = 'textNombre';
-        newDiv.innerHTML = direccion[i + 2];
+        newDiv = document.createElement('b');
+        newDiv.id = 'textNombreNegrita' + i;
+        newDiv.className = 'textNombreNegrita';
+        newDiv.innerHTML = "Nombre:";
         document.getElementById('divAux' + i).appendChild(newDiv);
-        document.getElementById("divAux"+i).insertBefore(document.createTextNode("Nombre: "), newDiv);*/
+
+        newDiv = document.createElement('text');
+        newDiv.id = 'textNombre' + i;
+        newDiv.className = 'textNombre';
+        newDiv.innerHTML = nombresAlbumes[i];
+        document.getElementById('divAux' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('b');
+        newDiv.id = 'textNegritaPrecio' + i;
+        newDiv.className = 'textNegritaPrecio';
+        newDiv.innerHTML = "Precio:";
+        document.getElementById('divAux' + i).appendChild(newDiv);
 
         newDiv = document.createElement('text');
         newDiv.id = 'textPrecio' + i;
         newDiv.className = 'textPrecio';
-        newDiv.innerHTML = "Precio: "+precioAlbumes[i];
+        newDiv.innerHTML = precioAlbumes[i];
         document.getElementById('divAux' + i).appendChild(newDiv);
 
         newDiv = document.createElement('button');
