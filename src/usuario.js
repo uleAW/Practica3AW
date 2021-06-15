@@ -202,23 +202,31 @@ async function cargarAlbumes() {
         newDiv.src = "data:image/png;base64," + imgAlbumes[i];
         document.getElementById('album' + i).appendChild(newDiv);
 
+        newDiv = document.createElement('div');
+        newDiv.id = 'texto' + i;
+        newDiv.className = 'texto';
+        document.getElementById('album' + i).appendChild(newDiv);
+
         newDiv = document.createElement('text');
         newDiv.id = 'text' + i;
         newDiv.className = 'text';
         newDiv.innerHTML = nombresAlbumes[i];
-        document.getElementById('album' + i).appendChild(newDiv);
+        document.getElementById('texto' + i).appendChild(newDiv);
+        document.getElementById("texto"+i).insertBefore(document.createTextNode("Nombre:"), newDiv);
 
         newDiv = document.createElement('text');
         newDiv.id = 'estado' + i;
         newDiv.className = 'estado';
         newDiv.innerHTML = "   " + estadosColeccion[i];
-        document.getElementById('album' + i).appendChild(newDiv);
+        document.getElementById('texto' + i).appendChild(newDiv);
+        document.getElementById("texto"+i).insertBefore(document.createTextNode("Estado:"), newDiv);
 
         newDiv = document.createElement('text');
         newDiv.id = 'numCromos' + i;
         newDiv.className = 'numCromos';
         newDiv.innerHTML = "   " + numCromos[i];
-        document.getElementById('album' + i).appendChild(newDiv);
+        document.getElementById('texto' + i).appendChild(newDiv);
+        document.getElementById("texto"+i).insertBefore(document.createTextNode("Numero de cromos:"), newDiv);
     }
 }
 
