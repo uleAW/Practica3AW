@@ -1,4 +1,4 @@
-function funciones(){
+function funciones() {
     checkSesion();
     datos();
 }
@@ -20,8 +20,8 @@ function buscarImagenes() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -32,8 +32,8 @@ function buscarPrecio() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -44,8 +44,8 @@ function albumID() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -56,7 +56,7 @@ function buscarNombres() {
         headers: {
             'Content-Type': 'application/json'
         },
-    }).then(response => response.text().then(function (text) {
+    }).then(response => response.text().then(function(text) {
         return text;
     }));
 }
@@ -91,36 +91,41 @@ async function cargarAlbumes() {
         newDiv.className = 'divAux';
         document.getElementById('cromo' + i).appendChild(newDiv);
 
+        newDiv = document.createElement('div');
+        newDiv.id = 'divAux2' + i;
+        newDiv.className = 'texto';
+        document.getElementById('divAux' + i).appendChild(newDiv);
+
         newDiv = document.createElement('b');
         newDiv.id = 'textNombreNegrita' + i;
         newDiv.className = 'textNombreNegrita';
         newDiv.innerHTML = "Nombre:";
-        document.getElementById('divAux' + i).appendChild(newDiv);
+        document.getElementById('divAux2' + i).appendChild(newDiv);
 
         newDiv = document.createElement('text');
         newDiv.id = 'textNombre' + i;
         newDiv.className = 'textNombre';
         newDiv.innerHTML = nombresAlbumes[i];
-        document.getElementById('divAux' + i).appendChild(newDiv);
+        document.getElementById('divAux2' + i).appendChild(newDiv);
 
         newDiv = document.createElement('b');
         newDiv.id = 'textNegritaPrecio' + i;
         newDiv.className = 'textNegritaPrecio';
         newDiv.innerHTML = "Precio:";
-        document.getElementById('divAux' + i).appendChild(newDiv);
+        document.getElementById('divAux2' + i).appendChild(newDiv);
 
         newDiv = document.createElement('text');
         newDiv.id = 'textPrecio' + i;
         newDiv.className = 'textPrecio';
         newDiv.innerHTML = precioAlbumes[i];
-        document.getElementById('divAux' + i).appendChild(newDiv);
+        document.getElementById('divAux2' + i).appendChild(newDiv);
 
         newDiv = document.createElement('button');
         newDiv.id = 'buttonComprar' + i;
         newDiv.appendChild(document.createTextNode("Comprar"))
         document.getElementById('divAux' + i).appendChild(newDiv);
-        document.getElementById('buttonComprar' + i).onclick = (function (i) {
-            return function () {
+        document.getElementById('buttonComprar' + i).onclick = (function(i) {
+            return function() {
                 comprarAlbum(albumIDs[i], i);
             }
         })(i);
@@ -135,9 +140,6 @@ async function cargarAlbumes() {
         newDiv.className = 'textErrorAlbum';
         newDiv.setAttribute("content", "Comprar");
         document.getElementById('errorAlbum' + i).appendChild(newDiv);
-
-        //out = out + "<p><img src= data:image/png;base64," + imgAlbumes[i] + "> Precio: " + precioAlbumes[i] + "<button onclick=comprarAlbum("+
-        //albumIDs[i] + ")>Comprar albumes </button><div id='errorAlbum" + albumIDs[i] + "'><text id='textErrorAlbum" + albumIDs[i] + "'></text></div></p>";
     }
 }
 
@@ -147,12 +149,12 @@ function comprarAlbum(ID, i) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"usuario": localStorage.getItem("user"), "album": ID})
-    }).then(response => response.text().then(function (text) {
+        body: JSON.stringify({ "usuario": localStorage.getItem("user"), "album": ID })
+    }).then(response => response.text().then(function(text) {
         document.getElementById("textErrorAlbum" + i).innerHTML = text;
-        document.getElementById("errorAlbum" + i).style.display = "block";
-        setTimeout(function () {
-            document.getElementById("errorAlbum" + i).style.display = "none";
+        document.getElementById("errorAlbum" + i).style.visibility = "visible";
+        setTimeout(function() {
+            document.getElementById("errorAlbum" + i).style.visibility = "hidden";
         }, 3000);
     }));
 }
@@ -174,11 +176,12 @@ function inactividad() {
 }
 
 var t = null;
+
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
-window.onblur = window.onmousemove = function () {
+window.onblur = window.onmousemove = function() {
     if (t) clearTimeout(t);
     contadorInactividad();
 }
