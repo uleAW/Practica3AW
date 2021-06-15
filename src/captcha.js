@@ -28,7 +28,23 @@ function validateCaptcha() {
     } else if (validateCaptcha > 0 || recaptcha.length > 6) {
         errCaptcha.innerHTML = "Captcha erroneo";
     } else {
+        var puntos = 50;
         errCaptcha.innerHTML = "Correcto";
+        //Sumo los puntos al usuario
+        if (localStorage.getItem("user") != null) {
+            fetch("/addPuntos", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ "usuario": localStorage.getItem("user"), "puntos": puntos })
+            }).then(response => response.text().then(function(text) {
+                alert("Su balance de puntos es de: +" + puntos)
+            }));
+        } else {
+            //INICIAR SESION y ADD PUNTOS
+            alert("INICIA SESION para ganar puntos")
+        }
     }
 }
 
