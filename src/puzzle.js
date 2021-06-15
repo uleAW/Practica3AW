@@ -8,7 +8,7 @@ var rompecabezas = {
     _arr_pos_r: new Array(),
     _arr_pos_a: new Array(),
 
-    _mostrar: function() {
+    _mostrar: function () {
         rompecabezas._arr_pos_r.length = 0;
         var piezas = rompecabezas._get("piezas").value;
         var tb = document.createElement('table');
@@ -39,7 +39,7 @@ var rompecabezas = {
                 dbp.innerHTML = p;
                 dp.appendChild(dbp);
                 dbp.style.visibility = "hidden";
-                td.onclick = function() {
+                td.onclick = function () {
                     rompecabezas._cambiaBGP(this.id);
                     rompecabezas._compruebaFin();
                 }
@@ -65,7 +65,7 @@ var rompecabezas = {
         }
     },
 
-    _barajar: function() {
+    _barajar: function () {
         var num_alt = null;
         var arr = new Array();
         var resp = "no";
@@ -101,7 +101,7 @@ var rompecabezas = {
         }
     },
 
-    _cambiaBGP: function(id) {
+    _cambiaBGP: function (id) {
         if (select == false) {
             pos_s = rompecabezas._get(id).style.backgroundPosition;
             id_s = id;
@@ -122,7 +122,7 @@ var rompecabezas = {
         }
     },
 
-    _compruebaFin: function() {
+    _compruebaFin: function () {
         var pie = parseInt(rompecabezas._get("piezas").value);
         var fin = false;
         rompecabezas._arr_pos_a.length = 0;
@@ -138,7 +138,7 @@ var rompecabezas = {
             }
         }
 
-        setTimeout(function() {
+        setTimeout(function () {
             if (fin) {
                 alert("PASATIEMPO RESUELTO")
                 addPuntos();
@@ -146,26 +146,26 @@ var rompecabezas = {
         }, 600);
     },
 
-    _get: function(id) {
+    _get: function (id) {
         return document.getElementById(id);
     }
 };
 
 
-window.onload = function() {
+window.onload = function () {
     rompecabezas._mostrar();
     rompecabezas._barajar();
-    rompecabezas._get("piezas").onchange = function() {
+    rompecabezas._get("piezas").onchange = function () {
         rompecabezas._mostrar();
     }
-    rompecabezas._get("barajar").onclick = function() {
+    rompecabezas._get("barajar").onclick = function () {
         rompecabezas._barajar();
     }
 }
 
-function addPuntos(){
+function addPuntos() {
     var puntos = 0;
-    switch (casillas){
+    switch (casillas) {
         case 4:
             puntos = 80;
             break;
@@ -187,17 +187,17 @@ function addPuntos(){
         default:
             puntos = 200;
     }
-    if(localStorage.getItem("user") != null){
+    if (localStorage.getItem("user") != null) {
         fetch("/addPuntos", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"usuario": localStorage.getItem("user"), "puntos": puntos})
-    }).then(response => response.text().then(function (text) {
-        alert("Su balance de puntos es de: +"+puntos)
-    }));
-    }else{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"usuario": localStorage.getItem("user"), "puntos": puntos})
+        }).then(response => response.text().then(function (text) {
+            alert("Su balance de puntos es de: +" + puntos)
+        }));
+    } else {
         alert("INICIA SESION para ganar puntos")
     }
 }

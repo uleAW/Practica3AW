@@ -28,7 +28,6 @@ function inactividad() {
 }
 
 var t = null;
-
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
@@ -51,10 +50,6 @@ function mostrarPuntos() {
     }));
 }
 
-function abrirPagCromo() {
-    window.open("./cromo.html", "_self");
-}
-
 //Cerrar Sesion
 function cerrarSesion() {
     localStorage.removeItem("user");
@@ -65,29 +60,29 @@ function cerrarSesion() {
 }
 
 function coleccionNombre() {
-
-            fetch("/coleccionNombre", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-            }
+    fetch("/coleccionNombre", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        }
         //body: JSON.stringify({"numColeccion": count})
-            }).then(response => response.text().then(function(text){
+    }).then(response => response.text().then(function (text) {
 
-                localStorage.setItem("coleccionNombre", text);
-        
-            }));
-        };
+        localStorage.setItem("coleccionNombre", text);
+
+    }));
+};
+
 function coleccionID() {
     fetch("/coleccionID", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
-            }
+        }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function(text){
+    }).then(response => response.text().then(function (text) {
 
-            localStorage.setItem("coleccionID", text);
+        localStorage.setItem("coleccionID", text);
     }));
 };
 
@@ -129,9 +124,8 @@ function volver() {
 function table() {
     coleccionID()
     coleccionNombre()
-        window.open("./comprar.html", "_self");    
-}    
-
+    window.open("./comprar.html", "_self");
+}
 
 function buscarImagenes() {
     return fetch("/albumesUsuario", {
@@ -206,14 +200,16 @@ async function cargarAlbumes() {
         newDiv = document.createElement('text');
         newDiv.id = 'estado' + i;
         newDiv.className = 'estado';
-        newDiv.innerHTML = "   " +estadosColeccion[i];
+        newDiv.innerHTML = "   " + estadosColeccion[i];
         document.getElementById('album' + i).appendChild(newDiv);
     }
 }
-function mostrarAlbumes(){
+
+function mostrarAlbumes() {
     window.open("./comprarAlbumes.html", "_self");
 }
+
 //Boton atras
-window.onbeforeunload = function(e) {
+window.onbeforeunload = function (e) {
     localStorage.setItem("back", "true");
 };

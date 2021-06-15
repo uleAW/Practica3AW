@@ -1,23 +1,13 @@
-function funciones() {
-    checkSesion();
-}
-
 function checkSesion() {
     //Impide que un usuario normal entre a esta pagina
-    if(localStorage.getItem("admin") != null){
+    if (localStorage.getItem("admin") != null) {
         if (localStorage.getItem("Cookie_Sesion") == "false") {
             alert("NECESARIO INICIAR SESION");
             window.open("./inicioSesion.html", "_self");
         }
-    }else{
-         window.open("/index.html", "_self");
+    } else {
+        window.open("/index.html", "_self");
     }
-}
-
-//Inactividad
-function e(q) {
-    document.body.appendChild(document.createTextNode(q));
-    document.body.appendChild(document.createElement("BR"));
 }
 
 function inactividad() {
@@ -120,7 +110,7 @@ function activarColeccion() {
 }
 
 //Boton atras
-window.onbeforeunload = function(e) {
+window.onbeforeunload = function (e) {
     localStorage.setItem("back", "true");
 };
 

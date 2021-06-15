@@ -1,7 +1,6 @@
-
 //la variable count es el id de la colección
 function imagenID(count) {
-	var aux;
+    var aux;
     //alert(count);
     fetch("/cargarImagen", {
         method: "POST",
@@ -10,7 +9,7 @@ function imagenID(count) {
         },
         body: JSON.stringify({"numColeccion": count})
     }).then(response => {
-        
+
     })
     fetch("/imagenID", {
         method: "GET",
@@ -18,27 +17,27 @@ function imagenID(count) {
             'Content-Type': 'application/json'
         },
         //body: JSON.stringify({"numColeccion": "1"})
-    }).then(response => response.text().then(function(text){
-        
-            // Mostrar pagina del 
-            localStorage.setItem("imagenID", text);
-            //Nombre = text;
+    }).then(response => response.text().then(function (text) {
 
-        
+        // Mostrar pagina del
+        localStorage.setItem("imagenID", text);
+        //Nombre = text;
+
+
     }));
 
 };
 
 function imagenDireccion(count) {
 
-	fetch("/cargarImagen", {
+    fetch("/cargarImagen", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({"numColeccion": count})
     }).then(response => {
-        
+
     })
     fetch("/imagenDireccion", {
         method: "GET",
@@ -46,15 +45,16 @@ function imagenDireccion(count) {
             'Content-Type': 'application/json'
         },
         //body: JSON.stringify({"numColeccion": "1"})
-    }).then(response => response.text().then(function(text){
-        
-            // Mostrar pagina del usuario
-            console.log("Direccion"+count);
-            localStorage.setItem("Direccion"+count, text);
-            //text;
-        
+    }).then(response => response.text().then(function (text) {
+
+        // Mostrar pagina del usuario
+        console.log("Direccion" + count);
+        localStorage.setItem("Direccion" + count, text);
+        //text;
+
     }));
 };
+
 function coleccionNombre() {
 
     fetch("/coleccionNombre", {
@@ -63,14 +63,14 @@ function coleccionNombre() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function(text){
-        
-            	localStorage.setItem("coleccionNombre", text);
+    }).then(response => response.text().then(function (text) {
+
+        localStorage.setItem("coleccionNombre", text);
 
 
-        
     }));
 };
+
 function coleccionID() {
 
     fetch("/coleccionID", {
@@ -79,74 +79,75 @@ function coleccionID() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function(text){
-        
-            	localStorage.setItem("coleccionID", text);
+    }).then(response => response.text().then(function (text) {
 
-        
+        localStorage.setItem("coleccionID", text);
+
+
     }));
 };
-var IDColeccion;
-var nombreColeccion;
-function datos(){
-	//coleccionID();
-	//coleccionNombre();
+
+function datos() {
     colecciones1();
 }
-function colecciones1(){
 
-	//coleccionID();
-	//coleccionNombre();
-	
-	//var =localStorage.getItem("coleccionNombre");
-	var nombreColeccion=localStorage.getItem("coleccionNombre");
-	var nombresColecciones = nombreColeccion.split(",");
-	
-    var IDColeccion=localStorage.getItem("coleccionID");
-	var IDColecciones = IDColeccion.split(",");
-	console.log(IDColeccion);
-    tabla="";
-	//tabla="<div class=menu>";
-	for(var i=0; i<nombresColecciones.length-1; i++){
-            var newDiv = document.createElement('div');
-            newDiv.id='pasatiempo'+i;
-            newDiv.className='pasatiempo';
-            newDiv.onclick=(function(i){return function() { table(i); }})(i);
-            document.getElementById('menu').appendChild(newDiv);
-            //document.getElementById('pasatiempo'+i).onclick=function() { table(IDColecciones[i]); };;
-                
-            newDiv = document.createElement('div');
-            newDiv.id='banner'+i;
-            newDiv.className='banner';
-            document.getElementById('pasatiempo'+i).appendChild(newDiv);
+function colecciones1() {
 
-            newDiv = document.createElement('div');
-            newDiv.id='info'+i;
-            newDiv.className='info';
-            newDiv.innerHTML='VER CROMOS';
-            document.getElementById('pasatiempo'+i).appendChild(newDiv);
+    //coleccionID();
+    //coleccionNombre();
 
-            newDiv = document.createElement('div');
-            newDiv.id='nombre'+i;
-            newDiv.className='nombre';
-            newDiv.innerHTML=nombresColecciones[i];
-            document.getElementById('banner'+i).appendChild(newDiv);
-        }
+    //var =localStorage.getItem("coleccionNombre");
+    var nombreColeccion = localStorage.getItem("coleccionNombre");
+    var nombresColecciones = nombreColeccion.split(",");
 
-
-};
-var boolean=true;
-var count=0;
-function table(ID){
-    imagenID(ID);
-	//imagenNombre(ID);//el 1 marca el id de de la coleccion.
-    //imagenDireccion(ID);
-    count=count+1;
-	console.log(ID);
-    var IDColeccion=localStorage.getItem("coleccionID");
+    var IDColeccion = localStorage.getItem("coleccionID");
     var IDColecciones = IDColeccion.split(",");
-    
+    console.log(IDColeccion);
+    tabla = "";
+    //tabla="<div class=menu>";
+    for (var i = 0; i < nombresColecciones.length - 1; i++) {
+        var newDiv = document.createElement('div');
+        newDiv.id = 'pasatiempo' + i;
+        newDiv.className = 'pasatiempo';
+        newDiv.onclick = (function (i) {
+            return function () {
+                table(i);
+            }
+        })(i);
+        document.getElementById('menu').appendChild(newDiv);
+        //document.getElementById('pasatiempo'+i).onclick=function() { table(IDColecciones[i]); };;
+
+        newDiv = document.createElement('div');
+        newDiv.id = 'banner' + i;
+        newDiv.className = 'banner';
+        document.getElementById('pasatiempo' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('div');
+        newDiv.id = 'info' + i;
+        newDiv.className = 'info';
+        newDiv.innerHTML = 'VER CROMOS';
+        document.getElementById('pasatiempo' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('div');
+        newDiv.id = 'nombre' + i;
+        newDiv.className = 'nombre';
+        newDiv.innerHTML = nombresColecciones[i];
+        document.getElementById('banner' + i).appendChild(newDiv);
+    }
+};
+
+var count = 0;
+
+function table(ID) {
+    imagenID(ID);
+    //imagenNombre(ID);//el 1 marca el id de de la coleccion.
+    //imagenDireccion(ID);
+    count = count + 1;
+    console.log(ID);
+    var IDColeccion = localStorage.getItem("coleccionID");
+    var IDColecciones = IDColeccion.split(",");
+
     localStorage.setItem("coleccion", IDColecciones[ID]);
     window.open("./listaCromosComprar.html", "_self");
-    
+
 };

@@ -1,15 +1,4 @@
 function imagenID(count) {
-    var aux;
-    //alert(count);
-    /*fetch("/cargarImagen", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"numColeccion": count})
-    }).then(response => {
-        
-    });*/
     fetch("/IDimagen", {
         method: "POST",
         headers: {
@@ -21,14 +10,11 @@ function imagenID(count) {
         // Mostrar pagina del
         localStorage.setItem("imagenID", text);
         //Nombre = text;
-
-
     }));
 
 };
 
 function table() {
-
     var ID = localStorage.getItem("coleccion");
     imagenID(ID);
     fetch("/cargarImagen", {
@@ -45,7 +31,6 @@ function table() {
         headers: {
             'Content-Type': 'application/json'
         },
-        //body: JSON.stringify({"numColeccion": "1"})
     }).then(response => response.text().then(function (text) {
         var direccion = text.split(",");
         //var imgIDs = imgID.split(",");
@@ -121,8 +106,4 @@ function comprarCromo(id) {
             console.log("Error al comprar el cromo")
         }
     }));
-}
-
-function colecciones1() {
-    window.open("./comprar.html", "_self");
 }
