@@ -23,13 +23,22 @@
 <body onload="funciones()">
     <div class="trivial">
         <div class="info">
-            <h2>Sabes más de lo que piensas</h2>
-            <div class="descripcion">
-                ¿Lo sabes todo acerca del mundo digital? <br><br> ¡Responde nuestras mejores preguntas digitales y se el nuevo niño elegido!
+            <div class="vertical-menu">
+                <ul class="vertical-menu-top">
+                    <h2>¡Trivializate!</h2>
+                    <li>
+                        <div class="descripcion">
+                            ¿Lo sabes todo acerca del mundo digital? <br><br> ¡Responde nuestras mejores preguntas digitales y se el nuevo niño elegido!
+                        </div>
+                    </li>
+                    <h3>¡¡1,2,3 responde otra vez!!</h3>
+                </ul>
+                <ul class="vertical-menu-bottom">
+                    <li>
+                        <button id="botonComprobar" onclick="comprobar()">Comprobar</button>
+                    </li>
+                </ul>
             </div>
-            <h3>¡¡1,2,3 responde otra vez!!</h3>
-            <br>
-            <button id="botonComprobar" onclick="comprobar()">Comprobar</button>
         </div>
         <div class="preguntas">
             <form id="pregunta1" style="display:none;">

@@ -23,23 +23,34 @@
     <body>
         <div class="puzzle">
             <div class="info">
-                <h2>¡DigiPuzzles! </h2>
-                <div class="descripcion">
-                    Elige el número de piezas del puzzle y barájalas. <br><br> Selecciona un cuadro del puzzle, después selecciona el cuadro por el que lo quieres intercambiar y...
+                <div class="vertical-menu">
+                    <ul class="vertical-menu-top">
+                        <h2>¡DigiPuzzles! </h2>
+                        <li>
+                            <div class="descripcion">
+                                Elige el número de piezas del puzzle y barájalas. <br><br> Selecciona un cuadro del puzzle, después selecciona el cuadro por el que lo quieres intercambiar y...
+                            </div>
+                        </li>
+                        <h3>¡¡A JUGAR!!</h3>
+                    </ul>
+                    <ul class="vertical-menu-bottom">
+                        <li>
+                            <h4>Número de piezas
+                                <select class="numeroPiezas" id='piezas'>
+                                <option value='4'>4</option>
+                                <option value='9'>9</option>
+                                <option value='16'>16</option>
+                                <option value='25'>25</option>
+                                <option value='36'>36</option>
+                                <option value='100'>100</option>
+                            </select>
+                            </h4>
+                        </li>
+                        <li>
+                            <button id='barajar' value='Barajar'>Barajar</button>
+                        </li>
+                    </ul>
                 </div>
-                <h3>¡¡A JUGAR!!</h3>
-                <h4>Número de piezas
-                    <select class="numeroPiezas" id='piezas'>
-                    <option value='4'>4</option>
-                    <option value='9'>9</option>
-                    <option value='16'>16</option>
-                    <option value='25'>25</option>
-                    <option value='36'>36</option>
-                    <option value='100'>100</option>
-                </select>
-                </h4>
-                <br>
-                <button id='barajar' value='Barajar'>Barajar</button>
             </div>
             <div class="rompecabezas" id="rompecabezas">
             </div>
