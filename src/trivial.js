@@ -1,3 +1,33 @@
+function funciones(){
+    cargaRandom();
+    desmarcar();
+}
+
+function desmarcar(){
+    
+    //Borro todos las preguntas con 4 opciones
+    for (var i = 1; i <= 20; i++) {
+        for (var j = 1; j <= 4; j++) {
+            if( i != 8 && i != 15){
+                document.getElementById("res"+i+j).checked = false;
+            }
+        }
+    }
+    document.getElementById("res45").checked = false;
+    document.getElementById("res165").checked = false;
+
+    //Pregunta 8
+    for (var i = 1; i <= 3; i++) {
+        document.getElementById("res8"+i).checked = false;
+    }
+
+    //Pregunta 14
+    for (var i = 1; i <= 2; i++) {
+        document.getElementById("res15"+i).checked = false;
+    }
+
+}
+
 //Carga aleatoria de 4 preguntas en el crucigrama
 function cargaRandom() {
     
