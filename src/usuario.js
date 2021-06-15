@@ -119,18 +119,12 @@ function cromoImagen() {
 var text;
 
 async function datos() {
-    //localStorage.clear();
-    //coleccionID();
-    //cromoID();
     text = await cromoImagen();
-    //coleccionNombre();
 }
 
 function volver() {
     window.open("./usuario.html", "_self");
 }
-
-var boolean = true;
 
 function table() {
     coleccionID()

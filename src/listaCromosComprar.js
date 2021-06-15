@@ -77,7 +77,7 @@ function table() {
             newDiv.id = 'buttonComprar' + i;
             newDiv.appendChild(document.createTextNode("Comprar"))
             document.getElementById('cromo' + i).appendChild(newDiv);
-            document.getElementById('cromo' + i).onclick = (function (i) {
+            document.getElementById('buttonComprar' + i).onclick = (function (i) {
                 return function () {
                     comprarCromo(i);
                 }

@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "pass",
-    port: 3006,
+    password: "aaaa",
+    port: 3306,
     database: "kiosko"
 })
 
@@ -85,7 +85,7 @@ app.post("/albumesUsuario1", function (req, res) {
             if (err) throw err;
             var out = "";
             for (let item of result) {
-                var bitmap = fs.readFileSync(item.imagen);
+                var bitmap = fs.readFileSync(__dirname + item.imagen);
                 var data = Buffer(bitmap).toString('base64');
                 out = out + data + ",";
             }
@@ -131,7 +131,7 @@ app.post('/registrar', function (req, res) {
 app.post('/aniadirColeccion', function (req, res) {
     var values = [];
     var data = req.body
-    var ruta = __dirname + "/media/albumes/" + data["nombre"] + ".png"
+    var ruta = "/media/albumes/" + data["nombre"] + ".png"
     var values2 = [];
     values.push([data["nombre"]]);
     var buffer = new Buffer(data["imagen"], 'base64');
@@ -143,7 +143,7 @@ app.post('/aniadirColeccion', function (req, res) {
             con.query("INSERT INTO albumes (imagen, precio, idColeccion) VALUES ?", [values2], function (err, result, fields) {
                 try {
                     if (err) throw err;
-                    fs.writeFile(ruta, buffer, function (err) {
+                    fs.writeFile(__dirname + ruta, buffer, function (err) {
                         try {
                             if (err) throw err;
                         } catch (err) {
@@ -169,7 +169,6 @@ app.post('/aniadirColeccion', function (req, res) {
 var coleccionID;
 app.post('/cargarImagen', function (req, res) {
     coleccionID = req.body.numColeccion;//
-    //console.log(coleccionID);
     res.end();
 });
 
@@ -180,13 +179,13 @@ app.get('/imagenNombre', function (req, res) {
         var out = "";
         for (let item of result) {
             out = out + item.nombre + ",";
-        }
-        ;
+        };
         res.status(200).send(out);
     });
 
 
 });
+
 app.get('/imagenID', function (req, res) {
     var data = req.body
     //console.log(data["numColeccion"]);
@@ -200,6 +199,7 @@ app.get('/imagenID', function (req, res) {
         res.status(200).send(out);
     });
 });
+
 app.post('/IDimagen', function (req, res) {
     var data = req.body
     //console.log(data["numColeccion"]);
@@ -233,7 +233,7 @@ app.post('/coleccionCromosImagenes', function (req, res) {
     con.query("SELECT imagen FROM cromos", function (err, result, fields) {
         var out = "";
         for (let item of result) {
-            var bitmap = fs.readFileSync(item.imagen);
+            var bitmap = fs.readFileSync(__dirname + item.imagen);
             var data = Buffer(bitmap).toString('base64');
             out = out + data + ",";
         }
@@ -247,7 +247,7 @@ app.get('/imagenDireccion', function (req, res) {
     con.query("SELECT imagen, precio, nombre FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
         var out = "";
         for (let item of result) {
-            var bitmap = fs.readFileSync(item.imagen);
+            var bitmap = fs.readFileSync(__dirname + item.imagen);
             var data = Buffer(bitmap).toString('base64');
             out = out + data + ",";
             out = out + item.precio + ",";
@@ -326,11 +326,11 @@ app.post('/aniadirCromo', function (req, res) {
 
     con.query("SELECT numColeccion FROM colecciones WHERE nombre= ?", [data["coleccion"]], function (err, result, fields) {
         try {
-            var ruta = __dirname + "/media/colecciones/" + data["coleccion"] + "/" + data["coleccion"] + "_" + data["nombre"] + ".png"
+            var ruta = "/media/colecciones/" + data["coleccion"] + "/" + data["coleccion"] + "_" + data["nombre"] + ".png"
             values.push([data["nombre"], ruta, data["precio"], result[0].numColeccion]);
             var buffer = new Buffer(data["imagen"], 'base64');
 
-            fs.writeFile(ruta, buffer, function (err) {
+            fs.writeFile(__dirname + ruta, buffer, function (err) {
                 if (err) throw err;
             });
             con.query("INSERT INTO cromos (nombre, imagen, precio, numColeccion) VALUES ?", [values], function (err, result, fields) {
@@ -547,7 +547,7 @@ app.post('/cargarInfoCromo', function (req, res) {
         try {
             if (err) throw err;
             var out = "";
-            var bitmap = fs.readFileSync(result[0].imagen);
+            var bitmap = fs.readFileSync(__dirname + result[0].imagen);
             var data = Buffer(bitmap).toString('base64');
             out = out + result[0].nombre + ",";
             out = out + data + ",";
@@ -583,7 +583,7 @@ app.post("/albumesUsuario", function (req, res) {
             if (err) throw err;
             var out = "";
             for (let item of result) {
-                var bitmap = fs.readFileSync(item.imagen);
+                var bitmap = fs.readFileSync(__dirname + item.imagen);
                 var data = Buffer(bitmap).toString('base64');
                 out = out + data + ",";
             }
@@ -641,7 +641,7 @@ app.post("/imagenCromosUsuario", function (req, res) {
                     if (err) throw err;
                     var out = "";
                     for (let item of result) {
-                        var bitmap = fs.readFileSync(item.imagen);
+                        var bitmap = fs.readFileSync(__dirname + item.imagen);
                         var data = Buffer(bitmap).toString('base64');
                         out = out + data + ",";
                     }
