@@ -207,26 +207,41 @@ async function cargarAlbumes() {
         newDiv.className = 'texto';
         document.getElementById('album' + i).appendChild(newDiv);
 
+        newDiv = document.createElement('b');
+        newDiv.id = 'bold1' + i;
+        newDiv.className = 'bold';
+        newDiv.innerHTML = "Nombre:";
+        document.getElementById('texto' + i).appendChild(newDiv);
+
         newDiv = document.createElement('text');
         newDiv.id = 'text' + i;
         newDiv.className = 'text';
         newDiv.innerHTML = nombresAlbumes[i];
         document.getElementById('texto' + i).appendChild(newDiv);
-        document.getElementById("texto"+i).insertBefore(document.createTextNode("Nombre:"), newDiv);
+
+        newDiv = document.createElement('b');
+        newDiv.id = 'bold2' + i;
+        newDiv.className = 'bold';
+        newDiv.innerHTML = "Estado:";
+        document.getElementById('texto' + i).appendChild(newDiv);
 
         newDiv = document.createElement('text');
         newDiv.id = 'estado' + i;
         newDiv.className = 'estado';
-        newDiv.innerHTML = "   " + estadosColeccion[i];
+        newDiv.innerHTML = estadosColeccion[i];
         document.getElementById('texto' + i).appendChild(newDiv);
-        document.getElementById("texto"+i).insertBefore(document.createTextNode("Estado:"), newDiv);
+
+        newDiv = document.createElement('b');
+        newDiv.id = 'bold3' + i;
+        newDiv.className = 'bold';
+        newDiv.innerHTML = "Número de cromos:";
+        document.getElementById('texto' + i).appendChild(newDiv);
 
         newDiv = document.createElement('text');
         newDiv.id = 'numCromos' + i;
         newDiv.className = 'numCromos';
-        newDiv.innerHTML = "   " + numCromos[i];
+        newDiv.innerHTML = numCromos[i];
         document.getElementById('texto' + i).appendChild(newDiv);
-        document.getElementById("texto"+i).insertBefore(document.createTextNode("Numero de cromos:"), newDiv);
     }
 }
 
