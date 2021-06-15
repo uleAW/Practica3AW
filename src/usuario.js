@@ -39,6 +39,7 @@ window.onblur = window.onmousemove = function () {
 
 function mostrarPuntos() {
     var usuario = localStorage.getItem("user");
+    document.getElementById("nombreUsuario").innerHTML = localStorage.getItem("user")
     fetch("/cargarPuntos", {
         method: "POST",
         headers: {

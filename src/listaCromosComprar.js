@@ -43,22 +43,29 @@ function table() {
             newDiv.src = "data:image/png;base64," + direccion[i];
             document.getElementById('cromo' + i).appendChild(newDiv);
 
+            newDiv = document.createElement('div');
+            newDiv.id = 'divAux' + i;
+            newDiv.className = 'divAux';
+            document.getElementById('cromo' + i).appendChild(newDiv);
+
             newDiv = document.createElement('text');
+
             newDiv.id = 'textNombre' + i;
             newDiv.className = 'textNombre';
             newDiv.innerHTML = direccion[i + 2];
-            document.getElementById('cromo' + i).appendChild(newDiv);
+            document.getElementById('divAux' + i).appendChild(newDiv);
+            document.getElementById("divAux"+i).insertBefore(document.createTextNode("Nombre: "), newDiv);
 
             newDiv = document.createElement('text');
             newDiv.id = 'textPrecio' + i;
             newDiv.className = 'textPrecio';
-            newDiv.innerHTML = direccion[i + 1];
-            document.getElementById('cromo' + i).appendChild(newDiv);
+            newDiv.innerHTML = "Precio: "+direccion[i + 1];
+            document.getElementById('divAux' + i).appendChild(newDiv);
 
             newDiv = document.createElement('button');
             newDiv.id = 'buttonComprar' + i;
             newDiv.appendChild(document.createTextNode("Comprar"))
-            document.getElementById('cromo' + i).appendChild(newDiv);
+            document.getElementById('divAux' + i).appendChild(newDiv);
             document.getElementById('buttonComprar' + i).onclick = (function (i) {
                 return function () {
                     comprarCromo(i);

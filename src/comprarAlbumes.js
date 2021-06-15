@@ -53,30 +53,63 @@ async function cargarAlbumes() {
     //estadosColeccion = estadosColeccion.split(",");
     var out = ""
     for (var i = 0; i < imgAlbumes.length - 1; i++) {
-        /*var newDiv = document.createElement('div');
-        newDiv.id = 'album' + i;
-        newDiv.className = 'album';
+        var newDiv = document.createElement('div');
+        newDiv.id = 'cromo' + i;
+        newDiv.className = 'cromos';
         document.getElementById('menu').appendChild(newDiv);
 
         newDiv = document.createElement('img');
         newDiv.id = 'img' + i;
         newDiv.className = 'image';
         newDiv.src = "data:image/png;base64," + imgAlbumes[i];
-        document.getElementById('album' + i).appendChild(newDiv);*/
+        document.getElementById('cromo' + i).appendChild(newDiv);
 
-        /*newDiv = document.createElement('text');
-        newDiv.id = 'text' + i;
-        newDiv.className = 'text';
-        newDiv.innerHTML = nombresAlbumes[i];
-        document.getElementById('album' + i).appendChild(newDiv);*/
-        out = out + "<p><img src= data:image/png;base64," + imgAlbumes[i] + "> Precio: " + precioAlbumes[i] + "<button onclick=comprarAlbum("+
-        albumIDs[i] + ")>Comprar albumes </button><div id='errorAlbum" + albumIDs[i] + "'><text id='textErrorAlbum" + albumIDs[i] + "'></text></div></p>";
+        newDiv = document.createElement('div');
+        newDiv.id = 'divAux' + i;
+        newDiv.className = 'divAux';
+        document.getElementById('cromo' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('text');
+
+        /*newDiv.id = 'textNombre' + i;
+        newDiv.className = 'textNombre';
+        newDiv.innerHTML = direccion[i + 2];
+        document.getElementById('divAux' + i).appendChild(newDiv);
+        document.getElementById("divAux"+i).insertBefore(document.createTextNode("Nombre: "), newDiv);*/
+
+        newDiv = document.createElement('text');
+        newDiv.id = 'textPrecio' + i;
+        newDiv.className = 'textPrecio';
+        newDiv.innerHTML = "Precio: "+precioAlbumes[i];
+        document.getElementById('divAux' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('button');
+        newDiv.id = 'buttonComprar' + i;
+        newDiv.appendChild(document.createTextNode("Comprar"))
+        document.getElementById('divAux' + i).appendChild(newDiv);
+        document.getElementById('buttonComprar' + i).onclick = (function (i) {
+            return function () {
+                comprarAlbum(albumIDs[i], i);
+            }
+        })(i);
+
+        newDiv = document.createElement('div');
+        newDiv.id = 'errorAlbum' + i;
+        newDiv.className = 'errorAlbum';
+        document.getElementById('cromo' + i).appendChild(newDiv);
+
+        newDiv = document.createElement('text');
+        newDiv.id = 'textErrorAlbum' + i;
+        newDiv.className = 'textErrorAlbum';
+        newDiv.setAttribute("content", "Comprar");
+        document.getElementById('errorAlbum' + i).appendChild(newDiv);
+
+        //out = out + "<p><img src= data:image/png;base64," + imgAlbumes[i] + "> Precio: " + precioAlbumes[i] + "<button onclick=comprarAlbum("+
+        //albumIDs[i] + ")>Comprar albumes </button><div id='errorAlbum" + albumIDs[i] + "'><text id='textErrorAlbum" + albumIDs[i] + "'></text></div></p>";
     }
-    document.write(out);
 }
 
-function comprarAlbum(ID) {
-    console.log(localStorage.getItem("user"))
+function comprarAlbum(ID, i) {
     fetch("/comprarAlbum", {
         method: "POST",
         headers: {
@@ -84,10 +117,10 @@ function comprarAlbum(ID) {
         },
         body: JSON.stringify({"usuario": localStorage.getItem("user"), "album": ID})
     }).then(response => response.text().then(function (text) {
-        document.getElementById("textErrorAlbum" + ID).innerHTML = text;
-        document.getElementById("errorAlbum" + ID).style.display = "block";
+        document.getElementById("textErrorAlbum" + i).innerHTML = text;
+        document.getElementById("errorAlbum" + i).style.display = "block";
         setTimeout(function () {
-            document.getElementById("errorAlbum" + ID).style.display = "none";
+            document.getElementById("errorAlbum" + i).style.display = "none";
         }, 3000);
     }));
 }
