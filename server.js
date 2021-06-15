@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
-    port: 3306,
+    password: "aaaa",
+    port: 3006,
     database: "kiosko"
 })
 
@@ -62,8 +62,8 @@ app.post('/inicioSesion', function (req, res) {
         }
     });
 });
+
 app.post("/albumID", function (req, res) {
-    var data = req.body;
     con.query("SELECT idAlbum FROM albumes WHERE idColeccion IN (SELECT numColeccion FROM colecciones WHERE estado <> 'inactiva')", function (err, result, fields) {
         try {
             if (err) throw err;
@@ -78,8 +78,8 @@ app.post("/albumID", function (req, res) {
         }
     });
 });
+
 app.post("/albumesUsuario1", function (req, res) {
-    var data = req.body;
     con.query("SELECT imagen FROM albumes WHERE idColeccion IN (SELECT numColeccion FROM colecciones WHERE estado <> 'inactiva')", function (err, result, fields) {
         try {
             if (err) throw err;
@@ -96,6 +96,7 @@ app.post("/albumesUsuario1", function (req, res) {
         }
     });
 });
+
 app.post("/albumesPrecio1", function (req, res) {
     var data = req.body;
     con.query("SELECT precio FROM albumes WHERE idColeccion IN (SELECT numColeccion FROM colecciones WHERE estado <> 'inactiva')", function (err, result, fields) {
@@ -112,6 +113,7 @@ app.post("/albumesPrecio1", function (req, res) {
         }
     });
 });
+
 app.post('/registrar', function (req, res) {
     var values = [];
     var data = req.body
@@ -179,7 +181,8 @@ app.get('/imagenNombre', function (req, res) {
         var out = "";
         for (let item of result) {
             out = out + item.nombre + ",";
-        };
+        }
+        ;
         res.status(200).send(out);
     });
 
@@ -237,12 +240,10 @@ app.post('/coleccionCromosImagenes', function (req, res) {
             var data = Buffer(bitmap).toString('base64');
             out = out + data + ",";
         }
-        //console.log(result);
         res.status(200).send(out);
     });
-
-
 });
+
 app.get('/imagenDireccion', function (req, res) {
     con.query("SELECT imagen, precio, nombre FROM cromos WHERE numColeccion = ?", coleccionID, function (err, result, fields) {
         var out = "";
@@ -264,58 +265,47 @@ app.post('/coleccionNombre', function (req, res) {
         for (let item of result) {
             out = out + item.nombre + ",";
         }
-
         res.status(200).send(out);
     });
 });
 
 app.post('/coleccionID', function (req, res) {
-    //var data = req.body
-
     con.query("SELECT numColeccion FROM colecciones", function (err, result, fields) {
         var out = "";
         for (let item of result) {
             out = out + item.numColeccion + ",";
         }
-
         res.status(200).send(out);
     });
 });
-app.post('/albumImg', function (req, res) {
-    //var data = req.body
 
+app.post('/albumImg', function (req, res) {
     con.query("SELECT imagen FROM albumes", function (err, result, fields) {
         var out = "";
         for (let item of result) {
             out = out + item.imagen + ",";
         }
-
         res.status(200).send(out);
     });
 });
-app.post('/albumColeccion', function (req, res) {
-    //var data = req.body
 
+app.post('/albumColeccion', function (req, res) {
     con.query("SELECT idColeccion FROM albumes", function (err, result, fields) {
         var out = "";
         for (let item of result) {
             out = out + item.numColeccion + ",";
         }
-
         res.status(200).send(out);
     });
 });
 
-//SELECT precio, idAlbum FROM albumes WHERE idColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?)
 app.post('/coleccionUsuarioID', function (req, res) {
     var data = req.body
-
     con.query("SELECT codCromos FROM coleccionusuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", data["numUsuario"], function (err, result, fields) {
         var out = ";";
         for (let item of result) {
             out = out + item.codCromos + ";";
         }
-
         res.status(200).send(out);
     });
 });
@@ -323,7 +313,6 @@ app.post('/coleccionUsuarioID', function (req, res) {
 app.post('/aniadirCromo', function (req, res) {
     var values = [];
     var data = req.body
-
     con.query("SELECT numColeccion FROM colecciones WHERE nombre= ?", [data["coleccion"]], function (err, result, fields) {
         try {
             var ruta = "/media/colecciones/" + data["coleccion"] + "/" + data["coleccion"] + "_" + data["nombre"] + ".png"
@@ -342,7 +331,6 @@ app.post('/aniadirCromo', function (req, res) {
             res.status(200).send("ERROR: no hay una coleccion con ese nombre");
         }
     });
-
 });
 
 app.post('/comprarCromo', function (req, res) {
@@ -456,7 +444,7 @@ app.post('/comprarAlbum', function (req, res) {
                                 if (err) throw err;
                                 var idColeccion = result[0].numColeccion
                                 con.query("SELECT * FROM coleccionusuario WHERE numColeccion = ? and numSocio = ?", [idColeccion, numSocio], function (err, result, fields) {
-                                    //Si esta vacia, solo he comprado el album
+                                    //COMPROBAMOS SI YA EXISTE LA COLECCION
                                     if (result.length == 0) {
                                         values.push([idAlbum, "no iniciada", idColeccion, numSocio, '']);
                                         con.query("INSERT INTO coleccionusuario (idAlbum, estado, numColeccion, numSocio, codCromos) VALUES ?", [values], function (err, result, fields) {
@@ -512,7 +500,6 @@ app.post('/comprarAlbum', function (req, res) {
         } catch (err) {
             console.log(err);
         }
-
     });
 });
 
@@ -604,7 +591,6 @@ app.post("/nombreColeccionesUsuario", function (req, res) {
             for (let item of result) {
                 out = out + item.nombre + ",";
             }
-            //console.log(result);
             res.status(200).send(out);
         } catch (err) {
             console.log(err);
@@ -621,14 +607,12 @@ app.post("/estadoColeccionesUsuario", function (req, res) {
             for (let item of result) {
                 out = out + item.estado + ",";
             }
-            //console.log(result);
             res.status(200).send(out);
         } catch (err) {
             console.log(err);
         }
     });
 });
-
 
 app.post("/imagenCromosUsuario", function (req, res) {
     var data = req.body;
@@ -674,6 +658,22 @@ app.post("/nombreCromosUsuario", function (req, res) {
                     console.log(err);
                 }
             });
+        } catch (err) {
+            console.log(err);
+        }
+    });
+});
+
+app.post("/calcularNumCromos", function (req, res) {
+    var data = req.body;
+    con.query("SELECT codCromos FROM coleccionUsuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", [data["nombre"]], function (err, result, fields) {
+        try {
+            if (err) throw err;
+            var out = ""
+            for (let item of result) {
+                out += item.codCromos.split(';').length - 1 + ","
+            }
+            res.status(200).send(out);
         } catch (err) {
             console.log(err);
         }
