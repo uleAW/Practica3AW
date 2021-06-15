@@ -1,0 +1,20 @@
+El despliege de la aplicación es muy sencillo, necesitaremos para el mismo únicamente
+el programa node.js.
+
+Comandos necesarios para poder levantar el servidor:
+sudo apt install nodejs
+sudo apt install npm
+npm install express --save
+
+Antes de nada, tenemos que importar la base de datos (BaseDatosAW.sql) y modificar el archivo server.js lineas 14,15 y 16 con el usuario, contraseña y puerto de
+mysql.
+
+Tras esto, nos posicionamos en el directorio del proyecto y ejecutamos
+el comando node server.js (server.js es el archivo javascript que crea el servidor).
+
+Ahora ya podemos acceder en el navegador a localhost:5050 donde se mostrará el menú de la
+práctica.
+
+Enlace al repositorio: https://github.com/uleAW/Practica3AW
+
+Grupo 3 - Practica 3 AW
