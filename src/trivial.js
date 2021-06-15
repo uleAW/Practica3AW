@@ -1,5 +1,21 @@
-function funciones() {
-
+//Carga aleatoria de 4 preguntas en el crucigrama
+function cargaRandom() {
+    
+    var lista = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+    var val;
+    //Genero los valores de las 4 preguntas que apareceran
+    for (var i = 0; i < 5; i++) {
+        val = Math.round(Math.random() * (lista.length - 1) + 1);
+        if(lista.includes(val)){
+            //Borro el elemento del array para no repetirlo
+            var j = lista.indexOf(val);
+            lista.splice(j, 1);
+            document.getElementById("pregunta"+val).style.display = "block";
+        //Si el ya se ha elegido, repito el proceso hasta que el numero no se haya elegido antes
+        }else{
+            i--;
+        }
+    }
 }
 
 function comprobar() {

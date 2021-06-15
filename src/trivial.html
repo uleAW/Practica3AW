@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <script src="trivial.js"></script>
-<body>
+<meta charset="UTF-8">
+<body onload="cargaRandom()">
 
-    <form id="pregunta1">
+    <form id="pregunta1"  style="display:none;">
         <h2>¿Cu&aacute;l es la digievoluci&oacute;n de Agumon?</h2>
         <input type="radio" id="res11" name="pregunta1" value="greymon">
         <label for="res11">Greymon</label><br>
@@ -15,7 +16,7 @@
         <label for="res14">Kuwagamon</label>
     </form>
 
-    <form id="pregunta2">
+    <form id="pregunta2" style="display:none;">
         <h2>¿Cu&aacute;l es el emblema de Izzy?</h2>
         <input type="radio" id="res21" name="pregunta2" value="valor">
         <label for="res21">Valor</label><br>
@@ -27,7 +28,7 @@
         <label for="res24">Conocimiento</label>
     </form>
 
-    <form id="pregunta3">
+    <form id="pregunta3" style="display:none;">
         <h2>¿Cu&aacute;l fue la &uacute;ltima digievoluci&oacute;n de nivel campe&oacute;n en aparecer en Digimon Adventure?</h2>
         <input type="radio" id="res31" name="pregunta3" value="angemon">
         <label for="res31">Angemon</label><br>
@@ -39,7 +40,7 @@
         <label for="res34">Angewomon</label>
     </form>
 
-    <form id="pregunta4">
+    <form id="pregunta4" style="display:none;">
         <h2>¿Cu&aacute;l de estos Digimons de Digimon Adventure son de nivel megacampe&oacute;n?</h2>
         <input type="checkbox" id="res41" name="pregunta4" value="garudamon">
         <label for="res41">Garudamon</label><br>
@@ -53,7 +54,7 @@
         <label for="res45">MetalGarurumon</label>
     </form>
 
-    <form id="pregunta5">
+    <form id="pregunta5" style="display:none;">
         <h2>¿Qu&eacute; dos Digimons forman a Omnimon?</h2>
         <input type="radio" id="res51" name="pregunta5" value="xveemonstingmon">
         <label for="res51">ExVeemon y Stingmon</label><br>
@@ -65,7 +66,7 @@
         <label for="res54">MetalGreymon y MetalGarurumon</label>
     </form>
 
-    <form id="pregunta6">
+    <form id="pregunta6" style="display:none;">
         <h2>¿Cu&aacute;ntas armodigievoluciones tiene Veemon en la serie de Digimon 02?</h2>
         <input type="radio" id="res61" name="pregunta6" value="una">
         <label for="res61">Una</label><br>
@@ -77,7 +78,7 @@
         <label for="res64">Cuatro</label>
     </form>
 
-    <form id="pregunta7">
+    <form id="pregunta7" style="display:none;">
         <h2>¿Qu&eacute; ni&ntilde;o elegido hereda el emblema de la amistad de Matt en Digimon 02?</h2>
         <input type="radio" id="res71" name="pregunta7" value="davis">
         <label for="res71">Davis</label><br>
@@ -89,7 +90,7 @@
         <label for="res74">Cody</label>
     </form>
 
-    <form id="pregunta8">
+    <form id="pregunta8" style="display:none;">
         <h2>¿Cu&aacute;l es la ADN digievoluci&oacute;n de ExVeemon y Stingmon en Digimon 02?</h2>
         <input type="radio" id="res81" name="pregunta8" value="silphymon">
         <label for="res81">Silphymon</label><br>
@@ -99,7 +100,7 @@
         <label for="res83">Paildramon</label>
     </form>
 
-    <form id="pregunta9">
+    <form id="pregunta9" style="display:none;">
         <h2>¿Cu&aacute;l de estas digievoluciones no es una de Hawkmon?</h2>
         <input type="radio" id="res91" name="pregunta9" value="aquilamon">
         <label for="res91">Aquilamon</label><br>
@@ -111,7 +112,7 @@
         <label for="res94">Halsemon</label>
     </form>
 
-    <form id="pregunta10">
+    <form id="pregunta10" style="display:none;">
         <h2>¿Qui&eacute;n es el compa&ntilde;ero digimon de Cody en la serie de Digimon 02?</h2>
         <input type="radio" id="res101" name="pregunta10" value="patamon">
         <label for="res101">Patamon</label><br>
@@ -123,7 +124,7 @@
         <label for="res104">Wormmon</label>
     </form>
 
-    <form id="pregunta11">
+    <form id="pregunta11" style="display:none;">
         <h2>¿De qu&eacute; color es el D-Power de Henry en Digimon Tamers?</h2>
         <input type="radio" id="res111" name="pregunta11" value="rojo">
         <label for="res111">Rojo</label><br>
@@ -135,7 +136,7 @@
         <label for="res114">Amarillo</label>
     </form>
 
-    <form id="pregunta12">
+    <form id="pregunta12" style="display:none;">
         <h2>¿Con qu&eacute; sobrenombre se le conoc&iacute;a a Rika en Digimon Tamers?</h2>
         <input type="radio" id="res121" name="pregunta12" value="emperatriz">
         <label for="res121">Digimon emperatriz</label><br>
@@ -147,7 +148,7 @@
         <label for="res124">Reina de los Digimon</label>
     </form>
 
-    <form id="pregunta13">
+    <form id="pregunta13" style="display:none;">
         <h2>¿Qu&eacute; tipo de digievoluci&oacute;n aparece solo en Digimon Tamers?</h2>
         <input type="radio" id="res131" name="pregunta13" value="adn">
         <label for="res131">ADN Digievoluci&oacute;n</label><br>
@@ -159,7 +160,7 @@
         <label for="res134">Espiritu Digital Digievoluci&oacute;n</label>
     </form>
 
-    <form id="pregunta14">
+    <form id="pregunta14" style="display:none;">
         <h2>¿Cu&aacute;l de estas no es una digievoluci&oacute;n de Guilmon en Digimon Tamers?</h2>
         <input type="radio" id="res141" name="pregunta14" value="wargrowldmon">
         <label for="res141">WarGrowldmon</label><br>
@@ -171,7 +172,7 @@
         <label for="res144">Gallantmon</label>
     </form>
 
-    <form id="pregunta15">
+    <form id="pregunta15" style="display:none;">
         <h2>¿Leomon muere en Digimon Tamers?</h2>
         <input type="radio" id="res151" name="pregunta15" value="si">
         <label for="res151">Si</label><br>
@@ -179,7 +180,7 @@
         <label for="res152">No</label>
     </form>
 
-    <form id="pregunta16">
+    <form id="pregunta16" style="display:none;">
         <h2>¿Qu&eacute; ni&ntilde;o elegido consigui&oacute; primero su esp&iacute;ritu digital animal en Digimon Frontier?</h2>
         <input type="radio" id="res161" name="pregunta16" value="tommy">
         <label for="res161">Tommy</label><br>
@@ -193,7 +194,7 @@
         <label for="res165">Koji</label>
     </form>
 
-    <form id="pregunta17">
+    <form id="pregunta17" style="display:none;">
         <h2>¿Cu&aacute;l no es un esp&iacute;ritu digital animal en Digimon Frontier?</h2>
         <input type="radio" id="res171" name="pregunta17" value="kazemon">
         <label for="res171">Kazemon</label><br>
@@ -205,7 +206,7 @@
         <label for="res174">Korikakumon</label>
     </form>
 
-    <form id="pregunta18">
+    <form id="pregunta18" style="display:none;">
         <h2>¿De qu&eacute; color es el D-tector de JP en Digimon Frontier?</h2>
         <input type="radio" id="res181" name="pregunta18" value="azulamarillo">
         <label for="res181">Azul y amarillo</label><br>
@@ -217,7 +218,7 @@
         <label for="res184">Verde y amarillo</label>
     </form>
 
-    <form id="pregunta19">
+    <form id="pregunta19" style="display:none;">
         <h2>¿De qu&iacute;en es hermano Koichi en Digimon Frontier?</h2>
         <input type="radio" id="res191" name="pregunta19" value="takuya">
         <label for="res191">Takuya</label><br>
@@ -229,7 +230,7 @@
         <label for="res194">Tommy</label>
     </form>
 
-    <form id="pregunta20">
+    <form id="pregunta20" style="display:none;">
         <h2>¿Qu&eacute; tipo de espiritu digital es Beetlemon?</h2>
         <input type="radio" id="res201" name="pregunta20" value="bestia">
         <label for="res201">Bestia</label><br>
@@ -241,7 +242,7 @@
         <label for="res204">Humano</label>
     </form>
 
-    <button id="botonComprobar" onclick="comprobar()">Comprobar</button>
+    <p><button id="botonComprobar" onclick="comprobar()">Comprobar</button></p>
 
 </body>
 

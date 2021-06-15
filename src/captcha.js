@@ -31,3 +31,29 @@ function validateCaptcha() {
         errCaptcha.innerHTML = "Correcto";
     }
 }
+
+//Inactividad
+function e(q) {
+    document.body.appendChild(document.createTextNode(q));
+    document.body.appendChild(document.createElement("BR"));
+}
+
+//Los pasatiempos no requieren sesiones, pero si esta iniciada, expira igual solo que no le pide que se vuelva a autenticar
+function inactividad() {
+    //Solo se excedera el tiempo cuando la sesion cuente como iniciada
+    if (localStorage.getItem("Cookie_Sesion") == "true") {
+        alert("SESION EXPIRADA");
+        localStorage.setItem("Cookie_Sesion", "false");
+        localStorage.removeItem("user");
+    }
+}
+
+var t = null;
+function contadorInactividad() {
+    t = setTimeout("inactividad()", 1800000); //30 min (1800000)
+}
+
+window.onblur = window.onmousemove = function () {
+    if (t) clearTimeout(t);
+    contadorInactividad();
+}
