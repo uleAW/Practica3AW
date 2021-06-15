@@ -193,6 +193,7 @@ async function cargarAlbumes() {
                 localStorage.setItem("cargarCromosUsuario", nombresAlbumes[i])
                 // window.open("./cromosUsuario.html", "_self");
                 document.getElementById("menu").style.display = "none"
+                document.getElementById("tituloColecciones").style.display = "none"
                 cargarCromos();
             }
         })(i);
@@ -299,6 +300,13 @@ function cargarNombresCromo() {
     }).then(response => response.text().then(function (text) {
         return text;
     }));
+}
+
+function volver() {
+    document.getElementById("menuCromos").style.display = "none";
+    document.getElementById("tituloColeccion").style.display = "none";
+    document.getElementById("menu").style.display = "block"
+    document.getElementById("tituloColecciones").style.display = "block"
 }
 
 function mostrarAlbumes() {
