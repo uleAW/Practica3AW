@@ -19,53 +19,79 @@
 </head>
 
 <body>
+    <div class="container">
 
-    <div class="menu">
-        <div class="pasatiempo" onclick="openPage(1)">
-            <div class="banner">
-                <div class="nombre" id="puzzles">
-                    PUZZLES
-                </div>
+        <!-- BARRA DEL MENU -->
+        <div class="menu-bar">
+            <nav class="navegacion">
+                <ul class="nav-menu-left">
+                    <li>
+                        <a href="#" id="nombreTienda">DigiKiosko</a>
+                    </li>
+                    <li>
+                        <a href="./src/colecciones.html" id="colecciones">Colecciones</a>
+                    </li>
+                    <li>
+                        <a href="./src/pasatiempos.html" id="colecciones">Pasatiempos</a>
+                    </li>
+                </ul>
 
-            </div>
-            <div class="info" id="puzzles">
-                <p>ROMPETE LA CABEZA RESOLVIENDO NUESTROS PUZZLES! <br><br>CONSIGUE DESDE 80 A 1500 PUNTOS CAMBIANDO LAS DIFICULTADES.</p>
-            </div>
+                <ul class="nav-menu-right">
+                    <li>
+                        <a href="./src/inicioSesion.html"><i class="fas fa-user"></i></a>
+                    </li>
+
+                </ul>
+            </nav>
         </div>
-        <div class="pasatiempo" onclick="openPage(2)">
-            <div class="banner">
-                <div class="nombre" id="trivial">
-                    TRIVIAL
-                </div>
+        <div class="menu">
+            <div class="pasatiempo" onclick="openPage(1)">
+                <div class="banner">
+                    <div class="nombre" id="puzzles">
+                        PUZZLES
+                    </div>
 
-            </div>
-            <div class="info">
-                SABES TODO ACERCA DE LOS DIGIMON? RESPONDE PREGUNTAS Y GANA PUNTOS!
-            </div>
-        </div>
-        <div class="pasatiempo" onclick="openPage(3)">
-            <div class="banner">
-                <div class="nombre" id="captcha">
-                    CAPTCHA
                 </div>
+                <div class="info" id="puzzles">
+                    <p>ROMPETE LA CABEZA RESOLVIENDO NUESTROS PUZZLES! <br><br>CONSIGUE DESDE 80 A 1500 PUNTOS CAMBIANDO LAS DIFICULTADES.</p>
+                </div>
+            </div>
+            <div class="pasatiempo" onclick="openPage(2)">
+                <div class="banner">
+                    <div class="nombre" id="trivial">
+                        TRIVIAL
+                    </div>
 
+                </div>
+                <div class="info">
+                    SABES TODO ACERCA DE LOS DIGIMON? RESPONDE PREGUNTAS Y GANA PUNTOS!
+                </div>
             </div>
-            <div class="info">
-                ¿ERES HUMANO?
+            <div class="pasatiempo" onclick="openPage(3)">
+                <div class="banner">
+                    <div class="nombre" id="captcha">
+                        CAPTCHA
+                    </div>
+
+                </div>
+                <div class="info">
+                    ¿ERES HUMANO?
+                </div>
             </div>
-        </div>
-        <script>
-            function openPage(num) {
-                if (num == 1) {
-                    window.open("./puzzle.html", "_self");
-                } else if (num == 2) {
-                    window.open("./trivial.html", "_self");
-                } else {
-                    window.open("./captcha.html", "_self");
+            <script>
+                function openPage(num) {
+                    if (num == 1) {
+                        window.open("./puzzle.html", "_self");
+                    } else if (num == 2) {
+                        window.open("./trivial.html", "_self");
+                    } else {
+                        window.open("./captcha.html", "_self");
+                    }
                 }
-            }
-        </script>
+            </script>
+        </div>
     </div>
+
 </body>
 
 </html>

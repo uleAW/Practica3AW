@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script src="comprarAlbumes.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="./pasatiempos.css">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesión de usuario</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <!-- FUENTE UBUNTU -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <!-- ICONO PESTAÑA -->
+    <link rel="shortcut icon" href="../media/img/icon.ico">
+    <!-- HOJA DE ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./comprarAlbumes.css">
+
+    <script src="comprarAlbumes.js" type="text/javascript"></script>
 </head>
-<body onload="funciones();" id="coleccion">
-	<div class="menu" id="menu">
-            </div>
+
+<body onload="datos();" id="coleccion">
+    <!-- BARRA DEL MENU -->
+    <div class="menu-bar">
+        <nav class="navegacion">
+            <ul class="nav-menu-left">
+                <li>
+                    <a href="#" id="nombreTienda">DigiKiosko</a>
+                </li>
+                <li>
+                    <a href="./src/colecciones.html" id="colecciones">Colecciones</a>
+                </li>
+                <li>
+                    <a href="./src/pasatiempos.html" id="colecciones">Pasatiempos</a>
+                </li>
+            </ul>
+
+            <ul class="nav-menu-right">
+                <li>
+                    <a href="./src/inicioSesion.html"><i class="fas fa-user"></i></a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+    <div class="menu" id="menu">
+    </div>
 </body>
+
 </html>

@@ -6,24 +6,97 @@
 
 body {
     font-family: 'Ubuntu', sans-serif;
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+
+/* NAVEGACION */
+
+#nombreTienda {
+    font-weight: 600;
+    margin-right: 60px;
+}
+
+#nuevo,
+#colecciones {
+    font-weight: 300;
+    font-size: 18px;
+}
+
+#buscador {
+    font-weight: 300;
+    font-size: 14px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    text-shadow: black;
+    z-index: 1200;
+}
+
+ul {
+    list-style: none;
+}
+
+.navegacion {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0px 0;
+    position: relative;
     background-color: #2980B9;
 }
 
+.navegacion ul {
+    display: flex;
+}
+
+.navegacion ul li {
+    padding: 10px;
+}
+
+.navegacion ul li a {
+    padding: 2px;
+}
+
+.navegacion ul.nav-menu-left {
+    color: white;
+    margin-left: 5%;
+}
+
+.navegacion ul.nav-menu-right {
+    margin-right: 5%;
+}
+
 .menu {
-    position: absolute;
+    position: relative;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     /**/
-    margin: auto;
-    height: 90%;
-    width: 90%;
+    margin: 5% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70%;
+    width: 80%;
     display: grid;
     grid-template-columns: repeat(1, 3fr);
     gap: 20px;
     z-index: -5;
-    background-color: #2980B9;
 }
 
 .pasatiempo {

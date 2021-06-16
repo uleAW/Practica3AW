@@ -9,6 +9,70 @@ body {
     font-family: 'Ubuntu', sans-serif;
 }
 
+
+/* NAVEGACION */
+
+#nombreTienda {
+    font-weight: 600;
+    margin-right: 60px;
+}
+
+#nuevo,
+#colecciones {
+    font-weight: 300;
+    font-size: 18px;
+}
+
+#buscador {
+    font-weight: 300;
+    font-size: 14px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    text-shadow: black;
+    z-index: 200;
+}
+
+ul {
+    list-style: none;
+}
+
+.navegacion {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0px 0;
+    position: relative;
+    background-color: #2980B9;
+    color: white;
+}
+
+.navegacion ul {
+    display: flex;
+}
+
+.navegacion ul li {
+    padding: 10px;
+}
+
+.navegacion ul li a {
+    padding: 2px;
+}
+
+.navegacion ul.nav-menu-left {
+    margin-left: 5%;
+}
+
+.navegacion ul.nav-menu-right {
+    margin-right: 5%;
+}
+
 .cuenta {
     position: relative;
     display: flex;
@@ -99,7 +163,7 @@ ul {
     position: relative;
     height: 100%;
     width: 100%;
-    padding-top: 6.4%;
+    padding-top: 5%;
     padding-left: 5%;
 }
 
@@ -150,12 +214,13 @@ button:hover {
 .image {
     height: 400px;
     margin-right: 50px;
+    cursor: pointer;
 }
 
 #menu {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 50px;
+    gap: 0px 50px;
 }
 
 .texto {
@@ -168,10 +233,25 @@ button:hover {
 .album {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 50px;
 }
 
 .text,
 .estado,
 .numCromos {
     padding-bottom: 15px;
+}
+
+#menuCromos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px 50px;
+}
+
+#menuCromos .image {
+    margin-bottom: 10px;
+}
+
+.cromos {
+    margin-bottom: 50px;
 }

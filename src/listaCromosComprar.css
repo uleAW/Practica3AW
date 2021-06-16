@@ -7,11 +7,120 @@
 body {
     position: absoule;
     font-family: 'Ubuntu', sans-serif;
-    padding-top: 50px;
-    padding-bottom: 50px;
     margin: auto;
+}
+
+
+/* NAVEGACION */
+
+#nombreTienda {
+    font-weight: 600;
+    margin-right: 60px;
+}
+
+#nuevo,
+#colecciones {
+    font-weight: 300;
+    font-size: 18px;
+}
+
+#buscador {
+    font-weight: 300;
+    font-size: 14px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    text-shadow: black;
+    z-index: 1200;
+}
+
+ul {
+    list-style: none;
+}
+
+.navegacion {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 0px 0;
+    position: relative;
+    background-color: #2980B9;
+}
+
+.navegacion ul {
+    display: flex;
+}
+
+.navegacion ul li {
+    padding: 10px;
+}
+
+.navegacion ul li a {
+    padding: 2px;
+}
+
+.navegacion ul.nav-menu-left {
+    margin-left: 5%;
+}
+
+.navegacion ul.nav-menu-right {
+    margin-right: 5%;
+}
+
+.container {
+    position: absolute;
     height: 100%;
-    width: 85%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -2000;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.info {
+    text-align: center;
+    background-color: #3d5b9c;
+    color: white;
+    height: 100%;
+    width: 100%;
+    padding: 10% 10%;
+    position: relative;
+}
+
+.vertical-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /**/
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+.vertical-menu ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical-menu ul.vertical-menu-top {
+    margin-top: 15%;
+}
+
+.vertical-menu ul.vertical-menu-bottom {
+    margin-bottom: 15%;
 }
 
 .image {
@@ -20,6 +129,9 @@ body {
 }
 
 #menu {
+    padding-top: 50px;
+    width: 80%;
+    margin: auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0px 50px;
