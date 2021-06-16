@@ -16,11 +16,5 @@ Ahora ya podemos acceder en el navegador a localhost:5050 donde se mostrará el 
 práctica.
 
 Enlace al repositorio: https://github.com/uleAW/Practica3AW
-Usuarios:
-    Administrador:
-        admin -> admin
-    Socios:
-        user1 -> 4321
-        user2 -> g3aw
 
 Grupo 3 - Practica 3 AW
