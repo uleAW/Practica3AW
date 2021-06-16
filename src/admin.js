@@ -1,18 +1,35 @@
+function funciones(){
+    checkSesion();
+}
+
+//Evita cargar la pagina correctamente si se ha excedido la sesion
+function checkSesion() {
+    if (localStorage.getItem("Cookie_Sesion") == "false") {
+        alert("NECESARIO INICIAR SESION");
+        window.open("./inicioSesion.html", "_self");
+    }
+}
+
+//Inactividad
+//Si las sesion expira nos expulsa de la pagina y crea la cookie Cookie_Sesion para impedir volver atras autenticado
 function inactividad() {
     //Solo se excedera el tiempo cuando la sesion cuente como iniciada
     if (localStorage.getItem("Cookie_Sesion") == "true") {
         alert("SESION EXPIRADA");
         localStorage.setItem("Cookie_Sesion", "false");
         window.open("./inicioSesion.html", "_self");
+        localStorage.removeItem("user");
     }
 }
 
 var t = null;
 
+//Se inicializa el contador a 30 minutos (en milisegundos)
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
+//Si se mueve el raton, se resetea el contador
 window.onblur = window.onmousemove = function () {
     if (t) clearTimeout(t);
     contadorInactividad();
@@ -102,7 +119,7 @@ window.onbeforeunload = function (e) {
     localStorage.setItem("back", "true");
 };
 
-//Cerrar Sesion
+//Cerrar Sesion (devuelve a la ventana principal)
 function cerrarSesion() {
     localStorage.removeItem("user");
     localStorage.removeItem("pass");

@@ -12,8 +12,8 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "aaaa",
-    port: 3006,
+    password: "admin1",
+    port: 3306,
     database: "kiosko"
 })
 
@@ -32,13 +32,15 @@ app.listen(port, () => {
     console.log(`Listening at http://${host}:${port}`)
 })
 
+//Realiza la autenticacion del usuario, segun sea usuario, admin. Avisa si los datos son incorrectos
 app.post('/inicioSesion', function (req, res) {
     var data = req.body
-
+    //Busca el usuario con 'x' nombre e 'y' password
     con.query("SELECT * FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
         try {
             if (err) throw err;
             if (result.length) {
+                //Comprueba el rol del usuario y envia un estado 200 para usuario y 201 para admin
                 con.query("SELECT rol FROM socios WHERE usuario = ? and contrasenia = ?", [data["usuario"], data["pass"]], function (err, result, fields) {
                     try {
                         if (result[0].rol == "usuario") {
@@ -110,6 +112,7 @@ app.post("/albumesPrecio1", function (req, res) {
     });
 });
 
+//Registra a un usuario en la base de datos, CON ROL USUARIO
 app.post('/registrar', function (req, res) {
     var values = [];
     var data = req.body
@@ -117,6 +120,7 @@ app.post('/registrar', function (req, res) {
     values.push([data['usuario'], data['pass']]);
 
     con.query("INSERT INTO socios (usuario, contrasenia) VALUES ?", [values], function (err, result, fields) {
+        //Devuelve un estado 200 si se ha registrado correctamente, 201 en caso contrario
         try {
             if (err) throw err;
             res.status(200).send("Usuario registrado correctamente");
@@ -328,6 +332,7 @@ app.post('/aniadirCromo', function (req, res) {
 app.post('/comprarCromo', function (req, res) {
     var values = [];
     var data = req.body;
+    //OBTENEMOS EL NUMERO DE COPIAS Y EL PRECIO DEL CROMO
     con.query("SELECT copias, precio, codCromo FROM cromos WHERE nombre = ?", [data["cromo"]], function (err, result, fields) {
         try {
             if (err) throw err;
@@ -497,6 +502,7 @@ app.post('/comprarAlbum', function (req, res) {
     });
 });
 
+//Carga los puntos que tiene el usuario
 app.post('/cargarPuntos', function (req, res) {
     var data = req.body;
     con.query("SELECT puntos FROM socios WHERE usuario = ?", data["usuario"], function (err, result, fields) {
@@ -510,6 +516,7 @@ app.post('/cargarPuntos', function (req, res) {
     });
 });
 
+//Suma los puntos al usuario tras realizar una actividad
 app.post('/addPuntos', function (req, res) {
     var data = req.body;
     con.query("UPDATE socios SET puntos = puntos + ? WHERE usuario = ?", [data["puntos"], data["usuario"]], function (err, result, fields) {

@@ -49,11 +49,6 @@ function validateCaptcha() {
 }
 
 //Inactividad
-function e(q) {
-    document.body.appendChild(document.createTextNode(q));
-    document.body.appendChild(document.createElement("BR"));
-}
-
 //Los pasatiempos no requieren sesiones, pero si esta iniciada, expira igual solo que no le pide que se vuelva a autenticar
 function inactividad() {
     //Solo se excedera el tiempo cuando la sesion cuente como iniciada

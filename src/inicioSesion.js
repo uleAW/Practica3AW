@@ -62,11 +62,12 @@ function registrar() {
 }
 
 function checkSesion() {
-    //Me salto la pantalla de autenticacion si quiere pasar del area usuario al perfil
+    //Me salto la pantalla de autenticacion si quiere pasar del area usuario al perfil (al pulsar el boton atras del perfil)
     if(localStorage.getItem("back") == "true"){
         localStorage.removeItem("back");
         window.open("/index.html", "_self");
     }else{
+        //El usuario tiene la sesion activa, obtengo los datos para saber su rol y abro la pagina correspondiente
         if (localStorage.getItem("user") != null) {
             fetch("/inicioSesion", {
                 method: "POST",

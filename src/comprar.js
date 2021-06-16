@@ -125,11 +125,7 @@ function table(ID) {
 };
 
 //Inactividad
-function e(q) {
-    document.body.appendChild(document.createTextNode(q));
-    document.body.appendChild(document.createElement("BR"));
-}
-
+//Si las sesion expira nos expulsa de la pagina y crea la cookie Cookie_Sesion para impedir volver atras autenticado
 function inactividad() {
     //Solo se excedera el tiempo cuando la sesion cuente como iniciada
     if (localStorage.getItem("Cookie_Sesion") == "true") {
@@ -142,11 +138,13 @@ function inactividad() {
 
 var t = null;
 
+//Se inicializa el contador a 30 minutos (en milisegundos)
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
-window.onblur = window.onmousemove = function() {
+//Si se mueve el raton, se resetea el contador
+window.onblur = window.onmousemove = function () {
     if (t) clearTimeout(t);
     contadorInactividad();
 }

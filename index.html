@@ -111,6 +111,31 @@
             botonLogo.className = "fas fa-volume-mute";
         }
     </script>
+    <script>
+        //Inactividad
+        //Los pasatiempos no requieren sesiones, pero si esta iniciada, expira igual solo que no le pide que se vuelva a autenticar
+        function inactividad() {
+            //Solo se excedera el tiempo cuando la sesion cuente como iniciada
+            if (localStorage.getItem("Cookie_Sesion") == "true") {
+                alert("SESION EXPIRADA");
+                localStorage.setItem("Cookie_Sesion", "false");
+                localStorage.removeItem("user");
+            }
+        }
+
+        var t = null;
+
+        //Se inicializa el contador a 30 minutos (en milisegundos)
+        function contadorInactividad() {
+            t = setTimeout("inactividad()", 1800000); //30 min (1800000)
+        }
+
+        //Si se mueve el raton, se resetea el contador
+        window.onblur = window.onmousemove = function () {
+            if (t) clearTimeout(t);
+            contadorInactividad();
+        }
+    </script>
 </body>
 
 </html>

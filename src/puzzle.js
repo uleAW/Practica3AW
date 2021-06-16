@@ -8,6 +8,7 @@ var rompecabezas = {
     _arr_pos_r: new Array(),
     _arr_pos_a: new Array(),
 
+    //Muestra las casillas del tablero con una imagen partida de cada faccion
     _mostrar: function () {
         rompecabezas._arr_pos_r.length = 0;
         var piezas = rompecabezas._get("piezas").value;
@@ -65,6 +66,7 @@ var rompecabezas = {
         }
     },
 
+    //Se barajan las posiciones del tablero de forma aleatoria
     _barajar: function () {
         var num_alt = null;
         var arr = new Array();
@@ -101,6 +103,7 @@ var rompecabezas = {
         }
     },
 
+    //Metodo que intercambia 2 casillas
     _cambiaBGP: function (id) {
         if (select == false) {
             pos_s = rompecabezas._get(id).style.backgroundPosition;
@@ -122,6 +125,7 @@ var rompecabezas = {
         }
     },
 
+    //Comprueba si el pasatiempo es correcto y llama a addPuntos()
     _compruebaFin: function () {
         var pie = parseInt(rompecabezas._get("piezas").value);
         var fin = false;
@@ -163,6 +167,7 @@ window.onload = function () {
     }
 }
 
+//Suma los puntos al usuario segun las casillas del pasatiempo
 function addPuntos() {
     var puntos = 0;
     switch (casillas) {
@@ -203,11 +208,6 @@ function addPuntos() {
 }
 
 //Inactividad
-function e(q) {
-    document.body.appendChild(document.createTextNode(q));
-    document.body.appendChild(document.createElement("BR"));
-}
-
 //Los pasatiempos no requieren sesiones, pero si esta iniciada, expira igual solo que no le pide que se vuelva a autenticar
 function inactividad() {
     //Solo se excedera el tiempo cuando la sesion cuente como iniciada
@@ -220,10 +220,12 @@ function inactividad() {
 
 var t = null;
 
+//Se inicializa el contador a 30 minutos (en milisegundos)
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
+//Si se mueve el raton, se resetea el contador
 window.onblur = window.onmousemove = function () {
     if (t) clearTimeout(t);
     contadorInactividad();
