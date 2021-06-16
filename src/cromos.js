@@ -13,21 +13,12 @@ function checkSesion() {
 function table() {
     localStorage.removeItem("back")
     var ID = localStorage.getItem("coleccion");
-    fetch("/cargarImagen", {
+    fetch("/imagenDireccion", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({"numColeccion": ID})
-    }).then(response => {
-
-    })
-    fetch("/imagenDireccion", {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        //body: JSON.stringify({"numColeccion": "1"})
     }).then(response => response.text().then(function (text) {
         var direccion = text.split(",");
         //var imgIDs = imgID.split(",");

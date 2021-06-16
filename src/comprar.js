@@ -85,7 +85,8 @@ function colecciones1() {
         newDiv.className = 'pasatiempo';
         newDiv.onclick = (function(i) {
             return function() {
-                table(i);
+                localStorage.setItem("coleccion", nombresColecciones[i]);
+                window.open("./listaCromosComprar.html", "_self");
             }
         })(i);
         document.getElementById('menu').appendChild(newDiv);
@@ -119,8 +120,7 @@ function table(ID) {
     var IDColeccion = localStorage.getItem("coleccionID");
     var IDColecciones = IDColeccion.split(",");
 
-    localStorage.setItem("coleccion", IDColecciones[ID]);
-    window.open("./listaCromosComprar.html", "_self");
+
 
 };
 

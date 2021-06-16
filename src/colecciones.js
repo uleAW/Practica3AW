@@ -16,7 +16,6 @@ function coleccionNombre() {
         headers: {
             'Content-Type': 'application/json'
         }
-        //body: JSON.stringify({"numColeccion": count})
     }).then(response => response.text().then(function (text) {
         localStorage.setItem("coleccionNombre", text);
     }));
@@ -29,7 +28,6 @@ function coleccionID() {
         headers: {
             'Content-Type': 'application/json'
         }
-        //body: JSON.stringify({"numColeccion": count})
     }).then(response => response.text().then(function (text) {
         localStorage.setItem("coleccionID", text);
     }));
@@ -51,11 +49,11 @@ function colecciones1() {
         newDiv.className = 'pasatiempo';
         newDiv.onclick = (function (i) {
             return function () {
-                table(i);
+                localStorage.setItem("coleccion", nombresColecciones[i]);
+                window.open("./cromos.html", "_self");
             }
         })(i);
         document.getElementById('menu').appendChild(newDiv);
-        //document.getElementById('pasatiempo'+i).onclick=function() { table(IDColecciones[i]); };;
 
         newDiv = document.createElement('div');
         newDiv.id = 'banner' + i;
@@ -65,7 +63,7 @@ function colecciones1() {
         newDiv = document.createElement('div');
         newDiv.id = 'info' + i;
         newDiv.className = 'info';
-        newDiv.innerHTML = 'VER CROMOS';
+        newDiv.innerHTML = 'VER CROMOS DE LA COLECCION ' + nombresColecciones[i];
         document.getElementById('pasatiempo' + i).appendChild(newDiv);
 
         newDiv = document.createElement('div');
@@ -74,16 +72,6 @@ function colecciones1() {
         newDiv.innerHTML = nombresColecciones[i];
         document.getElementById('banner' + i).appendChild(newDiv);
     }
-};
-
-var count = 0;
-
-function table(ID) {
-    count = count + 1;
-    var IDColeccion = localStorage.getItem("coleccionID");
-    var IDColecciones = IDColeccion.split(",");
-    localStorage.setItem("coleccion", IDColecciones[ID]);
-    window.open("./cromos.html", "_self");
 };
 
 //Inactividad
@@ -98,7 +86,6 @@ function inactividad() {
 }
 
 var t = null;
-
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }

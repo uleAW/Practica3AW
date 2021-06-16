@@ -38,7 +38,7 @@ var rompecabezas = {
                 rompecabezas._arr_pos_r.push(p);
                 dbp.innerHTML = p;
                 dp.appendChild(dbp);
-                dbp.style.visibility = "hidden";
+                dbp.style.display = "none";
                 td.onclick = function () {
                     rompecabezas._cambiaBGP(this.id);
                     rompecabezas._compruebaFin();
