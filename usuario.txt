@@ -1,0 +1,6 @@
+Usuarios:
+    Administrador:
+        admin -> admin
+    Socios:
+        user1 -> 4321
+        user2 -> g3aw
