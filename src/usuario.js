@@ -148,35 +148,8 @@ function buscarNombres() {
     }));
 }
 
-function estadoColeccion() {
-    return fetch("/estadoColeccionesUsuario", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
-        return text;
-    }));
-}
-
-function calcularNumCromos() {
-    return fetch("/calcularNumCromos", {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({"nombre": localStorage.getItem("user")})
-    }).then(response => response.text().then(function (text) {
-        return text;
-    }));
-}
-
 async function cargarAlbumes() {
     var nombresAlbumes;
-    var imgAlbumes;
-    imgAlbumes = await buscarImagenes();
-    imgAlbumes = imgAlbumes.split(",");
     nombresAlbumes = await buscarNombres();
     nombresAlbumes = nombresAlbumes.split(",");
     console.log(nombresAlbumes)
@@ -189,10 +162,10 @@ async function cargarAlbumes() {
         newDiv = document.createElement('img');
         newDiv.id = 'img' + i;
         newDiv.className = 'image';
-        newDiv.src = "data:image/png;base64," + imgAlbumes[i / 3];
+        newDiv.src = "data:image/png;base64," + nombresAlbumes[i];
         newDiv.onclick = (function (i) {
             return function () {
-                localStorage.setItem("cargarCromosUsuario", nombresAlbumes[i])
+                localStorage.setItem("cargarCromosUsuario", nombresAlbumes[i+1])
                 // window.open("./cromosUsuario.html", "_self");
                 window.scrollTo(0, 0);
                 document.getElementById("menu").style.display = "none"
@@ -216,7 +189,7 @@ async function cargarAlbumes() {
         newDiv = document.createElement('text');
         newDiv.id = 'text' + i;
         newDiv.className = 'text';
-        newDiv.innerHTML = nombresAlbumes[i];
+        newDiv.innerHTML = nombresAlbumes[i + 1];
         document.getElementById('texto' + i).appendChild(newDiv);
 
         newDiv = document.createElement('b');
@@ -228,7 +201,7 @@ async function cargarAlbumes() {
         newDiv = document.createElement('text');
         newDiv.id = 'estado' + i;
         newDiv.className = 'estado';
-        newDiv.innerHTML = nombresAlbumes[i + 1];
+        newDiv.innerHTML = nombresAlbumes[i + 2];
         document.getElementById('texto' + i).appendChild(newDiv);
 
         newDiv = document.createElement('b');
@@ -240,20 +213,20 @@ async function cargarAlbumes() {
         newDiv = document.createElement('text');
         newDiv.id = 'numCromos' + i;
         newDiv.className = 'numCromos';
-        newDiv.innerHTML = nombresAlbumes[i + 2];
+        newDiv.innerHTML = nombresAlbumes[i + 3];
         document.getElementById('texto' + i).appendChild(newDiv);
-        i = i + 3;
+        i = i + 4;
     }
 }
 
 async function cargarCromos() {
+
     var imgCromo;
     var nombreCromo;
     imgCromo = await cargarImagenesCromos();
     imgCromo = imgCromo.split(',')
     nombreCromo = await cargarNombresCromo();
     nombreCromo = nombreCromo.split(',')
-
     document.getElementById("menuCromos").innerHTML = '';
 
     for (var i = 0; i < imgCromo.length - 1; i++) {
@@ -279,7 +252,7 @@ async function cargarCromos() {
         newDiv.className = 'text';
         newDiv.innerHTML = nombreCromo[i];
         document.getElementById('cromo' + i).appendChild(newDiv);
-
+        console.log("DENTRO1")
     }
 
     document.getElementById("tituloColeccion").innerHTML = localStorage.getItem("cargarCromosUsuario");
