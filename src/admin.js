@@ -1,15 +1,3 @@
-function checkSesion() {
-    //Impide que un usuario normal entre a esta pagina
-    if (localStorage.getItem("admin") != null) {
-        if (localStorage.getItem("Cookie_Sesion") == "false") {
-            alert("NECESARIO INICIAR SESION");
-            window.open("./inicioSesion.html", "_self");
-        }
-    } else {
-        window.open("/index.html", "_self");
-    }
-}
-
 function inactividad() {
     //Solo se excedera el tiempo cuando la sesion cuente como iniciada
     if (localStorage.getItem("Cookie_Sesion") == "true") {

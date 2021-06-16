@@ -1,6 +1,7 @@
 function funciones() {
     cargaRandom();
     desmarcar();
+    localStorage.removeItem("back")
 }
 
 function desmarcar() {

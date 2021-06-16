@@ -1,4 +1,5 @@
 function funciones() {
+    localStorage.removeItem("back");
     checkSesion();
     mostrarPuntos();
     datos();

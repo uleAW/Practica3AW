@@ -12,6 +12,7 @@ function checkSesion() {
 
 function datos() {
     cargarAlbumes();
+    localStorage.removeItem("back")
 }
 
 function buscarImagenes() {
@@ -20,8 +21,8 @@ function buscarImagenes() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -32,8 +33,8 @@ function buscarPrecio() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -44,8 +45,8 @@ function albumID() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -56,7 +57,7 @@ function buscarNombres() {
         headers: {
             'Content-Type': 'application/json'
         },
-    }).then(response => response.text().then(function(text) {
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -124,8 +125,8 @@ async function cargarAlbumes() {
         newDiv.id = 'buttonComprar' + i;
         newDiv.appendChild(document.createTextNode("Comprar"))
         document.getElementById('divAux' + i).appendChild(newDiv);
-        document.getElementById('buttonComprar' + i).onclick = (function(i) {
-            return function() {
+        document.getElementById('buttonComprar' + i).onclick = (function (i) {
+            return function () {
                 comprarAlbum(albumIDs[i], i);
             }
         })(i);
@@ -149,11 +150,11 @@ function comprarAlbum(ID, i) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "usuario": localStorage.getItem("user"), "album": ID })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"usuario": localStorage.getItem("user"), "album": ID})
+    }).then(response => response.text().then(function (text) {
         document.getElementById("textErrorAlbum" + i).innerHTML = text;
         document.getElementById("errorAlbum" + i).style.visibility = "visible";
-        setTimeout(function() {
+        setTimeout(function () {
             document.getElementById("errorAlbum" + i).style.visibility = "hidden";
         }, 3000);
     }));
@@ -181,7 +182,7 @@ function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
-window.onblur = window.onmousemove = function() {
+window.onblur = window.onmousemove = function () {
     if (t) clearTimeout(t);
     contadorInactividad();
 }

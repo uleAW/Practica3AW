@@ -11,6 +11,7 @@ function checkSesion() {
 }
 
 function table() {
+    localStorage.removeItem("back")
     var ID = localStorage.getItem("coleccion");
     fetch("/cargarImagen", {
         method: "POST",

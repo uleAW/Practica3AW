@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puzzle</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <!-- FUENTE UBUNTU -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
@@ -20,67 +21,69 @@
 
 <body>
 
-    <body>
-        <!-- BARRA DEL MENU -->
-        <div class="menu-bar">
-            <nav class="navegacion">
-                <ul class="nav-menu-left">
-                    <li>
-                        <a href="#" id="nombreTienda">DigiKiosko</a>
-                    </li>
-                    <li>
-                        <a href="./src/colecciones.html" id="colecciones">Colecciones</a>
-                    </li>
-                    <li>
-                        <a href="./src/pasatiempos.html" id="colecciones">Pasatiempos</a>
-                    </li>
-                </ul>
+<body>
+<!-- BARRA DEL MENU -->
+<div class="menu-bar">
+    <nav class="navegacion">
+        <ul class="nav-menu-left">
+            <li>
+                <a href="#" id="nombreTienda">DigiKiosko</a>
+            </li>
+            <li>
+                <a href="./colecciones.html" id="colecciones">Colecciones</a>
+            </li>
+            <li>
+                <a href="./pasatiempos.html" id="colecciones">Pasatiempos</a>
+            </li>
+        </ul>
 
-                <ul class="nav-menu-right">
-                    <li>
-                        <a href="./src/inicioSesion.html"><i class="fas fa-user"></i></a>
-                    </li>
+        <ul class="nav-menu-right">
+            <li>
+                <a href="./inicioSesion.html"><i class="fas fa-user"></i></a>
+            </li>
 
-                </ul>
-            </nav>
+        </ul>
+    </nav>
+</div>
+<div class="puzzle">
+    <div class="info">
+        <div class="vertical-menu">
+            <ul class="vertical-menu-top">
+                <h2>¡DigiPuzzles! </h2>
+                <li>
+                    <div class="descripcion">
+                        Elige el número de piezas del puzzle y barájalas. <br><br> Selecciona un cuadro del puzzle,
+                        después selecciona el cuadro por el que lo quieres intercambiar y...
+                    </div>
+                </li>
+                <h3>¡¡A JUGAR!!</h3>
+            </ul>
+            <ul class="vertical-menu-bottom">
+                <li>
+                    <h4>Número de piezas
+                        <select class="numeroPiezas" id='piezas'>
+                            <option value='4'>4</option>
+                            <option value='9'>9</option>
+                            <option value='16'>16</option>
+                            <option value='25'>25</option>
+                            <option value='36'>36</option>
+                            <option value='100'>100</option>
+                        </select>
+                    </h4>
+                </li>
+                <li>
+                    <button id='barajar' value='Barajar'>Barajar</button>
+                </li>
+            </ul>
         </div>
-        <div class="puzzle">
-            <div class="info">
-                <div class="vertical-menu">
-                    <ul class="vertical-menu-top">
-                        <h2>¡DigiPuzzles! </h2>
-                        <li>
-                            <div class="descripcion">
-                                Elige el número de piezas del puzzle y barájalas. <br><br> Selecciona un cuadro del puzzle, después selecciona el cuadro por el que lo quieres intercambiar y...
-                            </div>
-                        </li>
-                        <h3>¡¡A JUGAR!!</h3>
-                    </ul>
-                    <ul class="vertical-menu-bottom">
-                        <li>
-                            <h4>Número de piezas
-                                <select class="numeroPiezas" id='piezas'>
-                                <option value='4'>4</option>
-                                <option value='9'>9</option>
-                                <option value='16'>16</option>
-                                <option value='25'>25</option>
-                                <option value='36'>36</option>
-                                <option value='100'>100</option>
-                            </select>
-                            </h4>
-                        </li>
-                        <li>
-                            <button id='barajar' value='Barajar'>Barajar</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="rompecabezas" id="rompecabezas">
-            </div>
-        </div>
+    </div>
+    <div class="rompecabezas" id="rompecabezas">
+    </div>
+</div>
 
-        <script src="puzzle.js"></script>
-    </body>
+<script src="puzzle.js"></script>
+<script>localStorage.removeItem("back")</script>
+</body>
 </body>
 
 </html>

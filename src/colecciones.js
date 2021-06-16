@@ -1,4 +1,4 @@
-function funciones(){
+function funciones() {
     checkSesion();
     datos();
 }
@@ -37,6 +37,7 @@ function coleccionID() {
 
 function datos() {
     colecciones1();
+    localStorage.removeItem("back")
 }
 
 function colecciones1() {
@@ -107,6 +108,7 @@ function inactividad() {
 }
 
 var t = null;
+
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }

@@ -1,3 +1,15 @@
+function funciones(){
+    checkSesion();
+    table();
+}
+
+function checkSesion() {
+    if (localStorage.getItem("Cookie_Sesion") == "false") {
+        alert("NECESARIO INICIAR SESION");
+        window.open("./inicioSesion.html", "_self");
+    }
+}
+
 function imagenID(count) {
     fetch("/IDimagen", {
         method: "POST",
@@ -12,6 +24,7 @@ function imagenID(count) {
 };
 
 function table() {
+    localStorage.removeItem("back")
     var ID = localStorage.getItem("coleccion");
     imagenID(ID);
     fetch("/cargarImagen", {
