@@ -58,7 +58,6 @@ function cerrarSesion() {
     localStorage.removeItem("user");
     localStorage.removeItem("pass");
     localStorage.removeItem("back");
-    console.log(localStorage.getItem("back"))
     window.open("/index.html", "_self");
 }
 
@@ -153,7 +152,6 @@ async function cargarAlbumes() {
     var nombresAlbumes;
     nombresAlbumes = await buscarNombres();
     nombresAlbumes = nombresAlbumes.split(",");
-    console.log(nombresAlbumes)
     for (var i = 0; i < nombresAlbumes.length - 1;) {
         var newDiv = document.createElement('div');
         newDiv.id = 'album' + i;
@@ -253,7 +251,6 @@ async function cargarCromos() {
         newDiv.className = 'text';
         newDiv.innerHTML = nombreCromo[i];
         document.getElementById('cromo' + i).appendChild(newDiv);
-        console.log("DENTRO1")
     }
 
     document.getElementById("tituloColeccion").innerHTML = localStorage.getItem("cargarCromosUsuario");

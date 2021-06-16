@@ -133,8 +133,6 @@ function comprarCromo(id) {
             setTimeout(function() {
                 document.getElementById("errorAlbum" + id).style.visibility = "hidden";
             }, 3000);
-        } else {
-            console.log("Error al comprar el cromo")
         }
     }));
 }

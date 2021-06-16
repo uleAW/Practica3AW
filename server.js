@@ -603,7 +603,6 @@ app.post("/imagenCromosUsuario", function (req, res) {
     var data = req.body;
     con.query("SELECT codCromos FROM coleccionusuario WHERE numColeccion = (SELECT numColeccion FROM colecciones WHERE nombre = ?) and numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", [data["nombreAlbum"], data["nombreUsuario"]], function (err, result, fields) {
         try {
-            console.log(result)
             if (err) throw err;
             var datos = result[0].codCromos.split(';');
             con.query("SELECT imagen FROM cromos WHERE codCromo IN (?)", [datos], function (err, result, fields) {

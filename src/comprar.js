@@ -27,7 +27,6 @@ function imagenID(count) {
         headers: {
             'Content-Type': 'application/json'
         },
-        //body: JSON.stringify({"numColeccion": "1"})
     }).then(response => response.text().then(function (text) {
         localStorage.setItem("imagenID", text);
     }));
@@ -74,11 +73,6 @@ function colecciones1() {
     var nombreColeccion = localStorage.getItem("coleccionNombre");
     var nombresColecciones = nombreColeccion.split(",");
 
-    var IDColeccion = localStorage.getItem("coleccionID");
-    var IDColecciones = IDColeccion.split(",");
-    console.log(IDColeccion);
-    tabla = "";
-    //tabla="<div class=menu>";
     for (var i = 0; i < nombresColecciones.length - 1; i++) {
         var newDiv = document.createElement('div');
         newDiv.id = 'pasatiempo' + i;
@@ -115,7 +109,6 @@ var count = 0;
 function table(ID) {
     imagenID(ID);
     count = count + 1;
-    console.log(ID);
     var IDColeccion = localStorage.getItem("coleccionID");
     var IDColecciones = IDColeccion.split(",");
 

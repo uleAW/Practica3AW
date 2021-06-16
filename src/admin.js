@@ -108,6 +108,5 @@ function cerrarSesion() {
     localStorage.removeItem("pass");
     localStorage.removeItem("back");
     localStorage.removeItem("admin");
-    console.log(localStorage.getItem("back"))
     window.open("/index.html", "_self");
 }

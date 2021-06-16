@@ -64,7 +64,6 @@ function registrar() {
 function checkSesion() {
     //Me salto la pantalla de autenticacion si quiere pasar del area usuario al perfil
     if(localStorage.getItem("back") == "true"){
-        console.log(localStorage.getItem("back"));
         localStorage.removeItem("back");
         window.open("/index.html", "_self");
     }else{

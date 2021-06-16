@@ -65,16 +65,6 @@ function table() {
     }));
 };
 
-function colecciones1() {
-    window.open("./colecciones.html", "_self");
-}
-
-//Inactividad
-function e(q) {
-    document.body.appendChild(document.createTextNode(q));
-    document.body.appendChild(document.createElement("BR"));
-}
-
 function inactividad() {
     //Solo se excedera el tiempo cuando la sesion cuente como iniciada
     if (localStorage.getItem("Cookie_Sesion") == "true") {
