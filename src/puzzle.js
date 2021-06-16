@@ -4,12 +4,14 @@ var pos_s = "";
 var id_s = "";
 var aleatorio = Math.round(Math.random() * (16 - 1) + 1);
 var casillas = 0;
+var barajar = false;
 var rompecabezas = {
     _arr_pos_r: new Array(),
     _arr_pos_a: new Array(),
 
     //Muestra las casillas del tablero con una imagen partida de cada faccion
     _mostrar: function () {
+        barajar = false;
         rompecabezas._arr_pos_r.length = 0;
         var piezas = rompecabezas._get("piezas").value;
         var tb = document.createElement('table');
@@ -68,6 +70,7 @@ var rompecabezas = {
 
     //Se barajan las posiciones del tablero de forma aleatoria
     _barajar: function () {
+        barajar = true;
         var num_alt = null;
         var arr = new Array();
         var resp = "no";
@@ -127,27 +130,29 @@ var rompecabezas = {
 
     //Comprueba si el pasatiempo es correcto y llama a addPuntos()
     _compruebaFin: function () {
-        var pie = parseInt(rompecabezas._get("piezas").value);
-        var fin = false;
-        rompecabezas._arr_pos_a.length = 0;
-        for (var i = 1; i <= pie; i++) {
-            rompecabezas._arr_pos_a.push(rompecabezas._get("pos_" + i).style.backgroundPosition);
-        }
-        for (var j = 0; j < rompecabezas._arr_pos_r.length; j++) {
-            if (rompecabezas._arr_pos_r[j] != rompecabezas._arr_pos_a[j]) {
-                fin = false;
-                break;
-            } else {
-                fin = true;
+        if(casillas != 4 && barajar == true){
+            var pie = parseInt(rompecabezas._get("piezas").value);
+            var fin = false;
+            rompecabezas._arr_pos_a.length = 0;
+            for (var i = 1; i <= pie; i++) {
+                rompecabezas._arr_pos_a.push(rompecabezas._get("pos_" + i).style.backgroundPosition);
             }
-        }
+            for (var j = 0; j < rompecabezas._arr_pos_r.length; j++) {
+                if (rompecabezas._arr_pos_r[j] != rompecabezas._arr_pos_a[j]) {
+                    fin = false;
+                    break;
+                } else {
+                    fin = true;
+                }
+            }
 
-        setTimeout(function () {
-            if (fin) {
-                alert("PASATIEMPO RESUELTO")
-                addPuntos();
-            }
-        }, 600);
+            setTimeout(function () {
+                if (fin) {
+                    alert("PASATIEMPO RESUELTO")
+                    addPuntos();
+                }
+            }, 600);
+        }
     },
 
     _get: function (id) {
