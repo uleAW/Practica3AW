@@ -130,7 +130,7 @@ var rompecabezas = {
 
     //Comprueba si el pasatiempo es correcto y llama a addPuntos()
     _compruebaFin: function () {
-        if(casillas != 4 && barajar == true){
+        if(barajar == true){
             var pie = parseInt(rompecabezas._get("piezas").value);
             var fin = false;
             rompecabezas._arr_pos_a.length = 0;
