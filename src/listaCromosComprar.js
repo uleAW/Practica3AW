@@ -23,6 +23,7 @@ function imagenID(count) {
 
 };
 
+// Muestra todos los cromos de una coleccion que se pueden comprar
 function table() {
     localStorage.removeItem("back")
     var ID = localStorage.getItem("coleccion");

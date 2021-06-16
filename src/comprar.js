@@ -69,6 +69,7 @@ function datos() {
     colecciones1();
 }
 
+// Muestra las colecciones que tienen cromos para comprar
 function colecciones1() {
 
     var nombreColeccion = localStorage.getItem("coleccionNombre");

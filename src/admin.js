@@ -35,6 +35,7 @@ window.onblur = window.onmousemove = function () {
     contadorInactividad();
 }
 
+// Anañdir coleccion cogiendo los valores de los input
 function aniadirColeccion() {
     var nombre = document.getElementById("nombreAniadirColeccion").value
     var imagen = document.getElementById("imgAniadirAlbum").files[0]
@@ -69,6 +70,7 @@ function aniadirColeccion() {
     }
 }
 
+// Añadir cromo cogiendo los valores de los input
 function aniadirCromo() {
 
     var nombre = document.getElementById("nombreAniadirCromo").value
@@ -97,6 +99,7 @@ function aniadirCromo() {
     reader.readAsDataURL(imagen);
 }
 
+// Activa la coleccion del input
 function activarColeccion() {
     var nombre = document.getElementById("nombreActivarColeccion").value
     fetch("/activarColeccion", {
