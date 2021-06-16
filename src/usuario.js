@@ -33,7 +33,7 @@ function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
-window.onblur = window.onmousemove = function() {
+window.onblur = window.onmousemove = function () {
     if (t) clearTimeout(t);
     contadorInactividad();
 }
@@ -46,8 +46,8 @@ function mostrarPuntos() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "usuario": usuario })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"usuario": usuario})
+    }).then(response => response.text().then(function (text) {
         document.getElementById("puntos").innerHTML = text;
     }));
 }
@@ -68,7 +68,7 @@ function coleccionNombre() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function(text) {
+    }).then(response => response.text().then(function (text) {
 
         localStorage.setItem("coleccionNombre", text);
 
@@ -82,7 +82,7 @@ function coleccionID() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function(text) {
+    }).then(response => response.text().then(function (text) {
 
         localStorage.setItem("coleccionID", text);
     }));
@@ -95,7 +95,7 @@ function cromoID() {
             'Content-Type': 'application/json'
         },
 
-    }).then(response => response.text().then(function(text) {
+    }).then(response => response.text().then(function (text) {
         localStorage.setItem("cromosID", text);
     }));
 
@@ -107,7 +107,7 @@ function cromoImagen() {
         headers: {
             'Content-Type': 'application/json'
         },
-    }).then(response => response.text().then(function(text) {
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -130,8 +130,8 @@ function buscarImagenes() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -142,8 +142,8 @@ function buscarNombres() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -154,8 +154,8 @@ function estadoColeccion() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -166,8 +166,8 @@ function calcularNumCromos() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombre": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({"nombre": localStorage.getItem("user")})
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -175,17 +175,12 @@ function calcularNumCromos() {
 async function cargarAlbumes() {
     var nombresAlbumes;
     var imgAlbumes;
-    var estadosColeccion;
-    var numCromos;
     imgAlbumes = await buscarImagenes();
     imgAlbumes = imgAlbumes.split(",");
     nombresAlbumes = await buscarNombres();
     nombresAlbumes = nombresAlbumes.split(",");
-    estadosColeccion = await estadoColeccion();
-    estadosColeccion = estadosColeccion.split(",");
-    numCromos = await calcularNumCromos();
-    numCromos = numCromos.split(",");
-    for (var i = 0; i < imgAlbumes.length - 1; i++) {
+    console.log(nombresAlbumes)
+    for (var i = 0; i < nombresAlbumes.length - 1;) {
         var newDiv = document.createElement('div');
         newDiv.id = 'album' + i;
         newDiv.className = 'album';
@@ -194,12 +189,12 @@ async function cargarAlbumes() {
         newDiv = document.createElement('img');
         newDiv.id = 'img' + i;
         newDiv.className = 'image';
-        newDiv.src = "data:image/png;base64," + imgAlbumes[i];
-        newDiv.onclick = (function(i) {
-            return function() {
+        newDiv.src = "data:image/png;base64," + imgAlbumes[i / 3];
+        newDiv.onclick = (function (i) {
+            return function () {
                 localStorage.setItem("cargarCromosUsuario", nombresAlbumes[i])
                 // window.open("./cromosUsuario.html", "_self");
-                window.scrollTo(0,0);
+                window.scrollTo(0, 0);
                 document.getElementById("menu").style.display = "none"
                 document.getElementById("tituloColecciones").style.display = "none"
                 cargarCromos();
@@ -233,7 +228,7 @@ async function cargarAlbumes() {
         newDiv = document.createElement('text');
         newDiv.id = 'estado' + i;
         newDiv.className = 'estado';
-        newDiv.innerHTML = estadosColeccion[i];
+        newDiv.innerHTML = nombresAlbumes[i + 1];
         document.getElementById('texto' + i).appendChild(newDiv);
 
         newDiv = document.createElement('b');
@@ -245,8 +240,9 @@ async function cargarAlbumes() {
         newDiv = document.createElement('text');
         newDiv.id = 'numCromos' + i;
         newDiv.className = 'numCromos';
-        newDiv.innerHTML = numCromos[i];
+        newDiv.innerHTML = nombresAlbumes[i + 2];
         document.getElementById('texto' + i).appendChild(newDiv);
+        i = i + 3;
     }
 }
 
@@ -297,8 +293,11 @@ function cargarImagenesCromos() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombreAlbum": localStorage.getItem("cargarCromosUsuario"), "nombreUsuario": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({
+            "nombreAlbum": localStorage.getItem("cargarCromosUsuario"),
+            "nombreUsuario": localStorage.getItem("user")
+        })
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -309,8 +308,11 @@ function cargarNombresCromo() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ "nombreAlbum": localStorage.getItem("cargarCromosUsuario"), "nombreUsuario": localStorage.getItem("user") })
-    }).then(response => response.text().then(function(text) {
+        body: JSON.stringify({
+            "nombreAlbum": localStorage.getItem("cargarCromosUsuario"),
+            "nombreUsuario": localStorage.getItem("user")
+        })
+    }).then(response => response.text().then(function (text) {
         return text;
     }));
 }
@@ -327,6 +329,6 @@ function mostrarAlbumes() {
 }
 
 //Boton atras
-window.onbeforeunload = function(e) {
+window.onbeforeunload = function (e) {
     localStorage.setItem("back", "true");
 };

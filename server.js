@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: true, limit: '50mb'}));
 var con = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "admin1",
+    password: "aaaa",
     port: 3306,
     database: "kiosko"
 })
@@ -584,12 +584,16 @@ app.post("/albumesUsuario", function (req, res) {
 
 app.post("/nombreColeccionesUsuario", function (req, res) {
     var data = req.body;
-    con.query("SELECT nombre FROM colecciones WHERE numColeccion IN (SELECT numColeccion FROM coleccionUsuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?))", [data["nombre"]], function (err, result, fields) {
+    con.query("SELECT a.nombre, b.estado, b.codCromos FROM colecciones a JOIN coleccionusuario b ON a.numColeccion = b.numColeccion WHERE a.numColeccion IN (SELECT numColeccion FROM coleccionUsuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?))", [data["nombre"]], function (err, result, fields) {
         try {
             if (err) throw err;
             var out = "";
             for (let item of result) {
+                console.log(item)
                 out = out + item.nombre + ",";
+                out = out + item.estado + ",";
+                out = out + (item.codCromos.split(';').length - 1) + ",";
+                console.log(item.codCromos.split(';').length - 1 + ",")
             }
             res.status(200).send(out);
         } catch (err) {
@@ -658,22 +662,6 @@ app.post("/nombreCromosUsuario", function (req, res) {
                     console.log(err);
                 }
             });
-        } catch (err) {
-            console.log(err);
-        }
-    });
-});
-
-app.post("/calcularNumCromos", function (req, res) {
-    var data = req.body;
-    con.query("SELECT codCromos FROM coleccionUsuario WHERE numSocio = (SELECT numSocio FROM socios WHERE usuario = ?)", [data["nombre"]], function (err, result, fields) {
-        try {
-            if (err) throw err;
-            var out = ""
-            for (let item of result) {
-                out += item.codCromos.split(';').length - 1 + ","
-            }
-            res.status(200).send(out);
         } catch (err) {
             console.log(err);
         }
