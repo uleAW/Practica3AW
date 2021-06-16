@@ -1,4 +1,4 @@
-function funciones(){
+function funciones() {
     checkSesion();
     datos();
 }
@@ -18,7 +18,7 @@ function imagenID(count) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({"numColeccion": count})
+        body: JSON.stringify({ "numColeccion": count })
     }).then(response => {
 
     })
@@ -27,7 +27,8 @@ function imagenID(count) {
         headers: {
             'Content-Type': 'application/json'
         },
-    }).then(response => response.text().then(function (text) {
+        //body: JSON.stringify({"numColeccion": "1"})
+    }).then(response => response.text().then(function(text) {
         localStorage.setItem("imagenID", text);
     }));
 };
@@ -40,7 +41,7 @@ function coleccionNombre() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function (text) {
+    }).then(response => response.text().then(function(text) {
 
         localStorage.setItem("coleccionNombre", text);
 
@@ -56,7 +57,7 @@ function coleccionID() {
             'Content-Type': 'application/json'
         }
         //body: JSON.stringify({"numColeccion": count})
-    }).then(response => response.text().then(function (text) {
+    }).then(response => response.text().then(function(text) {
 
         localStorage.setItem("coleccionID", text);
 
@@ -73,12 +74,17 @@ function colecciones1() {
     var nombreColeccion = localStorage.getItem("coleccionNombre");
     var nombresColecciones = nombreColeccion.split(",");
 
+    var IDColeccion = localStorage.getItem("coleccionID");
+    var IDColecciones = IDColeccion.split(",");
+    console.log(IDColeccion);
+    tabla = "";
+    //tabla="<div class=menu>";
     for (var i = 0; i < nombresColecciones.length - 1; i++) {
         var newDiv = document.createElement('div');
         newDiv.id = 'pasatiempo' + i;
         newDiv.className = 'pasatiempo';
-        newDiv.onclick = (function (i) {
-            return function () {
+        newDiv.onclick = (function(i) {
+            return function() {
                 table(i);
             }
         })(i);
@@ -93,7 +99,7 @@ function colecciones1() {
         newDiv = document.createElement('div');
         newDiv.id = 'info' + i;
         newDiv.className = 'info';
-        newDiv.innerHTML = 'VER CROMOS';
+        newDiv.innerHTML = 'VER CROMOS DE LA COLECCION ' + nombresColecciones[i];
         document.getElementById('pasatiempo' + i).appendChild(newDiv);
 
         newDiv = document.createElement('div');
@@ -109,6 +115,7 @@ var count = 0;
 function table(ID) {
     imagenID(ID);
     count = count + 1;
+    console.log(ID);
     var IDColeccion = localStorage.getItem("coleccionID");
     var IDColecciones = IDColeccion.split(",");
 
@@ -134,11 +141,12 @@ function inactividad() {
 }
 
 var t = null;
+
 function contadorInactividad() {
     t = setTimeout("inactividad()", 1800000); //30 min (1800000)
 }
 
-window.onblur = window.onmousemove = function () {
+window.onblur = window.onmousemove = function() {
     if (t) clearTimeout(t);
     contadorInactividad();
 }
