@@ -199,6 +199,7 @@ async function cargarAlbumes() {
             return function() {
                 localStorage.setItem("cargarCromosUsuario", nombresAlbumes[i])
                 // window.open("./cromosUsuario.html", "_self");
+                window.scrollTo(0,0);
                 document.getElementById("menu").style.display = "none"
                 document.getElementById("tituloColecciones").style.display = "none"
                 cargarCromos();

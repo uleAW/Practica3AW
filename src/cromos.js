@@ -32,34 +32,33 @@ function table() {
         //var imgIDs = imgID.split(",");
         for (var i = 0; i < direccion.length - 1;) {
             var newDiv = document.createElement('div');
-            newDiv.id = 'cromo' + i;
-            newDiv.className = 'cromos';
+            newDiv.id = 'album' + i;
+            newDiv.className = 'album';
             document.getElementById('menu').appendChild(newDiv);
 
             newDiv = document.createElement('img');
             newDiv.id = 'img' + i;
             newDiv.className = 'image';
             newDiv.src = "data:image/png;base64," + direccion[i];
-            document.getElementById('cromo' + i).appendChild(newDiv);
+            document.getElementById('album' + i).appendChild(newDiv);
 
             newDiv = document.createElement('div');
-            newDiv.id = 'divAux' + i;
-            newDiv.className = 'divAux';
-            document.getElementById('cromo' + i).appendChild(newDiv);
+            newDiv.id = 'texto' + i;
+            newDiv.className = 'texto';
+            document.getElementById('album' + i).appendChild(newDiv);
+
+            newDiv = document.createElement('b');
+            newDiv.id = 'bold1' + i;
+            newDiv.className = 'bold';
+            newDiv.innerHTML = "Nombre:";
+            document.getElementById('texto' + i).appendChild(newDiv);
 
             newDiv = document.createElement('text');
-
-            newDiv.id = 'textNombre' + i;
-            newDiv.className = 'textNombre';
+            newDiv.id = 'text' + i;
+            newDiv.className = 'text';
             newDiv.innerHTML = direccion[i + 2];
-            document.getElementById('divAux' + i).appendChild(newDiv);
-            document.getElementById("divAux" + i).insertBefore(document.createTextNode("Nombre: "), newDiv);
+            document.getElementById('texto' + i).appendChild(newDiv);
 
-            newDiv = document.createElement('text');
-            newDiv.id = 'textPrecio' + i;
-            newDiv.className = 'textPrecio';
-            newDiv.innerHTML = "Precio: " + direccion[i + 1];
-            document.getElementById('divAux' + i).appendChild(newDiv);
             i = i + 3;
         }
     }));
