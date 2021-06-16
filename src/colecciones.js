@@ -21,6 +21,7 @@ function coleccionNombre() {
     }));
 };
 
+// Busca el id de las colecciones
 function coleccionID() {
 
     fetch("/coleccionID", {
@@ -38,6 +39,7 @@ function datos() {
     localStorage.removeItem("back")
 }
 
+// Carga todas las colecciones del sistema y las muestra
 function colecciones1() {
 
     var nombreColeccion = localStorage.getItem("coleccionNombre");

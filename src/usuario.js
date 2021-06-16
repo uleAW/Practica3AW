@@ -148,6 +148,7 @@ function buscarNombres() {
     }));
 }
 
+// Muestra todos los albumes que tiene un usuario
 async function cargarAlbumes() {
     var nombresAlbumes;
     nombresAlbumes = await buscarNombres();
@@ -218,6 +219,7 @@ async function cargarAlbumes() {
     }
 }
 
+// Muestra todos los cromos que tiene de una determinada coleccion
 async function cargarCromos() {
 
     var imgCromo;

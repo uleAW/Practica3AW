@@ -62,6 +62,7 @@ function buscarNombres() {
     }));
 }
 
+// Muestra todos los albumes disponibles para comprar
 async function cargarAlbumes() {
     var nombresAlbumes;
     var imgAlbumes;
@@ -144,6 +145,7 @@ async function cargarAlbumes() {
     }
 }
 
+// Compra un album si clickas al boton
 function comprarAlbum(ID, i) {
     fetch("/comprarAlbum", {
         method: "POST",
